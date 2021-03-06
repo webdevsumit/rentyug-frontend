@@ -17,6 +17,7 @@ function YouMayLike(props){
 					OpenTime={d.OpenTime}
 					closeTime={d.closeTime}
 					handleOpenService={()=>props.handleOpenService(d.id)}
+					VStatus = {d.VStatus}
 					/>
 					<button onClick={()=>props.removeItem(d.id)}>remove</button>
 				</div>

@@ -15,7 +15,7 @@ function SiteIntro(props){
 	return(
 		<div className='SiteIntro' style={{'background':'lightgreen'}}>
 			<img className='logo' src={logo} alt='logo'/>
-			<h1>OnRent</h1>
+			<h1>RentYug</h1>
 			<br/>
 			<p>Let's make money togetheer'.</p>
 			<p>Now you can <b>make money</b> by your old things. Just by giving it on <b>rent</b>.</p>

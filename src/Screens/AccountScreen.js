@@ -383,6 +383,7 @@ function AccountScreen(){
 					<h1 className='m-20'>Services provided by you</h1>
 					{data.Service.map(d=>{return(
 						<div key={d.id} className='editServiceCard'>
+							{d.VStatus && <p className='VStatus'>verified</p>}
 							<p>Rating : {d.Rating}</p>
 
 							{settingShopName?<h4><input type='text' 

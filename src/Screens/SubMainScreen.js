@@ -22,7 +22,7 @@ class SubMainScreen extends Component{
 
 	removeItem(id){
 		const url = localStorage.getItem('url');
-		axios.post('removeItem/', 
+		axios.post( url+'removeItem/', 
 		{
 		'user':localStorage.getItem('user223'),
 		'id':id
@@ -51,7 +51,8 @@ class SubMainScreen extends Component{
 										data={this.state.InterestedService.Services} 
 										handleOpenService={this.props.handleOpenService}/>}
 
-					<h2>Services nearby you.</h2><em>our engineers are working on it.</em>
+					<h2>Services nearby you.</h2>
+					<em>our engineers are working on it.</em>
 					
 					<FamousServices data={this.state.Plans[0].PlanServices} 
 					handleOpenService={this.props.handleOpenService}/>

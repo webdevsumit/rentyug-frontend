@@ -33,6 +33,7 @@ class SearchScreen extends Component{
 						OpenTime={d.OpenTime}
 						closeTime={d.closeTime}
 						handleOpenService={()=>this.props.handleOpenService(d.id)}
+						VStatus = {d.VStatus}
 						/>
 					</div>
 				)})}

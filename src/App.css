@@ -8,6 +8,15 @@
 	color:black;
 }
 
+.VStatus{
+	background:cyan;
+	border:1px solid cyan;
+	border-radius:50000px;
+	width:fit-content;
+	margin:1px;
+	padding:4px;
+}
+
 b{
 	background:transparent;
 }

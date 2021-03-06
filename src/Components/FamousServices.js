@@ -17,6 +17,7 @@ function FamousServices(props){
 					OpenTime={d.OpenTime}
 					closeTime={d.closeTime}
 					handleOpenService={()=>props.handleOpenService(d.id)}
+					VStatus = {d.VStatus}
 					/>
 				</div>
 			)})}

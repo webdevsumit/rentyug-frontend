@@ -6,6 +6,7 @@ function ServiceCard(props){
 			<div onClick={props.handleOpenService}>
 				<img src={props.Image} alt='service'/>
 				<div>
+					{props.VStatus && <h6 className='VStatus'>verified</h6>}
 					<h6>{props.Rating}/5 rating , Category : {props.Type}</h6>
 					<p>{props.ShopName}</p>
 					<h6>Rent : {props.PriceType}</h6>
