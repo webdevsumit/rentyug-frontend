@@ -7,7 +7,7 @@ import SignupScreen from './SignupScreen';
 import LoginScreen from './LoginScreen';
 import AccountScreen from './AccountScreen';
 import Description from './Description';
-import AddNewSmsBox from './addNewSmsBox'
+import AddNewSmsBox from './AddNewSmsBox'
 import AboutUs from './AboutUs';
 
 import axios from 'axios';
