@@ -364,7 +364,7 @@ button:hover{
 
 .myMsg{
 	background-color:#fff;
-	margin-left:50px;
+	margin-left:70px;
 }
 
 .msg p{
@@ -384,7 +384,6 @@ button:hover{
 	overflow:scroll;
 	border:1px solid grey;
 	margin-bottom:20px;
-	cursor:pointer;
 }
 
 .dummyText h3{
@@ -394,9 +393,11 @@ button:hover{
 				-1px -1px 5px 1px grey inset;
 	margin:20px;
 	padding:10px;
+	width:400px;
+	cursor:pointer;
 }
 
-.dummyText h3 h6{
+.dummyText h6{
 	background:transparent;
 	font-family:cursive;
 }

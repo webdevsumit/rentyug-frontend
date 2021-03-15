@@ -30,38 +30,35 @@ function MessageBox(props){
 			</div>
 				
 			<div className='dummyText' id='dummyText'>
-				<h3 onClick={()=>{setMsg('Okay.')}}>
-				Okay.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'Okay.')}}>
+				Okay.</h3>
 				
-				<h3 onClick={()=>{setMsg('Cancel.')}}>
-				Cancel.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'Wait')}}>
+				Wait</h3>
 				
-				<h3 onClick={()=>{setMsg('Comming in 10 min..')}}>
-				Comming in 10 min.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'Just for')}}>
+				Just for</h3>
 				
-				<h3 onClick={()=>{setMsg('Comming in.')}}>
-				Comming in.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'Yes.')}}>
+				Yes.</h3>
 				
-				<h3 onClick={()=>{setMsg('min.')}}>
-				min.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'No.')}}>
+				No.</h3>
 				
-				<h3 onClick={()=>{setMsg('for Saving, Haircut.')}}>
-				for Saving, Haircut.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'For')}}>
+				For</h3>
 				
-				<h3 onClick={()=>{setMsg('Full time.')}}>
-				Full Time.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'1 month.')}}>
+				1 month.</h3>
 				
-				<h3 onClick={()=>{setMsg('15 min.')}}>
-				15 min.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'3 month.')}}>
+				3 month.</h3>
 				
-				<h3 onClick={()=>{setMsg('20 min.')}}>
-				20 min.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'5 month.')}}>
+				5 month.</h3>
 				
-				<h3 onClick={()=>{setMsg('30 min.')}}>
-				30 min.<h6>tab to use</h6></h3>
-				
-				<h3 onClick={()=>{setMsg('1 hour..')}}>
-				1 hour.<h6>tab to use</h6></h3>
+				<h3 onClick={()=>{setMsg(msg+'1 year.')}}>
+				1 year.</h3>
 				
 			</div>
 			<div className='toSend'>
