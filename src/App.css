@@ -9,8 +9,8 @@
 }
 
 .VStatus{
-	background:cyan;
-	border:1px solid cyan;
+	color:orange;
+	border:1px solid orange;
 	border-radius:50000px;
 	width:fit-content;
 	margin:1px;
@@ -57,7 +57,6 @@ b{
 	display:flex;
 	justify-content:center;
 	align-item:center;
-	border-radius:50%;
 	overflow:hidden;
 	background: black url('./logo.svg') no-repeat fixed center;
 }
