@@ -16,7 +16,7 @@ function Navbar(props){
 	return(
 		<div className='NavbarDiv'>
 			<img className='logo' src={logo} alt='logo'/>
-			<h3  className='Navhead'>RentYug</h3>
+			<h3  className='Navhead'></h3>
 			{props.login?<div className='msg-menu-div'>
 				<button onClick={props.handleMessages}>Messages</button>
 				<button onClick={()=>{showMenu?setShowMenu(false):setShowMenu(true)}}

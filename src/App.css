@@ -52,8 +52,8 @@ b{
 }
 
 .logo{
-	width:25px;
-	height:25px;
+	width:130px;
+	min-height:30px;
 	display:flex;
 	justify-content:center;
 	align-item:center;
