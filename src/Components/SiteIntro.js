@@ -14,15 +14,18 @@ function SiteIntro(props){
 	
 	return(
 		<div className='SiteIntro' style={{'background':'lightgreen'}}>
+			<div>
 			<img className='logo' src={logo} alt='logo'/>
-			<h1>RentYug</h1>
+			<h6>Start your business today.</h6>
+			</div>
 			<br/>
 			<p>Let's make money togetheer'.</p>
 			<p>Now you can <b>make money</b> by your old things. Just by giving it on <b>rent</b>.</p>
 			<br/>
 			<p>Get things that you need at <b>low price</b> with <b>verification</b>. Take it on <b>rent</b>  or <b>buy</b> it.</p>
 			<p style={{'font-size':'10px'}}>NOTE: You can find the verification tag on product if the details given are true. 
-			Details with no tag may or may not be true. </p>
+			Details with no tag may or may not be true. Initially we are not responsible for your product
+			but later we will add this feature. </p>
 			<br/>
 			<p>You can also make money by just shipping the product.(comming soon)</p>
 			<br/>
