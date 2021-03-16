@@ -95,8 +95,7 @@ function Description(props){
 
 
 				<h2>{data.ShopName}</h2>
-				<h6>Shop Type : {data.Type.Name}</h6>
-				<p>{data.Type.Description}</p>
+				<h6>Category : {data.Type.Name}</h6>
 				
 				<div className='imageSlider'>
 					<span>
@@ -108,9 +107,9 @@ function Description(props){
 					)}
 				</div>
 
-				<p>Open Time : {data.OpenTime}</p>
-				<p>Close Time : {data.closeTime}</p>
-				<p>Price Type : {data.PriceType}</p>
+				<p>Open Time to contact: {data.OpenTime}</p>
+				<p>Close Time to contact : {data.closeTime}</p>
+				<p>Rent : {data.PriceType}</p>
 
 				<div className='descBox'>
 					<h3>Description</h3>

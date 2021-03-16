@@ -32,6 +32,7 @@ function SignupScreen(props){
 				formData.append('last_name',lastname);
 				formData.append('email',email);
 				formData.append('password',password1);
+				formData.append('Address',addrs);
 				formData.append('image',image);
 				const url = localStorage.getItem('url');
 				axios.post(url+'signup/',formData).then(res=>{
@@ -115,10 +116,10 @@ function SignupScreen(props){
 				pattern='[0-9]{2} [0-9]{10}'
 			/>:''}
 
-			{servicePF?<textarea rows='7'
+			<textarea rows='7'
 				value={addrs} onChange={e=>{setAddrs(e.target.value)}}
-				placeholder='Enter your full address.*' required
-			></textarea>:''}
+				placeholder={servicePF?'Enter your full address.*':'Enter your full address.'} required
+			></textarea>
 
 			<div>
 				{servicePF?'':<h5>Signup as</h5>}

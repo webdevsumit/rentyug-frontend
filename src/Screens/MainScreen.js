@@ -20,6 +20,7 @@ class MainScreen extends Component{
 		'mainPage':true,
 		'productId':'',
 		'provider':'',
+		'showSearchBar':false,
 	}
 
 	componentDidMount(){
@@ -41,13 +42,12 @@ class MainScreen extends Component{
 			localStorage.removeItem('user223');
 		})
 	}
-
+	
 	handleSearch(){
-		var input = prompt('Search here by name/catagory/search tags/etc :');
-		this.setState({'toSearch':input});
-		if(input !== null && input !== ''){
-			this.setState({'screen':'SearchScreen','mainPage':false});
+		if(this.state.toSearch !== null && this.state.toSearch !== ''){
+			this.setState({'screen':'SearchScreen','mainPage':false, 'showSearchBar':false});
 		}
+		this.setState({'showSearchBar':false});
 	}
 
 	handleOpenService(id){
@@ -83,10 +83,22 @@ class MainScreen extends Component{
 				onClick={()=>this.setState({'screen':'SubMainScreen','mainPage':true})}
 				>Back</button>}
 				
-				<button 
-				onClick={this.handleSearch.bind(this)} 
-				className='search-btn'>Search</button>
-
+				{!this.state.showSearchBar && <button 
+				onClick={()=>this.setState({'showSearchBar':!this.state.showSearchBar})} 
+				className='search-btn'>Search</button>}
+				
+				{this.state.showSearchBar && <div className='searchBarDiv'>
+					<input 
+						className='searchBar'
+						type='text' 
+						value={this.state.toSearch}
+						onChange={e=>this.setState({'toSearch':e.target.value})}
+					/>
+					<button 
+						onClick={this.handleSearch.bind(this)}
+						className=''>Search
+					</button>
+				</div>}
 
 				
 				{this.state.screen==='SubMainScreen'?<SubMainScreen

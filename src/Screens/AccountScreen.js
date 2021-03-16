@@ -17,6 +17,11 @@ function AccountScreen(){
 	const [email, setEmail] = useState('');
 	const [settingEmail, setSettingEmail] = useState(false);
 
+	const [myAddr, setMyAddr] = useState('');
+	const [settingMyAddr, setSettingMyAddr] = useState(false);
+
+	const [myNo, setMyNo] = useState('');
+	const [settingMyNo, setSettingMyNo] = useState(false);
 	
 	const [shopName, setShopName] = useState('');
 	const [settingShopName, setSettingShopName] = useState(false);
@@ -113,6 +118,40 @@ function AccountScreen(){
 			})
 		}
 	}
+
+
+
+	const updateMyAddr=()=>{
+			if (myAddr==='') alert('Cannot asign empty value.');
+			else{
+				const url = localStorage.getItem('url');
+				axios.post(url+'setMyAddr/',{
+						'username':localStorage.getItem('user223'),
+						'Address':myAddr
+				})
+			.then(res=>{
+					setData(res.data.profile);
+					setEmail('');
+				})
+			}
+		}
+
+
+
+	const updateMyNo=()=>{
+				if (myNo==='') alert('Cannot asign empty value.');
+				else{
+					const url = localStorage.getItem('url');
+					axios.post(url+'setMyNo/',{
+							'username':localStorage.getItem('user223'),
+							'MobileNo':myNo
+					})
+				.then(res=>{
+						setData(res.data.profile);
+						setEmail('');
+					})
+				}
+			}
 	
 	const updateShopName=(id)=>{
 			if (shopName==='') alert('Cannot asign empty value.');
@@ -378,7 +417,30 @@ function AccountScreen(){
 				>Update</button></h3>}
 
 
+
+				{settingMyAddr?<h3>Address : <input type='text' 
+					onChange={e=>{setMyAddr(e.target.value)}}/><button
+					onClick={()=>{updateMyAddr(); setSettingMyAddr(false);}}
+				>Set</button>
+				</h3>:<h3>
+					Address : {data.Address}<button
+					onClick={()=>{setSettingMyAddr(true)}}
+				>Update</button></h3>}
 				
+
+				{data.Service && <React.Fragment>
+				{settingMyNo?<h3>Mobile No. : <input type='tel' 
+					onChange={e=>{setMyNo(e.target.value)}}/><button
+					onClick={()=>{updateMyNo(); setSettingMyNo(false);}}
+				>Set</button>
+				</h3>:<h3>
+				Mobile No. : {data.MobileNo}<button
+					onClick={()=>{setSettingMyNo(true)}}
+				>Update</button></h3>}
+				</React.Fragment>
+				}
+												
+								
 				{data.Service?<div>
 					<h1 className='m-20'>Services provided by you</h1>
 					{data.Service.map(d=>{return(

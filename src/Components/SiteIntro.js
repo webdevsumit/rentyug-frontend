@@ -16,10 +16,12 @@ function SiteIntro(props){
 		<div className='SiteIntro' style={{'background':'lightgreen'}}>
 			<div>
 			<img className='logo' src={logo} alt='logo'/>
-			<h6>Start your business today.</h6>
 			</div>
+			
+			<h1>A new  way of renting.</h1>
+			
 			<br/>
-			<p>Let's make money togetheer'.</p>
+			<p>Let's make money together.</p>
 			<p>Now you can <b>make money</b> by your old things. Just by giving it on <b>rent</b>.</p>
 			<br/>
 			<p>Get things that you need at <b>low price</b> with <b>verification</b>. Take it on <b>rent</b>  or <b>buy</b> it.</p>

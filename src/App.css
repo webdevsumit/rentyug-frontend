@@ -56,6 +56,17 @@ b{
 	position:fixed;
 }
 
+.searchBar{
+	padding:2px 4px;
+	border-radius:20px;
+	outline:none;
+}
+
+.searchBarDiv{
+	position:sticky;
+	top:35px;
+}
+
 .logo{
 	width:130px;
 	min-height:30px;
@@ -137,18 +148,26 @@ button:hover{
 	text-shadow:0.1px 0.1px 2px white;
 }
 
-.SiteIntro div h6,.SiteIntro p,.SiteIntro a{
+.SiteIntro h1,.SiteIntro p,.SiteIntro a{
 	background:transparent;
 }
 
-.SiteIntro div h6{
+.SiteIntro h1{
 	padding-left:20px;
+	font-family:helvetica;
 }
 
 .SiteIntro div{
-	width:fit-content;
+	width:100%;
+	background:transparent;
+	display:flex;
+	justify-content:center;	
 }
 
+
+.SiteIntro div img{
+	width:300px;
+}
 
 .ServiceCatagoryCard{
 	padding:15px;
