@@ -74,8 +74,10 @@ b{
 	justify-content:center;
 	align-item:center;
 	overflow:hidden;
-	background: black url('./logo.svg') no-repeat fixed center;
+	background: transparent;
 }
+
+
 
 .Navhead{
 	font-size:25px;
@@ -328,6 +330,8 @@ button:hover{
 	top:0;
 	width:100%;
 	left:0;
+	bottom:0;
+	right:0;
 	height:100%;
 	overflow:scroll;
 }

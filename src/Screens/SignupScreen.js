@@ -1,5 +1,6 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 
 function SignupScreen(props){
@@ -127,17 +128,21 @@ function SignupScreen(props){
 				
 				{servicePF?<button 
 					className='signup-btn'
-					onClick={()=>setServicePF(false)}>back</button>:<button 
-					className='signup-btn' 
-					onClick={()=>handleSignup('user')}
-				>User</button>}
+					onClick={()=>setServicePF(false)}>back</button>:<Link to='/'>
+					<button 
+						className='signup-btn' 
+						onClick={()=>handleSignup('user')}
+						>User</button>
+					</Link>}
 				<h6>(user cannot add products)</h6>
 				
-				{servicePF?<button className='signup-btn' 
-					onClick={()=>{handleSignup('service-provider')}}
-				>Now Signup as Service Provider</button>:<button className='signup-btn' 
+				{servicePF?<Link to='/'>
+					<button className='signup-btn' 
+						onClick={()=>{handleSignup('service-provider')}}
+					>Now Signup as Service Provider</button>
+				</Link>:<button className='signup-btn' 
 					onClick={()=>{setServicePF(true)}}
-				>Service Provider</button>}
+					>Service Provider</button>}
 				<h6>(recommended)</h6>
 			</div>
 		</div>

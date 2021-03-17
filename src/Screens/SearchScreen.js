@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import ServiceCard from '../Components/ServiceCard';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 
 class SearchScreen extends Component{
@@ -24,6 +25,7 @@ class SearchScreen extends Component{
 
 				{this.state.data.map(d=>{return(
 					<div key={d.id}>
+						<Link to={'/service/'+d.id}>
 						<ServiceCard 
 						Image={d.MainImage} 
 						Type={d.Type.Name} 
@@ -35,6 +37,7 @@ class SearchScreen extends Component{
 						handleOpenService={()=>this.props.handleOpenService(d.id)}
 						VStatus = {d.VStatus}
 						/>
+						</Link>
 					</div>
 				)})}
 				

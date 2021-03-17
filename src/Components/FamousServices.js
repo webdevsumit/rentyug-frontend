@@ -1,5 +1,6 @@
 import React from 'react';
 import ServiceCard from './ServiceCard';
+import {Link} from 'react-router-dom';
 
 
 function FamousServices(props){
@@ -8,6 +9,7 @@ function FamousServices(props){
 			<h2>Services by Supporters .</h2><span>#supporting</span>
 			{props.data.map(d=>{return(
 				<div key={d.id}>
+					<Link to={'/service/'+d.id}>
 					<ServiceCard 
 					Image={d.MainImage} 
 					Type={d.Type.Name} 
@@ -19,6 +21,7 @@ function FamousServices(props){
 					handleOpenService={()=>props.handleOpenService(d.id)}
 					VStatus = {d.VStatus}
 					/>
+					</Link>
 				</div>
 			)})}
 		</div>

@@ -50,14 +50,17 @@ function MessageScreen(){
 			handleSendingMsg={handleSendingMsg}
 			msgingTo={msgingTo}
 			handleRegularRender={handleClick}
-			data={messages}/></div>:''}
+			data={messages}/></div>:<React.Fragment>
 			
-			{data.map(d=><div key={d.id} onClick={()=>handleClick(d.MessagePartner)}><MessageCard 
-			Username={d.Username}
-			Name={d.MessagePartner}
-			Unread = {d.UnreadMessages}
-			/></div>)}
-			
+				{data.map(d=><div key={d.id} onClick={()=>handleClick(d.MessagePartner)}>
+				<MessageCard 
+				Username={d.Username}
+				Name={d.MessagePartner}
+				Unread = {d.UnreadMessages}
+				/>
+				</div>)}
+				
+			</React.Fragment>}
 		</div>
 	);
 }

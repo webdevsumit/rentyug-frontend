@@ -1,5 +1,6 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 
 function LoginScreen(props){
@@ -43,10 +44,11 @@ function LoginScreen(props){
 			<button onClick={()=>{setHidePass(!hidePass)}}>{hidePass?'show':'hide'}</button>
 						
 
-
+			<Link to='/'>
 			<button className='signup-btn' 
 				onClick={handleLogin}
 			>Login</button>
+			</Link>
 		</div>	
 	);
 }

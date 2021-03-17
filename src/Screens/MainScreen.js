@@ -10,7 +10,10 @@ import Description from './Description';
 import AddNewSmsBox from './AddNewSmsBox'
 import AboutUs from './AboutUs';
 
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import axios from 'axios';
+
+
 
 class MainScreen extends Component{
 	state={
@@ -21,6 +24,16 @@ class MainScreen extends Component{
 		'productId':'',
 		'provider':'',
 		'showSearchBar':false,
+	}
+
+	componentWillMount(){
+		const user = localStorage.getItem('user223');
+		if((user===null) || (user==='')){
+			this.setState({'productId':(-1)});
+		}else{
+			var id = window.location.href.split('/')[4];
+			this.setState({'productId':id});
+		}
 	}
 
 	componentDidMount(){
@@ -45,18 +58,18 @@ class MainScreen extends Component{
 	
 	handleSearch(){
 		if(this.state.toSearch !== null && this.state.toSearch !== ''){
-			this.setState({'screen':'SearchScreen','mainPage':false, 'showSearchBar':false});
+			this.setState({'showSearchBar':false});
 		}
 		this.setState({'showSearchBar':false});
 	}
 
 	handleOpenService(id){
-		if (this.state.login) this.setState({'screen':'Description','mainPage':false,'productId':id});
+		if (this.state.login) this.setState({'productId':id});
 		else alert('Please Signup or Login');
 	}
 
 	handleChooseCatagory(name){
-		this.setState({'toSearch':name,'screen':'SearchScreen','mainPage':false});
+		this.setState({'toSearch':name});
 	}
 
 	afterAddingNewSms(user,provider){
@@ -66,22 +79,19 @@ class MainScreen extends Component{
 	render(){
 		return(
 			<div className='MainScreen'>
-				{localStorage.setItem('Username','sumit')}
+				<Router>
+				
 				<Navbar 
-				 handleMessages={()=>this.setState({'screen':'MessageScreen','mainPage':false})}
-				 handleLogin={()=>this.setState({'screen':'LoginScreen','mainPage':false})}
-				 handleSignup={()=>this.setState({'screen':'SignupScreen','mainPage':false})}
-				 handleAccount={()=>this.setState({'screen':'AccountScreen','mainPage':false})}
 				 handleLogout={this.handleLogout.bind(this)}
-				 handleAboutUs={()=>this.setState({'screen':'AboutUs','mainPage':false})}
 				 login={this.state.login}
 				/>
 				<div className='breakpoint'></div>
 
-				{this.state.mainPage?'':<button 
-				className='search-btn'
-				onClick={()=>this.setState({'screen':'SubMainScreen','mainPage':true})}
-				>Back</button>}
+				<Route path={['/messages', '/signup', '/login', '/account', '/services', '/search']} >
+					<Link to='/'>
+						<button className='search-btn'>Home</button>
+					</Link>
+				</Route>
 				
 				{!this.state.showSearchBar && <button 
 				onClick={()=>this.setState({'showSearchBar':!this.state.showSearchBar})} 
@@ -94,46 +104,63 @@ class MainScreen extends Component{
 						value={this.state.toSearch}
 						onChange={e=>this.setState({'toSearch':e.target.value})}
 					/>
+					<Link to='/search'>
 					<button 
 						onClick={this.handleSearch.bind(this)}
 						className=''>Search
 					</button>
+					</Link>
 				</div>}
 
-				
-				{this.state.screen==='SubMainScreen'?<SubMainScreen
-				openAboutUs={()=>this.setState({'screen':'AboutUs','mainPage':false})}
-				handleChooseCatagory={this.handleChooseCatagory.bind(this)}
-				handleOpenService={this.handleOpenService.bind(this)}
-				login={this.state.login}/>:''}
-				
-				{this.state.screen==='SignupScreen'?<SignupScreen
-							     afterSignup={()=>this.setState({'screen':'SubMainScreen',
-							     'mainPage':true,'login':true})}
-								 />:''}
-								 
-				{this.state.screen==='LoginScreen'?<LoginScreen
-							     afterLogin={()=>this.setState({'screen':'SubMainScreen',
-							     'mainPage':true,'login':true})}
-								 />:''}
-								 
-				{this.state.screen==='MessageScreen'?<MessageScreen/>:''}
-				
-				{this.state.screen==='SearchScreen'?<SearchScreen 
-								handleOpenService={this.handleOpenService.bind(this)} 
-								Name={this.state.toSearch}/>:''}
+				<Route path='/' exact >
+					<SubMainScreen
+					openAboutUs={()=>this.setState({'screen':'AboutUs','mainPage':false})}
+					handleChooseCatagory={this.handleChooseCatagory.bind(this)}
+					handleOpenService={this.handleOpenService.bind(this)}
+					login={this.state.login}/>
+				</Route>
 
-				{this.state.screen==='AccountScreen'?<AccountScreen/>:''}
+
+				<Route path='/signup' >
+					<SignupScreen
+						afterSignup={()=>this.setState({'screen':'SubMainScreen',
+						'mainPage':true,'login':true})}
+					/>
+				</Route>
+
+				<Route path='/login' >
+					<LoginScreen
+						afterLogin={()=>this.setState({'screen':'SubMainScreen',
+						'mainPage':true,'login':true})}
+					/>
+				</Route>
+								 
 				
-				{this.state.screen==='Description'?<Description
-				afterAddingNewSms={this.afterAddingNewSms.bind(this)}
-				productId={this.state.productId}/>:''}
+				<Route path='/messages' component={MessageScreen}/>
+
+				<Route path='/search'>
+					<SearchScreen 
+						handleOpenService={this.handleOpenService.bind(this)} 
+						Name={this.state.toSearch}/>
+				</Route>
+
+
+				<Route path={'/account/'+localStorage.getItem('user223')} component={AccountScreen}/>
+
+				<Route path={'/service/'+this.state.productId}>
+					<Description
+					afterAddingNewSms={this.afterAddingNewSms.bind(this)}
+					productId={this.state.productId}/>
+				</Route>
 				
 				{this.state.screen==='AddNewSmsBox'?<AddNewSmsBox
 				back={()=>{this.setState({'screen':'SubMainScreen','mainPage':true})}}
 				provider={this.state.provider}/>:''}
 
-				{this.state.screen==='AboutUs'?<AboutUs/>:''}
+				<Route path='/about' component={AboutUs}/>
+
+
+				</Router>
 				
 			</div>
 		);
