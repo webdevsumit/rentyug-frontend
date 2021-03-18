@@ -54,6 +54,9 @@ function AccountScreen(){
 	const [newItemOpenTime, setNewItemOpenTime] = useState('');
 	const [newItemCloseTime, setNewItemCloseTime] = useState('');
 	const [newItemPriceType, setNewItemPriceType] = useState('');
+
+	const [readTC, setReadTC] = useState(false);
+	const [agreeTC, setAgreeTC] = useState(false);
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
@@ -630,7 +633,61 @@ function AccountScreen(){
 						in many different way to search tag.</p>
 						<p></p>
 
-						<button onClick={addNewService}>Add</button>
+
+						{readTC?<div>
+
+
+
+
+						
+							<h4>Terms and Conditions to upload product.</h4>
+							<br/>
+
+							<ul>
+								<li>Take care of your product on your own. Initially we are not providing that type of facility
+								but later we will add that.</li>
+								<br/>
+								
+								<li>We are not responsible for your product. Make sure your are taking security money or ID proof or
+								something else. So you can feel secure.</li>
+								<br/>
+
+								<li>You are providing something to your customers so you are the master of your business.
+								Do not do anything that will put you in trouble.</li>
+								<br/>
+
+								<li>Please call us to apply for the verification tag. It will help you to increase consumers 
+								trust on you and make you more profitable.</li>
+								<br/>
+
+								<li>For verification we can call(audio or video) or come to you, depends on the 
+								size and value of product  and verify you are giving the 
+								right details about the product or not.</li>
+								<br/>
+
+								<li>After getting verification tag do not try to change anything in service otherwise 
+								it will removed. If you want to change please contact us.</li>
+								<br/>
+
+								<li>Our goal is to get more and more trust on us by people like you Please co-operate us. </li>
+								<br/>
+
+								<li>Thankyou for providing service. If you have any doubt feel free to contact us.</li>
+								<br/>
+								<li><a href='tel:+91 7999004229'>customer care</a></li>
+							</ul>
+
+
+
+
+							
+							
+						</div>:<button onClick={()=>setReadTC(!readTC)}>Read T&C </button>}
+						
+						<input type='checkbox' onChange={()=>setAgreeTC(!agreeTC)}/>
+						<label>I agree</label>
+
+						{agreeTC?<button onClick={addNewService}>Add</button>:<button onClick={()=>alert('Agree T&C')}>Add</button>}
 						
 					</div>:<button onClick={()=>setCanAddNewItem(true)}>Add new service</button>}
 					

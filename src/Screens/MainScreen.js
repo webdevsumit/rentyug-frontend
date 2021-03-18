@@ -104,7 +104,7 @@ class MainScreen extends Component{
 						value={this.state.toSearch}
 						onChange={e=>this.setState({'toSearch':e.target.value})}
 					/>
-					<Link to='/search'>
+					<Link to={'/search/'+this.state.toSearch}>
 					<button 
 						onClick={this.handleSearch.bind(this)}
 						className=''>Search
@@ -138,7 +138,7 @@ class MainScreen extends Component{
 				
 				<Route path='/messages' component={MessageScreen}/>
 
-				<Route path='/search'>
+				<Route path={'/search/'+this.state.toSearch}>
 					<SearchScreen 
 						handleOpenService={this.handleOpenService.bind(this)} 
 						Name={this.state.toSearch}/>

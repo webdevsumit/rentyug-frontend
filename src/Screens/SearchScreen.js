@@ -20,7 +20,6 @@ class SearchScreen extends Component{
 	render(){
 		return(
 			<div className='SearchScreen'>
-				<h6>Our developers working on nearby services.</h6>
 				<h6>Results for {this.props.Name}</h6>
 
 				{this.state.data.map(d=>{return(
@@ -40,6 +39,8 @@ class SearchScreen extends Component{
 						</Link>
 					</div>
 				)})}
+				<div className='breakpoint'></div>
+				<h4>{this.state.data.length===0 && 'No results!'}</h4>
 				
 			</div>
 		);
