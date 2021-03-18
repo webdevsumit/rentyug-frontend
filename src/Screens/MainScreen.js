@@ -39,7 +39,7 @@ class MainScreen extends Component{
 	componentDidMount(){
 		const user = localStorage.getItem('user223');
 
-		localStorage.setItem('url','http://3cf1d1f9ddf2.ngrok.io/');
+		localStorage.setItem('url','http://127.0.0.1:8000/');
 		
 		if((user===null) || (user==='')){
 			this.setState({'screen':'SubMainScreen','login':false});
