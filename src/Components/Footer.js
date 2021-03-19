@@ -10,11 +10,7 @@ function Footer(props){
 
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
-		axios.get(url+'FAQData/',{
-				  headers: {
-				    'Authorization': `Token ${localStorage.getItem('token')}` 
-				  }
-				}).then(res=>{
+		axios.get(url+'FAQData/').then(res=>{
 			setFAQData(res.data);
 		});
 	},[])

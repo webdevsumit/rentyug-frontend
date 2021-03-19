@@ -9,11 +9,7 @@ function Navbar(props){
 
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
-		axios.get(url+'logo/',{
-				  headers: {
-				    'Authorization': `Token ${localStorage.getItem('token')}` 
-				  }
-				}).then(res=>{
+		axios.get(url+'logo/').then(res=>{
 			setLogo(res.data[0].Logo);
 		})
 	},[])

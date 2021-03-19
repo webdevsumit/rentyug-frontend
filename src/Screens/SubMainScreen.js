@@ -15,11 +15,7 @@ class SubMainScreen extends Component{
 
 	componentDidMount(){
 		const url = localStorage.getItem('url');
-		axios.post(url+'mainPageData/', {'user':localStorage.getItem('user223')},{
-		  headers: {
-		    'Authorization': `Token ${localStorage.getItem('token')}` 
-		  }
-		}).then(res=>{
+		axios.post(url+'mainPageData/', {'user':localStorage.getItem('user223')}).then(res=>{
 			this.setState(res.data);
 		});
 	}

@@ -343,9 +343,10 @@ button:hover{
 	background-color:red;
 	cursor:pointer;
 	margin:10px;
-	box-shadow:1px 1px 3px red;;
-	position:sticky;
-	top:10px;
+	box-shadow:1px 1px 3px red;
+	position:fixed;
+	top:0px;
+	right:0px;
 	border:none;
 }
 

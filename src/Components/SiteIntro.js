@@ -1,17 +1,13 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
-
+import {Link} from 'react-router-dom';
 
 function SiteIntro(props){
 
 	const [logo, setLogo] = useState('');
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
-		axios.get(url+'logo/',{
-				  headers: {
-				    'Authorization': `Token ${localStorage.getItem('token')}` 
-				  }
-				}).then(res=>{
+		axios.get(url+'logo/').then(res=>{
 			setLogo(res.data[0].Logo);
 		});
 	},[])
@@ -37,7 +33,7 @@ function SiteIntro(props){
 			<br/>
 			<a href='tel:+91 7999004229'>Customer care</a>
 			<br/>
-			<button onClick={props.openAboutUs}>Read more.</button>
+			<Link to='/about'><button onClick={props.openAboutUs}>Read more.</button></Link>
 		</div>
 	);
 }
