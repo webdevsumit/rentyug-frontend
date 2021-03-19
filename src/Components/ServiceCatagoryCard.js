@@ -7,7 +7,7 @@ function ServiceCatagoryCard(props){
 		<div className='ServiceCatagoryCard'>
 			<div onClick={props.handleChooseCatagory}>
 				<img src={props.Image} alt='service catagory'/>
-				<Link to='/search'>
+				<Link to={'/search/'+props.Name}>
 					<div>
 						<h3>{props.Name}</h3>
 						<p>{props.Description}</p>

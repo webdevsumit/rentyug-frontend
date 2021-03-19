@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
 import ServiceCatagoryCard from './ServiceCatagoryCard';
 
-
 function ServiceCatagories(props){
 
 	const [open, setOpen] = useState(false);
