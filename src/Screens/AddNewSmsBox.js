@@ -17,6 +17,10 @@ function AddNewSmsBox(props){
 		axios.post(url+'messages/',{
 		'Username':localStorage.getItem('user223'),
 		'MessagePartner':props.provider
+		},{
+				  headers: {
+				    'Authorization': `Token ${localStorage.getItem('token')}` 
+				  }
 		}).then(res=>{
 			setMessages(res.data);
 			setMsgBox(true);
@@ -30,6 +34,10 @@ function AddNewSmsBox(props){
 		axios.post(url+'messages/',{
 			'Username':localStorage.getItem('user223'),
 			'MessagePartner':msgMan
+		},{
+				  headers: {
+				    'Authorization': `Token ${localStorage.getItem('token')}` 
+				  }
 		}).then(res=>{
 				setMessages(res.data);
 				setMsgBox(true);
@@ -42,6 +50,10 @@ function AddNewSmsBox(props){
 			'SendBy':localStorage.getItem('user223'),
 			'Message':msg,
 			'RecievedBy':msgMan
+		},{
+				  headers: {
+				    'Authorization': `Token ${localStorage.getItem('token')}` 
+				  }
 		}).then(res=>{
 			setMessages(res.data);
 		})

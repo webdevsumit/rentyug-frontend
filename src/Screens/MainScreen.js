@@ -10,7 +10,7 @@ import Description from './Description';
 import AddNewSmsBox from './AddNewSmsBox'
 import AboutUs from './AboutUs';
 
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -50,9 +50,14 @@ class MainScreen extends Component{
 	
 	handleLogout(){
 		const url = localStorage.getItem('url');
-		axios.get(url+'logout/').then(res=>{
+		axios.get(url+'logout/',{
+				  headers: {
+				    'Authorization': `Token ${localStorage.getItem('token')}` 
+				  }
+				}).then(res=>{
 			this.setState({'screen':'SubMainScreen','login':false,'mainPage':true});
 			localStorage.removeItem('user223');
+			localStorage.removeItem('token');
 		})
 	}
 	

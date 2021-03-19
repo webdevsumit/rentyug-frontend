@@ -15,7 +15,7 @@ function LoginScreen(props){
 			alert('All fields are required.');
 		}else{
 			const url = localStorage.getItem('url');
-			axios.post(url+'login/',{
+			axios.post(url+'api-token-auth/',{
 				'username':username,
 				'password':password
 			}).then(res=>{
@@ -23,6 +23,7 @@ function LoginScreen(props){
 					alert(res.data.error)
 				}else{
 					localStorage.setItem('user223',username);
+					localStorage.setItem('token',res.data.token);
 					props.afterLogin();
 				}
 			}).catch(err=>{

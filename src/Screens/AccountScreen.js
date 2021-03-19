@@ -60,7 +60,11 @@ function AccountScreen(){
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
-		axios.post(url+'account/',{'username':localStorage.getItem('user223')})
+		axios.post(url+'account/',{'username':localStorage.getItem('user223')},{
+				  headers: {
+				    'Authorization': `Token ${localStorage.getItem('token')}` 
+				  }
+				})
 		.then(res=>{
 			setData(res.data.profile);
 			setAccScreen(true);
@@ -70,7 +74,11 @@ function AccountScreen(){
 
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
-		axios.get(url+'ShopCatagories/')
+		axios.get(url+'ShopCatagories/',{
+				  headers: {
+				    'Authorization': `Token ${localStorage.getItem('token')}` 
+				  }
+				})
 		.then(res=>{
 			setShopCatagories(res.data.data);
 		})
@@ -84,6 +92,10 @@ function AccountScreen(){
 			axios.post(url+'setFirstname/',{
 					'username':localStorage.getItem('user223'),
 					'firstname':firstname
+				},{
+						  headers: {
+						    'Authorization': `Token ${localStorage.getItem('token')}` 
+						  }
 				})
 			.then(res=>{
 				setData(res.data.profile);
@@ -99,6 +111,10 @@ function AccountScreen(){
 			axios.post(url+'setLastname/',{
 					'username':localStorage.getItem('user223'),
 					'lastname':lastname
+				},{
+						  headers: {
+						    'Authorization': `Token ${localStorage.getItem('token')}` 
+						  }
 				})
 			.then(res=>{
 				setData(res.data.profile);
@@ -114,6 +130,10 @@ function AccountScreen(){
 			axios.post(url+'setEmail/',{
 					'username':localStorage.getItem('user223'),
 					'email':email
+			},{
+					  headers: {
+					    'Authorization': `Token ${localStorage.getItem('token')}` 
+					  }
 			})
 		.then(res=>{
 				setData(res.data.profile);
@@ -131,6 +151,10 @@ function AccountScreen(){
 				axios.post(url+'setMyAddr/',{
 						'username':localStorage.getItem('user223'),
 						'Address':myAddr
+				},{
+						  headers: {
+						    'Authorization': `Token ${localStorage.getItem('token')}` 
+						  }
 				})
 			.then(res=>{
 					setData(res.data.profile);
@@ -148,6 +172,10 @@ function AccountScreen(){
 					axios.post(url+'setMyNo/',{
 							'username':localStorage.getItem('user223'),
 							'MobileNo':myNo
+					},{
+							  headers: {
+							    'Authorization': `Token ${localStorage.getItem('token')}` 
+							  }
 					})
 				.then(res=>{
 						setData(res.data.profile);
@@ -164,6 +192,10 @@ function AccountScreen(){
 					'id':id,
 					'ShopName':shopName,
 					'username':localStorage.getItem('user223')
+				},{
+						  headers: {
+						    'Authorization': `Token ${localStorage.getItem('token')}` 
+						  }
 				})
 			.then(res=>{
 				setData(res.data.profile);
@@ -178,6 +210,10 @@ function AccountScreen(){
 					'serviceId':serviceId,
 					'catagoryId':catagoryId,
 					'username':localStorage.getItem('user223')
+				},{
+						  headers: {
+						    'Authorization': `Token ${localStorage.getItem('token')}` 
+						  }
 				})
 		.then(res=>{
 				setData(res.data.profile);
@@ -194,7 +230,11 @@ function AccountScreen(){
 			formData.append('image',mainImage);
 			formData.append('username',localStorage.getItem('user223'));
 
-			axios.post(url+'updateMainImage/',formData)
+			axios.post(url+'updateMainImage/',formData,{
+					  headers: {
+					    'Authorization': `Token ${localStorage.getItem('token')}` 
+					  }
+					})
 			.then(res=>{
 				setData(res.data.profile);
 				setMainImage(null);
@@ -215,7 +255,11 @@ function AccountScreen(){
 			
 			formData.append('username',localStorage.getItem('user223'));
 			const url = localStorage.getItem('url');
-			axios.post(url+'updateImage/',formData)
+			axios.post(url+'updateImage/',formData,{
+					  headers: {
+					    'Authorization': `Token ${localStorage.getItem('token')}` 
+					  }
+					})
 			.then(res=>{
 				setData(res.data.profile);
 				setMainImage(null);
@@ -235,7 +279,11 @@ function AccountScreen(){
 	        formData.append('image',mainImage);         
 	        formData.append('username',localStorage.getItem('user223'));
 			const url = localStorage.getItem('url');
-	        axios.post(url+'addNewImage/',formData)
+	        axios.post(url+'addNewImage/',formData,{
+	        		  headers: {
+	        		    'Authorization': `Token ${localStorage.getItem('token')}` 
+	        		  }
+	        		})
 	        .then(res=>{
 	            setData(res.data.profile);
 	            setMainImage(null);
@@ -252,6 +300,10 @@ function AccountScreen(){
 	 				'username':localStorage.getItem('user223'),
 	 				'id':id,
 	 				'openTime':openTime
+	 			},{
+	 					  headers: {
+	 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 					  }
 	 			})
 	 		.then(res=>{
 	 			setData(res.data.profile);
@@ -268,6 +320,10 @@ function AccountScreen(){
 	 				'username':localStorage.getItem('user223'),
 	 				'id':id,
 	 				'closeTime':closeTime
+	 			},{
+	 					  headers: {
+	 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 					  }
 	 			})
 	 		.then(res=>{
 	 			setData(res.data.profile);
@@ -284,6 +340,10 @@ function AccountScreen(){
 	 				'username':localStorage.getItem('user223'),
 	 				'id':id,
 	 				'priceType':priceType
+	 			},{
+	 					  headers: {
+	 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 					  }
 	 			})
 	 		.then(res=>{
 	 			setData(res.data.profile);
@@ -297,6 +357,10 @@ function AccountScreen(){
 	 	axios.post(url+'deleteSearchName/',{
  			'username':localStorage.getItem('user223'),
 			'id':id
+	 	},{
+	 			  headers: {
+	 			    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 			  }
 	 	})
 	 	.then(res=>{
 	 		setData(res.data.profile);
@@ -308,6 +372,10 @@ function AccountScreen(){
 	 	axios.post(url+'deleteImage/',{
  			'username':localStorage.getItem('user223'),
 			'id':id
+	 	},{
+	 			  headers: {
+	 			    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 			  }
 	 	})
 	 	.then(res=>{
 	 		setData(res.data.profile);
@@ -322,6 +390,10 @@ function AccountScreen(){
 	 				'username':localStorage.getItem('user223'),
 	 				'serviceId':serviceId,
 	 				'searchName':searchName
+	 			},{
+	 					  headers: {
+	 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 					  }
 	 			})
 	 		.then(res=>{
 	 			setData(res.data.profile);
@@ -340,7 +412,11 @@ function AccountScreen(){
 	 							'username':localStorage.getItem('user223'),
 	 			 				'serviceId':serviceId,
 	 			 				'desc':desc
-	 			})
+	 			},{
+	 					  headers: {
+	 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 					  }
+	 				})
 	 		.then(res=>{
 	 			setData(res.data.profile);
 	 			setDesc('');
@@ -362,7 +438,11 @@ function AccountScreen(){
 	 		formData.append('PriceType',newItemPriceType);
 	 		formData.append('username', localStorage.getItem('user223'));
 			const url = localStorage.getItem('url');
-	 		axios.post(url+'addNewService/',formData)
+	 		axios.post(url+'addNewService/',formData,{
+	 			 					  headers: {
+	 			 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 			 					  }
+	 			 				})
 	 		.then(res=>{
 	 			 setData(res.data.profile);
 	 			 setNewShopName('');

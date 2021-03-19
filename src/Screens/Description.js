@@ -1,5 +1,6 @@
 import React,{ useState, useEffect} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 function Description(props){
 
@@ -17,6 +18,10 @@ function Description(props){
 		axios.post(url+'productData/',{
 					'productId':props.productId,
 					'Username': localStorage.getItem('user223')
+			},{
+				headers: {
+					'Authorization': `Token ${localStorage.getItem('token')}` 
+				}
 			}).then(res=>{
 			setData(res.data.data);
 			setProfile(res.data.providerDetail);
@@ -33,7 +38,11 @@ function Description(props){
 			axios.post(url+'addNewSmsBox/',{
 				'user':user,
 				'provider':provider
-			}).then(res=>{
+			},{
+							headers: {
+								'Authorization': `Token ${localStorage.getItem('token')}` 
+							}
+						}).then(res=>{
 				if (res.data.msg){
 					props.afterAddingNewSms(user,provider);
 				}
@@ -50,7 +59,11 @@ function Description(props){
 					'user':user,
 					'productId':props.productId,
 					'rating':rating
-			}).then(res=>{
+			},{
+							headers: {
+								'Authorization': `Token ${localStorage.getItem('token')}` 
+							}
+						}).then(res=>{
 			if(res.data.msg){
 				alert(res.data.msg);
 			}else{
@@ -73,7 +86,11 @@ function Description(props){
 							'user':user,
 							'productId':props.productId,
 							'feed':feed
-			}).then(res=>{
+			},{
+							headers: {
+								'Authorization': `Token ${localStorage.getItem('token')}` 
+							}
+						}).then(res=>{
 				setData(res.data.data);
 				setProfile(res.data.providerDetail);
 				addFeed('');
@@ -122,7 +139,7 @@ function Description(props){
 					<h3>Address : {profile.Address}</h3>
 					<a href={'tel:'+profile.MobileNo}><button>Call</button></a>
 					<a href={'sms:'+profile.MobileNo}><button>Direct message</button></a>
-					<button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button>
+					<Link to='/messages'><button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button></Link>
 				</div>:''}
 
 

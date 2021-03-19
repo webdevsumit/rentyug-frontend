@@ -41,6 +41,8 @@ function SignupScreen(props){
 						alert(res.data.error)
 					}else{
 						localStorage.setItem('user223',username);
+						localStorage.setItem('token',res.data.token);
+						alert(res.data.token);
 						props.afterSignup();
 					}
 				}).catch(err=>{
@@ -62,6 +64,7 @@ function SignupScreen(props){
 						alert(res.data.error)
 					}else{
 						localStorage.setItem('user223',username);
+						localStorage.setItem('token',res.data.token);
 						props.afterSignup();
 					}
 				}).catch(err=>{

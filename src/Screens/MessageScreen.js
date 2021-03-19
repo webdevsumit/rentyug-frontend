@@ -5,8 +5,10 @@ import axios from 'axios';
 
 
 function MessageScreen(){
-
-	const [data, setData] = useState([]);
+	
+	const [unreaddata, setUnreadData] = useState([]);
+	const [readdata, setReadData] = useState([]);
+	
 	const [messages, setMessages] = useState([]);
 	const [msgBox, setMsgBox] = useState(false);
 	const [msgingTo, setMsgingTo] = useState('x');
@@ -14,8 +16,13 @@ function MessageScreen(){
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
-		axios.post(url+'messageBox/',{'Username':localStorage.getItem('user223')}).then(res=>{
-			setData(res.data);
+		axios.post(url+'messageBox/',{'Username':localStorage.getItem('user223')},{
+						headers: {
+							'Authorization': `Token ${localStorage.getItem('token')}` 
+						}
+					}).then(res=>{
+			setUnreadData(res.data.filter(d=>d.UnreadMessages));
+			setReadData(res.data.filter(d=>d.UnreadMessages===false));
 		})
 	},[msgBox]);
 
@@ -25,7 +32,11 @@ function MessageScreen(){
 		axios.post(url+'messages/',{
 		'Username':localStorage.getItem('user223'),
 		'MessagePartner':msgMan
-		}).then(res=>{
+		},{
+						headers: {
+							'Authorization': `Token ${localStorage.getItem('token')}` 
+						}
+			}).then(res=>{
 			setMessages(res.data);
 			setMsgBox(true);
 		})
@@ -37,7 +48,11 @@ function MessageScreen(){
 			'SendBy':localStorage.getItem('user223'),
 			'Message':msg,
 			'RecievedBy':msgMan
-		}).then(res=>{
+		},{
+						headers: {
+							'Authorization': `Token ${localStorage.getItem('token')}` 
+						}
+			}).then(res=>{
 			setMessages(res.data);
 		})
 	}
@@ -52,7 +67,16 @@ function MessageScreen(){
 			handleRegularRender={handleClick}
 			data={messages}/></div>:<React.Fragment>
 			
-				{data.map(d=><div key={d.id} onClick={()=>handleClick(d.MessagePartner)}>
+				{unreaddata.map(d=><div key={d.id} onClick={()=>handleClick(d.MessagePartner)}>
+				<MessageCard 
+				Username={d.Username}
+				Name={d.MessagePartner}
+				Unread = {d.UnreadMessages}
+				/>
+				</div>)}
+
+
+				{readdata.map(d=><div key={d.id} onClick={()=>handleClick(d.MessagePartner)}>
 				<MessageCard 
 				Username={d.Username}
 				Name={d.MessagePartner}

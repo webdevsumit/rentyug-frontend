@@ -11,7 +11,11 @@ class SearchScreen extends Component{
 
 	componentDidMount(){
 		const url = localStorage.getItem('url');
-		axios.post(url+'search/',{'searchName':this.props.Name})
+		axios.post(url+'search/',{'searchName':this.props.Name},{
+				  headers: {
+				    'Authorization': `Token ${localStorage.getItem('token')}` 
+				  }
+				})
 		.then(res=>{
 			this.setState({'data':res.data.data});
 		})

@@ -15,6 +15,10 @@ function AddFeedback(){
 			axios.post(url+'addFeedback/',{
 				'username':localStorage.getItem('user223'),
 				'msg':feed
+			},{
+					  headers: {
+					    'Authorization': `Token ${localStorage.getItem('token')}` 
+					  }
 			}).then(res=>{
 				alert('We will add this after review!\n (does not depend on good/bad feedback.)');
 			})

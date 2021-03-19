@@ -15,7 +15,11 @@ class SubMainScreen extends Component{
 
 	componentDidMount(){
 		const url = localStorage.getItem('url');
-		axios.post(url+'mainPageData/', {'user':localStorage.getItem('user223')}).then(res=>{
+		axios.post(url+'mainPageData/', {'user':localStorage.getItem('user223')},{
+		  headers: {
+		    'Authorization': `Token ${localStorage.getItem('token')}` 
+		  }
+		}).then(res=>{
 			this.setState(res.data);
 		});
 	}
@@ -26,6 +30,10 @@ class SubMainScreen extends Component{
 		{
 		'user':localStorage.getItem('user223'),
 		'id':id
+		},{
+				  headers: {
+				    'Authorization': `Token ${localStorage.getItem('token')}` 
+				  }
 		}).then(res=>{
 			this.setState({'InterestedService':res.data.InterestedService});
 		});
