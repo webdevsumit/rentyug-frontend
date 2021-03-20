@@ -17,6 +17,11 @@ function AccountScreen(){
 	const [email, setEmail] = useState('');
 	const [settingEmail, setSettingEmail] = useState(false);
 
+	const [oldPassword, setOldPassword] = useState('');
+	const [newPassword, setNewPassword] = useState('');
+	const [newPassword2, setNewPassword2] = useState('');
+	const [settingNewPassword, setSettingNewPassword] = useState(false);
+
 	const [myAddr, setMyAddr] = useState('');
 	const [settingMyAddr, setSettingMyAddr] = useState(false);
 
@@ -103,6 +108,31 @@ function AccountScreen(){
 			})
 		}
 	}
+
+	const updatePassword=()=>{
+			const url = localStorage.getItem('url');
+			if (newPassword.length<8) alert('Password should be of minmum 8 characters with the combination of words and numbers.');
+			else{
+				if(newPassword===newPassword2){
+					axios.post(url+'setPassword/',{
+							'username':localStorage.getItem('user223'),
+							'password':newPassword,
+							'oldPassword':oldPassword
+						},{
+								  headers: {
+								    'Authorization': `Token ${localStorage.getItem('token')}` 
+								  }
+						})
+					.then(res=>{
+						if(res.data.msg) alert('Wrong password.');
+						else{
+							setData(res.data.profile);
+							setNewPassword('');
+						}
+					})
+				}else alert('Password should be same.')
+			}
+		}
 
 	const updateLastname=()=>{
 			if (lastname==='') alert('Cannot asign empty value.');
@@ -499,6 +529,22 @@ function AccountScreen(){
 					onClick={()=>{setSettingEmail(true)}}
 				>Update</button></h3>}
 
+
+				{settingNewPassword?<React.Fragment><h3>Old password : <input type='text' 
+										onChange={e=>{setOldPassword(e.target.value)}}/></h3>
+									
+				
+					<h3>New password : <input type='password' 
+						onChange={e=>{setNewPassword(e.target.value)}}/></h3>
+					
+					<h3>Confirm password : <input type='password' 
+						onChange={e=>{setNewPassword2(e.target.value)}}/></h3>
+
+					<button
+						onClick={()=>{updatePassword(); setSettingNewPassword(false);}}	
+				>Set</button></React.Fragment>:<button
+					onClick={()=>{setSettingNewPassword(true)}}
+				>Change Password</button>}
 
 
 				{settingMyAddr?<h3>Address : <input type='text' 
