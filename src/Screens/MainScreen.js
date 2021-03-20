@@ -9,6 +9,7 @@ import AccountScreen from './AccountScreen';
 import Description from './Description';
 import AddNewSmsBox from './AddNewSmsBox'
 import AboutUs from './AboutUs';
+import PostScreen from './PostScreen';
 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
@@ -92,9 +93,15 @@ class MainScreen extends Component{
 				/>
 				<div className='breakpoint'></div>
 
-				<Route path={['/messages', '/signup', '/login', '/account', '/services', '/search']} >
+				<Route path={['/messages', '/signup', '/login', '/account', '/services', '/search', '/posts']} >
 					<Link to='/'>
 						<button className='search-btn'>Home</button>
+					</Link>
+				</Route>
+				
+				<Route path='/' exact >
+					<Link to='/posts'>
+						<button className='search-btn'>Posts</button>
 					</Link>
 				</Route>
 				
@@ -142,6 +149,12 @@ class MainScreen extends Component{
 								 
 				
 				<Route path='/messages' component={MessageScreen}/>
+
+
+				<Route path='/posts' component={PostScreen}/>
+
+
+				
 
 				<Route path={'/search/'+this.state.toSearch}>
 					<SearchScreen 
