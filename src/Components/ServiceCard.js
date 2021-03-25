@@ -7,11 +7,11 @@ function ServiceCard(props){
 				<img src={props.Image} alt='service'/>
 				<div>
 					{props.VStatus && <h6 className='VStatus'>verified</h6>}
-					<h6>{props.Rating}/5 rating , Category : {props.Type}</h6>
-					<p>{props.ShopName}</p>
-					<h6>Rent : {props.PriceType}</h6>
-					<h6>Open Time to contact : {props.OpenTime}</h6>
-					<h6>Close Time to contact : {props.closeTime}</h6>
+					<h4>{props.Rating}/5 rating , Category : {props.Type}</h4>
+					<h3>{props.ShopName}</h3>
+					<p>Rent : {props.PriceType}</p>
+					<p>Open Time to contact : {props.OpenTime}</p>
+					<p>Close Time to contact : {props.closeTime}</p>
 				</div>
 			</div>
 		</div>

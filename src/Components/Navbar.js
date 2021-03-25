@@ -45,7 +45,7 @@ function Navbar(props){
 				</ul>
 				<Link to='/'><button onClick={()=>{props.handleLogout(); setShowMenu(false);}}>Logout</button></Link>
 				<Link to='/about'><button onClick={()=>{setShowMenu(false);}}>About us</button></Link>
-				<a href='https://associationyug.com'>About our group</a>
+				<a href='sms:+91 7999004229'>Give feedback</a>
 				<h6 className='f-cursive c-name'>BY</h6>
 				<h6 className='f-cursive'>ASSOCIATION YUG</h6>
 			</div>:''}

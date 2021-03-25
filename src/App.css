@@ -54,17 +54,22 @@ b{
 	box-shadow:1px 1px 5px 1px grey;
 	width:100%;
 	position:fixed;
+	z-index:1;
+	opacity:0.95;
 }
 
 .searchBar{
 	padding:2px 4px;
 	border-radius:20px;
 	outline:none;
+	opacity:1;
 }
 
 .searchBarDiv{
 	position:sticky;
-	top:35px;
+	top:0px;
+	opacity:0.9;
+	z-index:1;
 }
 
 .logo{
@@ -103,16 +108,25 @@ button{
 	border-radius:500000px;
 	outline:none;
 	color:black;
+	opacity:0.7;
+	width:fit-content;
+	height:fit-content;
 }
 
 button:hover{
 	box-shadow:1.5px 1.5px 6px 1px grey;
 	border:0.5px solid grey;
+	opacity:0.8;
+}
+
+em{
+	opacity:0.5;
 }
 
 .search-btn{
 	position:sticky;
-	top:25px;
+	top:35px;
+	z-index:1;
 }
 
 .menu{
@@ -140,7 +154,9 @@ button:hover{
 }
 
 .SiteIntro{
-	margin:20px 0;
+	position:relative;
+	top:-60px;
+	margin:0px 0;
 	overflow:hiden;
 	padding:30px;
 	display:flex;
@@ -150,13 +166,19 @@ button:hover{
 	text-shadow:0.1px 0.1px 2px white;
 }
 
-.SiteIntro h1,.SiteIntro p,.SiteIntro a{
+.SiteIntro h1,.SiteIntro p,.SiteIntro a, SiteIntro em{
 	background:transparent;
 }
 
+SiteIntro em{
+	opacity:0.3;
+}
+
 .SiteIntro h1{
-	padding-left:20px;
+	padding-left:14px;
 	font-family:helvetica;
+	font-size:24px;
+	opacity:0.4;
 }
 
 .SiteIntro div{
@@ -168,8 +190,18 @@ button:hover{
 
 
 .SiteIntro div img{
-	width:300px;
+	width:400px;
 }
+
+.SiteIntro p{
+	font-size:30px;
+	opacity:0.85;
+}
+
+.SiteIntro p{
+	opacity:0.7;
+}
+
 
 .ServiceCatagoryCard{
 	padding:15px;
@@ -177,10 +209,14 @@ button:hover{
 
 .ServiceCatagoryCard div{
 	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-item:center;
+	width:fit-content;
 	border-radius:500000px;
 	padding:10px;
 	background-color:#fff;
-	box-shadow:1px 1px 5px 1px grey;
+	box-shadow:0.1px 0.1px 3px 1px rgba(100,100,100,0.8);
 	cursor:pointer;
 }
 
@@ -191,51 +227,90 @@ button:hover{
 	display:block;
 	background-color:black;
 	overflow:hidden;
+	margin:auto;
 }
 
 .ServiceCatagoryCard div div{
-	flex-direction:column;
 	border:none;
 	margin:0 20px;
 	background:transparent;
 	box-shadow:none;
+	width:fit-content;
 }
 
 .ServiceCatagoryCard div div h6, 
 .ServiceCatagoryCard div div h3, 
 .ServiceCatagoryCard div div p{
 	background:transparent;
+	text-decoration:none;
 }
 
 
-.ServiceCatagoryCard div div h3,
-.ServiceCatagoryCard div div p{
-	background:transparent;
-    text-shadow:0.1px 0.2px 2px grey;
+.ServiceCatagoryCard div div h3{
     font-weight: bolder;
+    font-size:20px;
 }
 
 
-
+.ServiceCatagoryCard div div p{
+	opacity:0.4;
+}
 
 
 .ServiceCatagories{
 	padding:40px 20px;
-	border-bottom:1px dashed #aaa;
 }
 
 .ServiceCatagories div{
 	border-radius:20px;
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:center;
 }
 
-.ServiceCatagories h2{
+.ServiceCatagories h3{
 	background:transpatent;
-	border-bottom:1px solid rgba(3,3,3,0.1);
-	padding-top:10px;
+	padding:20px;
+	font-size:20px;
 }
+
+.ServiceCatagories a{
+	font-size:10px;
+	opacity:1;
+}
+
+
+
 
 .ServiceCard div, .ServiceCard div img{
 	border-radius:0px;
+}
+
+.ServiceCard div img{
+	opacity:1;
+	width:150px;
+	height:150px;
+}
+
+.YouMayLike{
+	display:flex;
+	flex-direction:rows;
+	justify-content:center;
+}
+
+.removeItem{
+	position:relative;
+	border:none;
+}
+
+.SearchScreen h6{
+	opacity:0.5;
+}
+
+.SearchScreen div{
+	display:flex;
+	justify-content:center;
+	flex-wrap:wrap;
 }
 
 
@@ -249,11 +324,27 @@ button:hover{
 	margin:10px;
 	display:flex;
 	flex-direction:column;
+	padding:20px;
 }
 
 .FeedbackCard h6, .FeedbackCard p, .FeedbackCard em{
 	background:transparent;
 	padding:5px;
+}
+
+.FeedbackCard h6{
+	opacity:0.6;
+}
+
+.FeedbackCard p{
+	font-size:12px;
+	height:50px;
+	overflow:scroll;
+}
+
+.FeedbackCard em{
+	font-size:10px;
+	opacity:0.4;
 }
 
 .FeedbackCard img{
@@ -267,7 +358,7 @@ button:hover{
 
 .Feedbacks{
 	padding:20px 0;
-	border-bottom:1px dashed #aaa;
+	margin:40px auto;
 }
 
 .feedback-container{
@@ -276,6 +367,7 @@ button:hover{
 	width:100%;
 	overflow:scroll;
 }
+
 
 .Footer div{
 	padding:30px;	
@@ -341,6 +433,7 @@ button:hover{
 	height:20px;
 	border-radius:50%;
 	background-color:red;
+	opacity:0.7;
 	cursor:pointer;
 	margin:10px;
 	box-shadow:1px 1px 3px red;
@@ -348,6 +441,20 @@ button:hover{
 	top:0px;
 	right:0px;
 	border:none;
+}
+
+.feedCross{
+	position:static;
+	margin:0;
+}
+
+.feedNotice{
+	display:flex;
+	font-size:10px;
+	color:rgba(0,0,0,0.4);
+	height:fit-content;
+	position:absolute;
+	top:100px;
 }
 
 .cross:hover{

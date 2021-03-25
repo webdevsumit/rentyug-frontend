@@ -7,9 +7,9 @@ function ServiceCatagories(props){
 
 	return(
 		<div className='ServiceCatagories'>
-			<h2>Categories</h2>
+			<h3>Categories</h3>
 			<button onClick={()=>{setOpen(!open)}}>{open?'Hide':'Show Categories'}</button><br/>
-			{open && <React.Fragment>
+			{open && <div>
 			{props.data.map(d=>{
 				return(
 				<div key={d.id}>
@@ -19,7 +19,7 @@ function ServiceCatagories(props){
 					 handleChooseCatagory={()=>props.handleChooseCatagory(d.Name)}/>
 				</div>
 			)})}
-			</React.Fragment>
+			</div>
 			}
 			<a href='tel:+91 7999004229'>Contact us to add new category.</a>
 		</div>

@@ -25,6 +25,7 @@ class MainScreen extends Component{
 		'productId':'',
 		'provider':'',
 		'showSearchBar':false,
+		'feedbackCard':true,
 	}
 
 	componentWillMount(){
@@ -115,7 +116,7 @@ class MainScreen extends Component{
 						type='text' 
 						value={this.state.toSearch}
 						onChange={e=>this.setState({'toSearch':e.target.value})}
-					/>
+					/><em onClick={()=>this.setState({'showSearchBar':false})}>x</em>
 					<Link to={'/search/'+this.state.toSearch}>
 					<button 
 						onClick={this.handleSearch.bind(this)}
@@ -123,6 +124,9 @@ class MainScreen extends Component{
 					</button>
 					</Link>
 				</div>}
+
+				{this.state.feedbackCard && this.state.login && <div className='feedNotice'>Do not forget to give feedback. 
+				<h3 onClick={()=>this.setState({feedbackCard:false})}>X</h3></div>}
 
 				<Route path='/' exact >
 					<SubMainScreen

@@ -6,7 +6,7 @@ function FeedbackCard(props){
 			<img src={props.Image} alt='Profile'/>
 			<h6>@{props.Username}</h6>
 			<p>{props.Message}</p>
-			<p><em>Date: {props.Date}</em></p>
+			<em>Date: {props.Date}</em>
 		</div>
 	);
 }

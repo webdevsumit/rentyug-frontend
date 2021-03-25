@@ -5,10 +5,12 @@ import {Link } from 'react-router-dom';
 
 function YouMayLike(props){
 	return(
-		<div className='ServiceCatagories FamousServices'>
-			<h2>You May Like</h2>
+		<div className='ServiceCatagories'>
+			<h3>You May Like</h3>
+			<div className='YouMayLike'>
 			{props.data.map(d=>{return(
 				<div key={d.id}>
+					<button className='removeItem' onClick={()=>props.removeItem(d.id)}>X</button>
 					<Link to={'/service/'+d.id}>
 					<ServiceCard 
 					Image={d.MainImage} 
@@ -22,9 +24,10 @@ function YouMayLike(props){
 					VStatus = {d.VStatus}
 					/>
 					</Link>
-					<button onClick={()=>props.removeItem(d.id)}>remove</button>
+					
 				</div>
 			)})}
+			</div>
 		</div>
 	);
 }
