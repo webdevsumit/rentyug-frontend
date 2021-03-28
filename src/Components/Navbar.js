@@ -32,8 +32,17 @@ function Navbar(props){
 			</div>}
 			
 			{showMenu?<div className='menu'>
+				<Link to='/'>
+					<button onClick={()=>{setShowMenu(false)}}>Home</button>
+				</Link><br/>
 				<Link to={'/account/'+localStorage.getItem('user223')}>
-					<button onClick={()=>{setShowMenu(false);}}>Account</button>
+					<button onClick={()=>{setShowMenu(false)}}>Account</button>
+				</Link><br/>
+				<Link to='posts'>
+					<button onClick={()=>{setShowMenu(false)}}>Posts</button>
+				</Link><br/>
+				<Link to='myposts'>
+					<button onClick={()=>{setShowMenu(false)}}>My posts</button>
 				</Link>
 				<h3>CONNECT WITH US THROUGH</h3>
 				<ul>
@@ -42,10 +51,10 @@ function Navbar(props){
 					<li><a href='https://www.linkedin.com/in/sumit-dhakad-0152b1189'>Linkedin</a></li>
 					<li><a href='https://www.instagram.com/__sumit__dhakad__/'>Instagram</a></li>
 					<li><a href='https://www.facebook.com/sumit.dhakad.7587'>Facebook</a></li>
+					<li><a href='sms:+91 7999004229'>Give feedback</a></li>
 				</ul>
 				<Link to='/'><button onClick={()=>{props.handleLogout(); setShowMenu(false);}}>Logout</button></Link>
 				<Link to='/about'><button onClick={()=>{setShowMenu(false);}}>About us</button></Link>
-				<a href='sms:+91 7999004229'>Give feedback</a>
 				<h6 className='f-cursive c-name'>BY</h6>
 				<h6 className='f-cursive'>ASSOCIATION YUG</h6>
 			</div>:''}

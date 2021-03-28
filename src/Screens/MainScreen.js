@@ -93,12 +93,6 @@ class MainScreen extends Component{
 				 login={this.state.login}
 				/>
 				<div className='breakpoint'></div>
-
-				<Route path={['/messages', '/signup', '/login', '/account', '/service', '/search', '/posts']} >
-					<Link to='/'>
-						<button className='search-btn'>Home</button>
-					</Link>
-				</Route>
 				
 				<Route path='/' exact >
 					<Link to='/posts'>
