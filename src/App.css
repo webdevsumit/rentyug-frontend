@@ -426,6 +426,7 @@ SiteIntro em{
 	right:0;
 	height:100%;
 	overflow:scroll;
+	z-index:2;
 }
 
 .cross{
@@ -455,6 +456,10 @@ SiteIntro em{
 	height:fit-content;
 	position:absolute;
 	top:100px;
+}
+
+.feedNotice h3{
+	cursor:pointer;
 }
 
 .cross:hover{
@@ -688,5 +693,92 @@ SiteIntro em{
 	padding:10px;
 }
 
+.liked{
+	color:blue;
+}
 
+.PostScreen{
+	margin:20px;
+}
+
+.post{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:center;
+	box-shadow:1px 1px 5px #ddd;
+}
+
+.post-tittle{
+	margin:10px;
+	opacity:0.6;
+	font-weight:normal;
+	letter-spacing:2px;
+	font-size:17px;
+}
+
+summary{
+	outline:none;
+	cursor:pointer;
+	opacity:0.7;
+	margin:10px auto;
+	color:blue;
+	font-size:10px;
+}
+
+.whatsapp-share button{
+	color:green;
+}
+
+.post-desc{
+	word-spacing:4px;
+	letter-spacing:1px;
+	padding:20px;
+}
+
+.post-media{
+	width:350px;
+	border:1px solid #ddd;
+	outline:none;
+}
+
+.posts-main-section{
+	padding:20px 0;
+	flex:5;
+	margin:auto;
+}
+
+.post-comment-section{
+	border-left:1px solid #eee;
+	flex:2;
+}
+
+.post-comment-section-div{
+	height:300px;
+	overflow:scroll;
+}
+
+.post-user{
+	font-size:10px;
+}
+
+.post-comment{
+	height:fit-content;
+	margin:5px;
+}
+
+.post-comment-text{
+	border-radius:0 5000px 5000px 5000px;
+	box-shadow:1px 1px 5px #ddd; 
+}
+
+.post-reply-text{
+	border-radius:5000px 0 5000px 5000px;
+	box-shadow:1px 1px 5px #ddd;
+	margin-left:25px;
+}
+
+textarea{
+	outline:none;
+	padding:5px;
+}
 

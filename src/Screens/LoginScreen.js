@@ -45,7 +45,7 @@ function LoginScreen(props){
 			<button onClick={()=>{setHidePass(!hidePass)}}>{hidePass?'show':'hide'}</button>
 						
 
-			<Link to='/'>
+			<Link to='/posts'>
 			<button className='signup-btn' 
 				onClick={handleLogin}
 			>Login</button>

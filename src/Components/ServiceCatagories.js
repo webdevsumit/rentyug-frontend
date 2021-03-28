@@ -21,7 +21,7 @@ function ServiceCatagories(props){
 			)})}
 			</div>
 			}
-			<a href='tel:+91 7999004229'>Contact us to add new category.</a>
+			<a href='sms:+91 7999004229'>Contact us to add new category.</a>
 		</div>
 	);
 }

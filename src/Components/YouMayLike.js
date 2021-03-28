@@ -1,6 +1,5 @@
 import React from 'react';
 import ServiceCard from './ServiceCard';
-import {Link } from 'react-router-dom';
 
 
 function YouMayLike(props){
@@ -10,9 +9,9 @@ function YouMayLike(props){
 			<div className='YouMayLike'>
 			{props.data.map(d=>{return(
 				<div key={d.id}>
-					<button className='removeItem' onClick={()=>props.removeItem(d.id)}>X</button>
-					<Link to={'/service/'+d.id}>
+
 					<ServiceCard 
+					id={d.id}
 					Image={d.MainImage} 
 					Type={d.Type.Name} 
 					ShopName={d.ShopName}
@@ -22,8 +21,9 @@ function YouMayLike(props){
 					closeTime={d.closeTime}
 					handleOpenService={()=>props.handleOpenService(d.id)}
 					VStatus = {d.VStatus}
+					fromYouMayLike={true}
+					removeItem={props.removeItem}
 					/>
-					</Link>
 					
 				</div>
 			)})}

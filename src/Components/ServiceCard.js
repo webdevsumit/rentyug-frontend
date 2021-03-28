@@ -1,9 +1,14 @@
 import React from 'react';
+import {Link } from 'react-router-dom';
+
 
 function ServiceCard(props){
 	return(
 		<div className='ServiceCatagoryCard ServiceCard'>
+		
 			<div onClick={props.handleOpenService}>
+
+				<Link to={'/service/'+props.id}>
 				<img src={props.Image} alt='service'/>
 				<div>
 					{props.VStatus && <h6 className='VStatus'>verified</h6>}
@@ -13,6 +18,11 @@ function ServiceCard(props){
 					<p>Open Time to contact : {props.OpenTime}</p>
 					<p>Close Time to contact : {props.closeTime}</p>
 				</div>
+
+				</Link>
+
+				{props.fromYouMayLike && <button className='removeItem' 
+							onClick={()=>props.removeItem(props.id)}>remove</button>}
 			</div>
 		</div>
 	);

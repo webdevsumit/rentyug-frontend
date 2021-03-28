@@ -94,7 +94,7 @@ class MainScreen extends Component{
 				/>
 				<div className='breakpoint'></div>
 
-				<Route path={['/messages', '/signup', '/login', '/account', '/services', '/search', '/posts']} >
+				<Route path={['/messages', '/signup', '/login', '/account', '/service', '/search', '/posts']} >
 					<Link to='/'>
 						<button className='search-btn'>Home</button>
 					</Link>
@@ -125,7 +125,7 @@ class MainScreen extends Component{
 					</Link>
 				</div>}
 
-				{this.state.feedbackCard && this.state.login && <div className='feedNotice'>Do not forget to give feedback. 
+				{this.state.feedbackCard && this.state.login && <div className='feedNotice'>Please  give feedback. 
 				<h3 onClick={()=>this.setState({feedbackCard:false})}>X</h3></div>}
 
 				<Route path='/' exact >

@@ -69,7 +69,7 @@ class SubMainScreen extends Component{
 					<hr/>
 					<Footer/>
 					
-				</div>:<div><h6><i>loading...</i></h6></div>}
+				</div>:<div><h6><em>loading...</em></h6></div>}
 			</div>
 		)
 	}

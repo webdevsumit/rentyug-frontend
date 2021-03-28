@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import ServiceCard from '../Components/ServiceCard';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 
 
 class SearchScreen extends Component{
@@ -11,7 +10,7 @@ class SearchScreen extends Component{
 
 	componentDidMount(){
 		const url = localStorage.getItem('url');
-		axios.post(url+'search/',{'searchName':this.props.Name})
+		axios.post(url+'search/',{'searchName':this.props.Name,'Username':localStorage.getItem('user223')})
 		.then(res=>{
 			this.setState({'data':res.data.data});
 		})
@@ -24,8 +23,8 @@ class SearchScreen extends Component{
 				<div>
 				{this.state.data.map(d=>{return(
 					<div key={d.id}>
-						<Link to={'/service/'+d.id}>
 						<ServiceCard 
+						id={d.id}
 						Image={d.MainImage} 
 						Type={d.Type.Name} 
 						PriceType={d.PriceType}
@@ -36,7 +35,6 @@ class SearchScreen extends Component{
 						handleOpenService={()=>this.props.handleOpenService(d.id)}
 						VStatus = {d.VStatus}
 						/>
-						</Link>
 					</div>
 				)})}
 				</div>
