@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import PostMedia from './../Components/PostMedia';
 
 
 function PostScreen(){
@@ -141,14 +142,12 @@ function PostScreen(){
 						<div className='posts-main-section'>
 
 							<h3 className='post-tittle'>{post.Tittle}</h3>
-						
-							{post.HasImage?<img src={post.Image} alt='Video' className='post-media'/>:
-							<video width="80%" height="auto" controls className='post-media'
-							poster={post.Image}>
-							 	<source src={post.Media} type="video/mp4"/>
-							 	<source src={post.Media} type="video/ogg"/>
-							 	<source src={post.Media} type="video/webm"/>					 	
-							</video>}
+							
+							<PostMedia
+								HasImage={post.HasImage}
+								Image={post.Image}
+								Media={post.Media}
+							/>
 							
 							<details>
 								<summary>Description</summary>

@@ -102,7 +102,7 @@ b{
 button{
 	margin:8px;
 	cursor:pointer;
-	border:0.5px solid black;
+	border:none;
 	padding:2px 5px;
 	box-shadow:1px 1px 4px 1px grey;
 	border-radius:500000px;
@@ -115,7 +115,6 @@ button{
 
 button:hover{
 	box-shadow:1.5px 1.5px 6px 1px grey;
-	border:0.5px solid grey;
 	opacity:0.8;
 }
 
@@ -552,9 +551,8 @@ SiteIntro em{
 }
 
 .SignupScreen{
-	border:1px solid black;
 	border-radius:20px;
-	box-shadow:1px 1px 5px black;
+	box-shadow:1px 1px 5px #ddd;
 	margin:20px;
 	display:flex;
 	flex-direction:column;
@@ -562,27 +560,30 @@ SiteIntro em{
 
 .SignupScreen input{
 	margin:20px 50px;
-	font-size:24px;
-	border-radius:20px;
+	font-size:12px;
+	border-radius:5px;
 	outline:none;
 	padding:4px 10px;
 	text-align:center;
+	opacity:0.8;
 }
 
 .SignupScreen button{
 	width:fit-content;
 	margin:10px 30px 20px 80px;
+	border:none;
 }
 
 .SignupScreen .signup-btn{
 	width:80%;
 	margin:10px 10%;
-	font-size:30px;;
+	font-size:18px;;
 }
 
 .SignupScreen textarea{
 	margin:20px;
 	padding:10px;
+	border-radius:5px;
 }
 
 
@@ -591,15 +592,13 @@ SiteIntro em{
 	width:200px;;
 	margin:auto;
 	border-radius:50%;
-	border:1px solid grey;
-	box-shadow:1px 1px 5px grey;
+	box-shadow:1px 1px 5px #ddd;
 }
 
 .AccountScreen{
 	margin:20px;
-	border:1px solid black;
 	border-radius:20px;
-	box-shadow:1px 1px 5px black;
+	box-shadow:1px 1px 5px #ddd;
 }
 
 .AccountScreen div{
