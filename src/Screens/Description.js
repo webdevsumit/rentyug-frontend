@@ -137,6 +137,9 @@ function Description(props){
 					<h1>Provider details</h1>
 					<h3>Username : @{profile.User.username}</h3>
 					<h3>Address : {profile.Address}</h3>
+					<h5><em>If you would get something wrong from provider please contact
+						customer care instantly to remove verified tag. 
+						This will help us to give better services to you.</em></h5>
 					<a href={'tel:'+profile.MobileNo}><button>Call</button></a>
 					<a href={'sms:'+profile.MobileNo}><button>Direct message</button></a>
 					<Link to='/messages'><button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button></Link>

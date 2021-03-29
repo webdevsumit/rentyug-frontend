@@ -10,6 +10,7 @@ import Description from './Description';
 import AddNewSmsBox from './AddNewSmsBox'
 import AboutUs from './AboutUs';
 import PostScreen from './PostScreen';
+import MyPostScreen from './MyPostScreen';
 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
@@ -168,6 +169,8 @@ class MainScreen extends Component{
 					afterAddingNewSms={this.afterAddingNewSms.bind(this)}
 					productId={this.state.productId}/>
 				</Route>
+
+				<Route path='/myposts' component={MyPostScreen}/>
 				
 				{this.state.screen==='AddNewSmsBox'?<AddNewSmsBox
 				back={()=>{this.setState({'screen':'SubMainScreen','mainPage':true})}}

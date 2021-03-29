@@ -30,7 +30,8 @@ function PostScreen(){
 			axios.post(url+'addPostComment/',{
 					'postId':postId,
 					'Username':localStorage.getItem('user223'),
-					'comment':commentWord
+					'comment':commentWord,
+					'type':'post'
 				},{
 						headers: {
 							'Authorization': `Token ${localStorage.getItem('token')}` 
@@ -46,7 +47,8 @@ function PostScreen(){
 			const url = localStorage.getItem('url');
 			axios.post(url+'removePostComment/',{
 					'commentId':commentId,
-					'Username':localStorage.getItem('user223')
+					'Username':localStorage.getItem('user223'),
+					'type':'post'
 				},{
 						headers: {
 							'Authorization': `Token ${localStorage.getItem('token')}` 
@@ -65,7 +67,8 @@ function PostScreen(){
 			axios.post(url+'addPostCommentReply/',{
 					'commentId':commentId,
 					'Username':localStorage.getItem('user223'),
-					'reply':replyWord
+					'reply':replyWord,
+					'type':'post'
 				},{
 						headers: {
 							'Authorization': `Token ${localStorage.getItem('token')}` 
@@ -81,7 +84,8 @@ function PostScreen(){
 			const url = localStorage.getItem('url');
 			axios.post(url+'removePostCommentReply/',{
 					'replyId':replyId,
-					'Username':localStorage.getItem('user223')
+					'Username':localStorage.getItem('user223'),
+					'type':'post'
 				},{
 						headers: {
 							'Authorization': `Token ${localStorage.getItem('token')}` 
@@ -96,7 +100,8 @@ function PostScreen(){
 			const url = localStorage.getItem('url');
 			axios.post(url+'addPostLike/',{
 					'postId':postId,
-					'Username':localStorage.getItem('user223')
+					'Username':localStorage.getItem('user223'),
+					'type':'post'
 				},{
 						headers: {
 							'Authorization': `Token ${localStorage.getItem('token')}` 
@@ -138,7 +143,7 @@ function PostScreen(){
 							<h3 className='post-tittle'>{post.Tittle}</h3>
 						
 							{post.HasImage?<img src={post.Image} alt='Video' className='post-media'/>:
-							<video width="80%" height="auto" controls  muted className='post-media'
+							<video width="80%" height="auto" controls className='post-media'
 							poster={post.Image}>
 							 	<source src={post.Media} type="video/mp4"/>
 							 	<source src={post.Media} type="video/ogg"/>
@@ -169,28 +174,34 @@ function PostScreen(){
 						</div>
 
 						<details className='post-comment-section'>
-							<summary>Comments</summary>
+							<summary>Comments {post.Comments.length}</summary>
 							<div className='post-comment-section-div'>
 								<textarea rows='3' cols='25' value={commentWord} onChange={(e)=>setCommentWord(e.target.value)} 
 									placeholder='Write you comment here.'></textarea>
 								<button onClick={()=>commentIt(post.id)}>comment</button>
 								
 								{post.Comments.map(comment=><div key={comment.id} className='post-comment'>
-									<em className='post-user'>@{comment.Username}</em>
-									<p className='post-comment-text'>{comment.Comment}</p>
-									{comment.Username===localStorage.getItem('user223') && <button 
-											onClick={()=>removeComment(comment.id)}>remove</button>}
+									<p className='post-comment-text'>
+										<em className='post-user'>@{comment.Username}</em>
 
+										{comment.Username===localStorage.getItem('user223') && <button 
+											onClick={()=>removeComment(comment.id)}>x</button>}
+										<br/>
+										{comment.Comment}
+									</p>
 									
 									
 									<details>
-										<summary>replies</summary>
+										<summary>replies {comment.Replies.length}</summary>
 										<div>
 											{comment.Replies.map(reply=><div key={reply.id}>
+												<p className='post-reply-text'>
 												<em className='post-user'>@{reply.Username}</em>
-												<p className='post-reply-text'>{reply.Reply}</p>
-												{comment.Username===localStorage.getItem('user223') && <button 
-													onClick={()=>removeReply(reply.id)}>x</button>}
+													{comment.Username===localStorage.getItem('user223') && <button 
+														onClick={()=>removeReply(reply.id)}>x</button>}
+													<br/>
+												{reply.Reply}
+												</p>
 											</div>)}
 											<textarea rows='2' cols='25' value={replyWord} 
 													onChange={(e)=>setReplyWord(e.target.value)} 

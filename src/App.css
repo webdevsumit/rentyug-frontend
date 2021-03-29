@@ -706,6 +706,7 @@ SiteIntro em{
 	flex-wrap:wrap;
 	justify-content:center;
 	box-shadow:1px 1px 5px #ddd;
+	margin:20px 0px;
 }
 
 .post-tittle{
@@ -768,17 +769,64 @@ summary{
 
 .post-comment-text{
 	border-radius:0 5000px 5000px 5000px;
-	box-shadow:1px 1px 5px #ddd; 
+	box-shadow:1px 1px 5px #ddd;
+	padding:10px;
+	margin:5px auto 5px 5px;
+	font-size:14px;
+	width:fit-content;
 }
 
 .post-reply-text{
 	border-radius:5000px 0 5000px 5000px;
 	box-shadow:1px 1px 5px #ddd;
-	margin-left:25px;
+	margin:5px auto 35px 5px;
+	padding:10px;
+	font-size:14px;
+	width:fit-content;
 }
 
 textarea{
 	outline:none;
 	padding:5px;
 }
+
+.new-post{
+	margin:20px;
+	padding:20px 10px;
+	box-shadow:1px 1px 5px #ddd;
+}
+
+.post-image-lable{
+	font-size:10px;
+	opacity:0.8;
+}
+
+.post-checkbox{
+	margin:10px;
+}
+
+.post-tittle-input, .post-description-input{
+	outline:none;
+	border-radius:5px;
+	padding:5px;
+	margin:5px;
+}
+
+.service-card-input-post{
+	border-radius:5000px;
+	box-shadow:1px 1px 5pc #ddd;
+	margin:10px;
+	padding:5px;
+}
+
+.service-card-input-post h5{
+	background:transparent;
+}
+
+
+
+
+
+
+
 
