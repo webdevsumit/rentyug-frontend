@@ -11,6 +11,7 @@ import AddNewSmsBox from './AddNewSmsBox'
 import AboutUs from './AboutUs';
 import PostScreen from './PostScreen';
 import MyPostScreen from './MyPostScreen';
+import MySavedServices from './MySavedServices';
 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
@@ -27,16 +28,6 @@ class MainScreen extends Component{
 		'provider':'',
 		'showSearchBar':false,
 		'feedbackCard':true,
-	}
-
-	componentWillMount(){
-		const user = localStorage.getItem('user223');
-		if((user===null) || (user==='')){
-			this.setState({'productId':(-1)});
-		}else{
-			var id = window.location.href.split('/')[4];
-			this.setState({'productId':id});
-		}
 	}
 
 	componentDidMount(){
@@ -152,7 +143,7 @@ class MainScreen extends Component{
 
 				<Route path='/posts' component={PostScreen}/>
 
-
+				<Route path='/mysavedservices' component={MySavedServices}/>
 				
 
 				<Route path={'/search/'+this.state.toSearch}>

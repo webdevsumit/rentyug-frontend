@@ -14,9 +14,17 @@ function Description(props){
 	const [feed, addFeed] = useState('')
 
 	useEffect(()=>{
+	
+		const user = localStorage.getItem('user223');
+		if((user===null) || (user==='')){
+			let productId = -1;
+		}else{
+			var productId = window.location.href.split('/')[4];
+		}
+		
 		const url = localStorage.getItem('url');
 		axios.post(url+'productData/',{
-					'productId':props.productId,
+					'productId':productId,
 					'Username': localStorage.getItem('user223')
 			},{
 				headers: {

@@ -38,13 +38,16 @@ function Navbar(props){
 				<Link to={'/account/'+localStorage.getItem('user223')}>
 					<button onClick={()=>{setShowMenu(false)}}>Account</button>
 				</Link><br/>
-				<Link to='posts'>
+				<Link to='/posts'>
 					<button onClick={()=>{setShowMenu(false)}}>Posts</button>
 				</Link><br/>
-				<Link to='myposts'>
+				<Link to='/myposts'>
 					<button onClick={()=>{setShowMenu(false)}}>My posts</button>
-				</Link>
-				<h3>CONNECT WITH US THROUGH</h3>
+				</Link><br/>
+				<Link to='/mysavedservices/'>
+					<button onClick={()=>{setShowMenu(false)}}>My saved services</button>
+				</Link><br/>
+				<h4>CONNECT WITH US THROUGH</h4>
 				<ul>
 					<li><a href='mailto:sumitdhakad2232@gmail.com'>Mail</a></li>
 					<li><a href='tel:+91 7999004229'>Phone Call</a></li>

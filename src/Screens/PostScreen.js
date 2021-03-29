@@ -114,10 +114,10 @@ function PostScreen(){
 
 	
 
-	const savePost=(postId)=>{
+	const savePost=(serviceId)=>{
 			const url = localStorage.getItem('url');
 			axios.post(url+'savePost/',{
-					'postId':postId,
+					'serviceId':serviceId,
 					'Username':localStorage.getItem('user223')
 				},{
 						headers: {
@@ -142,7 +142,7 @@ function PostScreen(){
 						<div className='posts-main-section'>
 
 							<h3 className='post-tittle'>{post.Tittle}</h3>
-							
+							<h6><em>from : {ser.ShopName}</em></h6>
 							<PostMedia
 								HasImage={post.HasImage}
 								Image={post.Image}
@@ -160,7 +160,7 @@ function PostScreen(){
 										.length!==0 && 'liked'}
 								>like {post.TotalLikes}</button>
 								
-								<button onClick={()=>savePost(post.id)}>save</button>
+								<button onClick={()=>savePost(ser.id)}>save</button>
 								<Link to={'/service/'+ser.id}><button>product</button></Link>
 								<a href={"whatsapp://send?text="+localStorage.getItem('url')+"/service/"+ser.id}   
 										className='whatsapp-share'    
@@ -196,7 +196,7 @@ function PostScreen(){
 											{comment.Replies.map(reply=><div key={reply.id}>
 												<p className='post-reply-text'>
 												<em className='post-user'>@{reply.Username}</em>
-													{comment.Username===localStorage.getItem('user223') && <button 
+													{reply.Username===localStorage.getItem('user223') && <button 
 														onClick={()=>removeReply(reply.id)}>x</button>}
 													<br/>
 												{reply.Reply}
