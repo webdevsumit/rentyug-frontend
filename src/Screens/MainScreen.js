@@ -33,7 +33,7 @@ class MainScreen extends Component{
 	componentDidMount(){
 		const user = localStorage.getItem('user223');
 
-		localStorage.setItem('url','http://sumit2232.pythonanywhere.com/');
+		localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
 		
 		if((user===null) || (user==='')){
 			this.setState({'screen':'SubMainScreen','login':false});
