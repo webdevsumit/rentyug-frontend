@@ -55,7 +55,7 @@ class SubMainScreen extends Component{
 										data={this.state.InterestedService.Services} 
 										handleOpenService={this.props.handleOpenService}/>}
 
-					<h2>Services nearby you.</h2>
+					<h3>Services nearby you.</h3>
 					<em>our engineers are working on it.</em>
 					
 					<FamousServices data={this.state.Plans[0].PlanServices} 
@@ -65,7 +65,7 @@ class SubMainScreen extends Component{
 					
 
 					<Feedbacks data={this.state.FrontPageFeedback}/>
-					{this.props.login?<AddFeedback/>:<h4>You can give feedback after signup/login.</h4>}
+					{this.props.login?<AddFeedback/>:<em>You can give feedback after signup/login.</em>}
 					<hr/>
 					<Footer/>
 					

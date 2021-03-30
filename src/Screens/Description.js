@@ -109,7 +109,7 @@ function Description(props){
 		<div className='Description'>
 			<h1>Details</h1>
 			{data?<div>
-				<h3>Rating : {data.Rating}</h3>
+				<h6>Rating : {data.Rating}</h6>
 
 
 				{canRate?<div>
@@ -119,8 +119,8 @@ function Description(props){
 				</div>:<button onClick={setCanRate(true)}>Give rating</button>}
 
 
-				<h2>{data.ShopName}</h2>
-				<h6>Category : {data.Type.Name}</h6>
+				<h4>{data.ShopName}</h4>
+				<p>Category : {data.Type.Name}</p>
 				
 				<div className='imageSlider'>
 					<span>
@@ -143,11 +143,11 @@ function Description(props){
 
 				{profile?<div className='providerDetail'>
 					<h1>Provider details</h1>
-					<h3>Username : @{profile.User.username}</h3>
-					<h3>Address : {profile.Address}</h3>
-					<h5><em>If you would get something wrong from provider please contact
+					<h5>Username : @{profile.User.username}</h5>
+					<h5>Address : {profile.Address}</h5>
+					<p><em>If you would get something wrong from provider please contact
 						customer care instantly to remove verified tag. 
-						This will help us to give better services to you.</em></h5>
+						This will help us to give better services to you.</em></p>
 					<a href={'tel:'+profile.MobileNo}><button>Call</button></a>
 					<a href={'sms:'+profile.MobileNo}><button>Direct message</button></a>
 					<Link to='/messages'><button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button></Link>

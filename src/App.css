@@ -2,8 +2,7 @@
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
-	background-color:white;
-	font-family:'Brush Script MT';
+	background-color:#ffffff;
 	scroll-behavior:smooth;
 	color:black;
 }
@@ -23,6 +22,10 @@ b{
 
 .c-name{
 	padding-top:30px;
+}
+
+a{
+	font-size:12px;
 }
 
 
@@ -120,6 +123,7 @@ button:hover{
 
 em{
 	opacity:0.5;
+	font-size:10px;
 }
 
 .search-btn{
@@ -161,22 +165,23 @@ em{
 	display:flex;
 	flex-direction:column;
 	justify-content:center;
-	box-shadow:0.1px 0.1px 4px grey;
-	text-shadow:0.1px 0.1px 2px white;
+	box-shadow:0.1px 0.1px 4px #ddd;
+	background:#f5fffe;
 }
 
-.SiteIntro h1,.SiteIntro p,.SiteIntro a, SiteIntro em{
+.SiteIntro h1,.SiteIntro p,.SiteIntro a, .SiteIntro em{
 	background:transparent;
 }
 
-SiteIntro em{
-	opacity:0.3;
+.SiteIntro em{
+	opacity:0.4;
+	font-size:10px;
 }
 
 .SiteIntro h1{
-	padding-left:14px;
+	padding-left:16px;
 	font-family:helvetica;
-	font-size:24px;
+	font-size:20px;
 	opacity:0.4;
 }
 
@@ -193,13 +198,10 @@ SiteIntro em{
 }
 
 .SiteIntro p{
-	font-size:30px;
+	font-size:16px;
 	opacity:0.85;
 }
 
-.SiteIntro p{
-	opacity:0.7;
-}
 
 
 .ServiceCatagoryCard{
@@ -213,16 +215,16 @@ SiteIntro em{
 	align-item:center;
 	width:fit-content;
 	border-radius:500000px;
-	padding:10px;
+	padding:20px;
 	background-color:#fff;
-	box-shadow:0.1px 0.1px 3px 1px rgba(100,100,100,0.8);
+	box-shadow:0.1px 0.1px 3px #ddd;
 	cursor:pointer;
 }
 
 .ServiceCatagoryCard div img{
 	width:80px;
 	height:80px;
-	border-radius:50%;
+	border-radius:5px;
 	display:block;
 	background-color:black;
 	overflow:hidden;
@@ -246,8 +248,7 @@ SiteIntro em{
 
 
 .ServiceCatagoryCard div div h3{
-    font-weight: bolder;
-    font-size:20px;
+    font-size:17px;
 }
 
 
@@ -270,12 +271,13 @@ SiteIntro em{
 .ServiceCatagories h3{
 	background:transpatent;
 	padding:20px;
-	font-size:20px;
+	font-size:17px;
+	opacity:0.8;
 }
 
 .ServiceCatagories a{
 	font-size:10px;
-	opacity:1;
+	opacity:0.9;
 }
 
 
@@ -316,7 +318,6 @@ SiteIntro em{
 .FeedbackCard{
 	background-color:#ddd;
 	width:300px;
-	border:1px solid #ddd;
 	border-radius:20px 0;
 	word-wrap:wrap;
 	box-shadow:1px 1px 5px #ddd;
@@ -337,12 +338,13 @@ SiteIntro em{
 
 .FeedbackCard p{
 	font-size:12px;
-	height:50px;
+	letter-spacing:1.3px;
+	height:60px;
 	overflow:scroll;
 }
 
 .FeedbackCard em{
-	font-size:10px;
+	font-size:8px;
 	opacity:0.4;
 }
 
@@ -350,7 +352,6 @@ SiteIntro em{
 	width:50px;
 	height:50px;
 	border-radius:50%;
-	background-color:black;
 	overflow:hidden;
 	margin:auto;
 }
@@ -383,6 +384,14 @@ SiteIntro em{
 	flex-direction:column;
 }
 
+textarea, input{
+	padding:5px;
+	border-radius:10px;
+	box-shadow:1px 1px 5px #ddd;
+	border:1px solid #ddd;
+	outline:none;
+}
+
 .MessageScreen{
 	border:1px solid #ddd;
 	padding:20px;
@@ -393,11 +402,11 @@ SiteIntro em{
 }
 
 .MessageCard{
-	background-color:#ddd;
+	background-color:#f5fffe;
 	margin:15px;
 	cursor:pointer;
 	border-radius:50000px;
-	box-shadow:1px 1px 10px grey;
+	box-shadow:1px 1px 5px #ddd;
 	display:flex;
 	padding:5px 20px;
 	justify-content:center;
@@ -406,17 +415,16 @@ SiteIntro em{
 
 
 .MessageCard p{
-	background-color:blue;
+	background-color:#ffffff;
 	width:20px;
 	height:20px;
 	border-radius:50%;
-	margin-left:50px;
+	margin-left:100px;
 }
 
 .MessageBoxOuter{
-	border:1px solid grey;
 	border-radius:10px;
-	box-shadow:1px 1px 10px grey;
+	box-shadow:1px 1px 10px #ddd;
 	position:absolute;
 	top:0;
 	width:100%;
@@ -432,11 +440,11 @@ SiteIntro em{
 	width:20px;
 	height:20px;
 	border-radius:50%;
-	background-color:red;
+	background-color:#fff8db;
 	opacity:0.7;
 	cursor:pointer;
 	margin:10px;
-	box-shadow:1px 1px 3px red;
+	box-shadow:1px 1px 3px #fff8db;
 	position:fixed;
 	top:0px;
 	right:0px;
@@ -463,6 +471,8 @@ SiteIntro em{
 
 .cross:hover{
 	box-shadow:1px 1px 15px red;
+	background:red;
+	opacity:0.8;
 }
 
 .cross-for-delete{
@@ -474,12 +484,14 @@ SiteIntro em{
 }
 
 .MessageBox h2{
-	border-bottom:1px solid #ddd;
+	font-size:17px;
 }
 
 .MessageBox h5{
 	position:sticky;
 	top:10px;
+	font-size:10px;
+	opacity:0.6;
 	background:transparent;
 }
 
@@ -493,6 +505,7 @@ SiteIntro em{
 .toSend textarea{
 	width:100%;
 	margin:10px;
+	
 }
 
 .msgContent{
@@ -506,7 +519,7 @@ SiteIntro em{
 	width:fit-content;
 	margin:10px;
 	border-radius:20px;
-	box-shadow:1px 1px 10px #ddd;
+	box-shadow:1px 1px 5px #ddd;
 	background-color:#eee;
 }
 
@@ -517,38 +530,38 @@ SiteIntro em{
 
 .msg p{
 	padding:10px;
-	text-shadow:0.1px 0.1px 5px pink;
 	background:transparent;
+	letter-spacing:1.3px;
+	font-size:17px;
 }
 
 .msg h6,.msg em{
 	color:black;
 	background:transparent;
+	opacity:0.5;
+	font-size:10px;
 }
 
 .dummyText{
 	display:flex;
 	width:100%;
 	overflow:scroll;
-	border:1px solid grey;
-	margin-bottom:20px;
+	margin-bottom:0px;
 }
 
 .dummyText h3{
 	
 	border-radius:10px;
-	box-shadow:1px 1px 5px 1px black inset,
-				-1px -1px 5px 1px grey inset;
-	margin:20px;
+	box-shadow:1px 1px 10px 1px #ddd inset,
+				-1px -1px 5px 1px #eee inset;
+	margin:10px 5px;
+	font-weight:normal;
 	padding:10px;
 	width:400px;
 	cursor:pointer;
+	font-size:14px;
 }
 
-.dummyText h6{
-	background:transparent;
-	font-family:cursive;
-}
 
 .SignupScreen{
 	border-radius:20px;
@@ -561,7 +574,6 @@ SiteIntro em{
 .SignupScreen input{
 	margin:20px 50px;
 	font-size:12px;
-	border-radius:5px;
 	outline:none;
 	padding:4px 10px;
 	text-align:center;
@@ -611,11 +623,15 @@ SiteIntro em{
 
 .AccountScreen div h3{
 	margin:15px;
+	font-size:14px;
+	opacity:0.8;
 }
 
 .editServiceCard{
-	margin:30px 10px;
-	border:1px solid grey;	
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	padding:10px 0;
+	font-size:14px;
 }
 
 .editServiceCard p{
@@ -628,7 +644,6 @@ SiteIntro em{
 	display:flex;
 	margin:20px 0px;
 	padding:10px;
-	box-shadow:1px 1px 5px grey;
 }
 
 .imageSlider span{
@@ -640,22 +655,19 @@ SiteIntro em{
 .imageSlider span img, .previewImage img{
 	height:300px;
 	margin:2px;
-	border:1px solid black;
-	box-shadow:1px 1px 5px black;
+	box-shadow:1px 1px 5px #ddd;
 	border-radius:10px;
 }
 
 .feed{
-	margin:20px;
-	border:1px sloid grey;
+	margin:20px;;
 	border-radius:10px;
-	box-shadow:1px 1px 5px grey;
+	box-shadow:1px 1px 5px #ddd ;
 }
 
 .ShopType{
-	border:1px solid black;
 	border-radius:20px;
-	box-shadow:1px 1px 5px black;
+	box-shadow:1px 1px 5px #ddd;
 	margin:5px 20px;
 	padding:5px 40px;
 	cursor:pointer;
@@ -667,27 +679,34 @@ SiteIntro em{
 }
 
 .addServiceCard{
-	border:1px solid grey;
-	margin:30px;
-	padding:20px;
+	margin:20px;
 }
 
 .addServiceCard p{
 	margin:20px;
+	font-size:14px;
+	line-height:18px;
+	opacity:0.8;
 }
 
 
 .Description h1{
 	border-bottom:2px solid black;
 	margin:20px;
+	font-size:20px;
+	opacity:0.8;
 }
 
 .Description p{
 	margin:10px;
+	font-size:14px;
+	opacity:0.8;
+	letter-spacing:1.3px;
+	word-spacing:4px;
 }
 
 .descBox{
-	border: 1px solid rgba(3,3,3,1);
+	border: 1px solid #ddd;
 	margin:5px;
 	padding:10px;
 }
@@ -697,7 +716,7 @@ SiteIntro em{
 }
 
 .PostScreen{
-	margin:20px;
+	margin:10px;
 }
 
 .post{
@@ -736,7 +755,7 @@ summary{
 }
 
 .post-media{
-	width:350px;
+	width:330px;
 	border:1px solid #ddd;
 	outline:none;
 }
@@ -782,11 +801,6 @@ summary{
 	padding:10px;
 	font-size:14px;
 	width:fit-content;
-}
-
-textarea{
-	outline:none;
-	padding:5px;
 }
 
 .new-post{

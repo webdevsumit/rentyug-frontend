@@ -490,7 +490,7 @@ function AccountScreen(){
 	return(
 		<div className='AccountScreen'>
 			{accScreen?<div>
-				<h1 className='m-20'>Account</h1>
+				<h2 className='m-20'>Account</h2>
 				
 				<img className='profileImg' 
 				src={profile?URL.createObjectURL(profile):data.Image.Image} alt='Profile'/><br/>
@@ -571,7 +571,7 @@ function AccountScreen(){
 												
 								
 				{data.Service?<div>
-					<h1 className='m-20'>Services provided by you</h1>
+					<h2 className='m-20'>Services provided by you</h2>
 					{data.Service.map(d=>{return(
 						<div key={d.id} className='editServiceCard'>
 							{d.VStatus && <p className='VStatus'>verified</p>}
@@ -640,7 +640,7 @@ function AccountScreen(){
 							{settingDesc?<div className='descBox'>
 								<h3>Set Description</h3>
 								<textarea 
-								rows='20' cols='60'
+								rows='20' cols='auto'
 								value={desc} onChange={e=>setDesc(e.target.value)}></textarea><br/>
 								<button onClick={()=>{updateDesc(d.id);
 												setSettingDesc(false)}}>Set</button>
@@ -712,7 +712,7 @@ function AccountScreen(){
 					)})}
 					
 					{canAddNewItem?<div className='addServiceCard'>
-						<p>Product/Service Name : <textarea rows='2' cols='60'
+						<p>Product/Service Name : <textarea rows='4' cols='auto'
 						placeholder='Enter full name with address(if want to sell)'
 						onChange={e=>setNewShopName(e.target.value)}></textarea></p>
 
