@@ -13,6 +13,7 @@ function PostScreen(){
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
+		if (localStorage.getItem('user223')){
 		axios.post(url+'posts/',{
 			'Username':localStorage.getItem('user223')
 		},{
@@ -22,6 +23,7 @@ function PostScreen(){
 		}).then(res=>{
 			setData(res.data.data);
 		})
+		}
 	},[]);
 
 	const commentIt=(postId)=>{
@@ -217,7 +219,7 @@ function PostScreen(){
 					
 				</div>)}
 			</div>)}
-		</div>:<em>loading...</em>}
+		</div>:<em>{localStorage.getItem('user223')?<i>loading...</i>:<i>please login</i>}</em>}
 				
 	</div>)
 }
