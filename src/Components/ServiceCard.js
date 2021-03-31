@@ -9,7 +9,7 @@ function ServiceCard(props){
 			<div onClick={props.handleOpenService}>
 
 				<Link to={'/service/'+props.id}>
-				<img src={props.Image} alt='service'/>
+				<img src={props.Image} loading='lazy' alt='service'/>
 				<div>
 					{props.VStatus && <h6 className='VStatus'>verified</h6>}
 					<h4>{props.Rating}/5 rating , Category : {props.Type}</h4>

@@ -20,7 +20,7 @@ function Description(props){
 			let productId = -1;
 		}else{
 			var productId = window.location.href.split('/')[4];
-		}
+		
 		
 		const url = localStorage.getItem('url');
 		axios.post(url+'productData/',{
@@ -34,6 +34,7 @@ function Description(props){
 			setData(res.data.data);
 			setProfile(res.data.providerDetail);
 		})
+		}
 	},[]);
 
 

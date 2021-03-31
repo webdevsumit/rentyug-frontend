@@ -756,6 +756,7 @@ summary{
 
 .post-media{
 	width:330px;
+	margin:20px;
 	border:1px solid #ddd;
 	outline:none;
 }
