@@ -30,32 +30,25 @@ function SiteIntro(props){
 			<div className='breakpoint'></div>
 			<div className='breakpoint'></div>
 			
-			<p>Now you can <b>make money</b> by your old things.</p>
-			<p>Just by giving it on <b>rent</b>.</p>
+			<p>Now, you can <b>make money</b> with your old things.</p>
+			<p>Just give them on <b>rent</b>.</p>
 			
-			<div className='breakpoint'></div>
-			<div className='breakpoint'></div>
-			<div className='breakpoint'></div>
 			<div className='breakpoint'></div>
 			<div className='breakpoint'></div>
 			
 			<p>Get things that you need at <b>low price</b> with <b>verification</b>.</p>
-			<p> Take it on <b>rent</b>  or <b>buy</b> it.</p>
+			<p> Take on <b>rent</b>  or <b>purchase</b>.</p>
 			<br/>
 			
-			<em>NOTE: You can find the verification tag on product if the details given are true. 
+			<em>You can find the verification tag on product if the details given are true. 
 			Details with no tag may or may not be true. </em>
 			
 			<div className='breakpoint'></div>
 			<div className='breakpoint'></div>
-			<div className='breakpoint'></div>
-			<div className='breakpoint'></div>
-			<div className='breakpoint'></div>
 			
-			<p>You can also make money by just shipping the product.</p>
+			<p>You can also make money by shipping the product.</p>
 			<em>(comming soon)</em>
 			
-			<div className='breakpoint'></div>
 			<div className='breakpoint'></div>
 			<div className='breakpoint'></div>
 			
@@ -63,7 +56,10 @@ function SiteIntro(props){
 			
 			<div className='breakpoint'></div>
 			
-			<Link to='/about'><button onClick={props.openAboutUs}>Read more.</button></Link>
+			<Link to='/login'><button>login</button></Link>
+			<Link to='/signup'><button>signup</button></Link>
+			<Link to='/about'><button onClick={props.openAboutUs}>about us</button></Link>
+
 		</div>
 	);
 }

@@ -285,11 +285,9 @@ function MyPostScreen(){
                             </details>                                                        
 					     </div>
 						<br/>
-						<h6><em>Your post is activated free of cost upto 500 likes.</em></h6>
-						<h6><em>After that you have to pay to reactivate that service post.</em></h6>
-						<h6><em>Contact us to re-activate service(including all ppsts).</em></h6>					
-						<h6><em>We can increase or decrease this (500) 
-									according to audience reactions.</em></h6><br/>
+						<h6><em>Your post is activated for  500 likes.</em></h6>
+						<h6><em>After that you have to contact us to reactivate that.</em></h6>
+						<h6><em>You can also do normal deactivation/reactivation.</em></h6>
 						
 						{post.Activated?<div>
 							<em>post status : active</em><br/>

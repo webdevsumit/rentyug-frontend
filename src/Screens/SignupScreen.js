@@ -18,7 +18,7 @@ function SignupScreen(props){
 	const [hidePass1, setHidePass1]   = useState(true);
 	const [hidePass2, setHidePass2]   = useState(true);
 	
-	const [servicePF, setServicePF]   = useState(false);
+	
 
 	const handleSignup=(as)=>{
 		if(password1 !== password2){
@@ -26,29 +26,6 @@ function SignupScreen(props){
 		}else if(username==='' || password1==='' || email===''){
 			alert('* fields are required.');
 		}else{
-			if(as==='user'){
-				let formData = new FormData();
-				formData.append('username',username);
-				formData.append('first_name',firstname);
-				formData.append('last_name',lastname);
-				formData.append('email',email);
-				formData.append('password',password1);
-				formData.append('Address',addrs);
-				formData.append('image',image);
-				const url = localStorage.getItem('url');
-				axios.post(url+'signup/',formData).then(res=>{
-					if(res.data.error){
-						alert(res.data.error)
-					}else{
-						localStorage.setItem('user223',username);
-						localStorage.setItem('token',res.data.token);
-						alert(res.data.token);
-						props.afterSignup();
-					}
-				}).catch(err=>{
-					alert('Please provide valid details.');
-				})
-			}else{
 				let formData2 = new FormData();
 				formData2.append('username',username);
 				formData2.append('first_name',firstname);
@@ -70,7 +47,6 @@ function SignupScreen(props){
 				}).catch(err=>{
 					alert('Please provide valid details.');
 				})
-			}
 		}
 	}
 	
@@ -114,39 +90,24 @@ function SignupScreen(props){
 			<button onClick={()=>{setHidePass2(!hidePass2)}}>{hidePass2?'show':'hide'}</button>
 
 
-			{servicePF?<input type='tel'
+			<input type='tel'
 				value={moNo} onChange={e=>{setMoNo(e.target.value)}}
-				placeholder='Mobile no with country code*' required
+				placeholder='Mobile no. eg +91 9876543210*' required
 				pattern='[0-9]{2} [0-9]{10}'
-			/>:''}
+			/>
 
 			<textarea rows='7'
 				value={addrs} onChange={e=>{setAddrs(e.target.value)}}
-				placeholder={servicePF?'Enter your full address.*':'Enter your full address.'} required
+				placeholder={'Enter full address*'} required
 			></textarea>
 
 			<div>
-				{servicePF?'':<h5>Signup as</h5>}
-
 				
-				{servicePF?<button 
-					className='signup-btn'
-					onClick={()=>setServicePF(false)}>back</button>:<Link to='/'>
-					<button 
-						className='signup-btn' 
-						onClick={()=>handleSignup('user')}
-						>User</button>
-					</Link>}
-				<h6>(user cannot add products)</h6>
-				
-				{servicePF?<Link to='/'>
+				<Link to='/'>
 					<button className='signup-btn' 
 						onClick={()=>{handleSignup('service-provider')}}
-					>Now Signup as Service Provider</button>
-				</Link>:<button className='signup-btn' 
-					onClick={()=>{setServicePF(true)}}
-					>Service Provider</button>}
-				<h6>(recommended)</h6>
+					>Signup</button>
+				</Link>
 			</div>
 		</div>
 	);
