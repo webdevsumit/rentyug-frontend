@@ -12,6 +12,7 @@ function ServiceCard(props){
 				<img src={props.Image} loading='lazy' alt='service'/>
 				<div>
 					{props.VStatus && <h6 className='VStatus'>verified</h6>}
+					{props.RentalStatus? <h6 className='VStatus'>Available</h6>:<h6 className='VStatus'>Unavailable</h6>}
 					<h4>{props.Rating}/5 rating , Category : {props.Type}</h4>
 					<h3>{props.ShopName}</h3>
 					<p>Rent : {props.PriceType}</p>

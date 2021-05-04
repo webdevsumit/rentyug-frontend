@@ -34,12 +34,18 @@ class MainScreen extends Component{
 		const user = localStorage.getItem('user223');
 
 		localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
+		//localStorage.setItem('url','http://127.0.0.1:8000/');
 		
 		if((user===null) || (user==='')){
 			this.setState({'screen':'SubMainScreen','login':false});
 		}else{
 			this.setState({'screen':'SubMainScreen','login':true});
 		}
+	}
+
+	componentWillUnmount(){
+		localStorage.removeItem('user223');
+		localStorage.removeItem('url')
 	}
 	
 	handleLogout(){

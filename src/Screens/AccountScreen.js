@@ -36,7 +36,14 @@ function AccountScreen(){
 	
 	const [closeTime, setCloseTime] = useState('');
 	const [settingCloseTime, setSettingCloseTime] = useState(false);
-	
+
+	const [rentalStatus, setRentalStatus] = useState(false);
+	const [settingRentalStatus, setSettingRentalStatus] = useState(false);
+		
+
+	const [noOfItems, setNoOfItems] = useState(1);
+	const [settingNoOfItems, setSettingNoOfItems] = useState(false);
+		
 	const [priceType, setPriceType] = useState('');
 	const [settingPriceType, setSettingPriceType] = useState(false);
 	
@@ -362,6 +369,50 @@ function AccountScreen(){
 	 	}
 	 }
 	
+	const changeRentalStatus=(id)=>{
+		if (rentalStatus) setRentalStatus(true); 
+		else setRentalStatus(false);
+
+
+	 	if (rentalStatus===true || rentalStatus===false){
+	 		const url = localStorage.getItem('url');
+	 		axios.post(url+'setRentalStatus/',{
+	 				'username':localStorage.getItem('user223'),
+	 				'id':id,
+	 				'rentalStatus':rentalStatus
+	 			},{
+	 					  headers: {
+	 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 					  }
+	 			})
+	 		.then(res=>{
+	 			setData(res.data.profile);
+	 			setRentalStatus(false);
+	 		})
+	 	}
+	 }
+	
+	
+	const changeNoOfItems=(id)=>{
+
+	 	if (noOfItems){
+	 		const url = localStorage.getItem('url');
+	 		axios.post(url+'setNoOfItems/',{
+	 				'username':localStorage.getItem('user223'),
+	 				'id':id,
+	 				'noOfItems':noOfItems
+	 			},{
+	 					  headers: {
+	 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 					  }
+	 			})
+	 		.then(res=>{
+	 			setData(res.data.profile);
+	 			setNoOfItems(1);
+	 		})
+	 	}
+	 }
+	
 	const changePriceType=(id)=>{
 	 	if (priceType==='') alert('Cannot asign empty value.');
 	 	else{
@@ -668,6 +719,33 @@ function AccountScreen(){
 							</div>:<p>Close Time to contact : {d.closeTime}<button
 							onClick={()=>setSettingCloseTime(true)}
 							>Update</button></p>}
+
+							
+
+								
+							{settingRentalStatus?<div>
+								<p>Available : </p>
+								<input type='checkbox'
+								onChange={e=>setRentalStatus(e.target.checked)}
+								/><button onClick={()=>{changeRentalStatus(d.id);
+												setSettingRentalStatus(false);}}>Set</button>
+							</div>:<p>Rental status : {d.RentalStatus?<b>Available</b>:<b>Not avialable</b>}<button
+							onClick={()=>setSettingRentalStatus(true)}
+							>Update</button></p>}
+							
+
+								
+							{settingNoOfItems?<div>
+								<p>NO of items : </p>
+								<input type='number' min="0" max="100"
+								value={noOfItems}
+								onChange={e=>setNoOfItems(e.target.value)}
+								/><button onClick={()=>{changeNoOfItems(d.id);
+												setSettingNoOfItems(false);}}>Set</button>
+							</div>:<p>NO of items : {d.NoOfItems}<button
+							onClick={()=>setSettingNoOfItems(true)}
+							>Update</button></p>}
+							
 							
 							{settingPriceType?<div>
 								<input type='text' placeholder='eg. Rs.10/month'

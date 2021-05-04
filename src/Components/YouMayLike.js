@@ -21,6 +21,7 @@ function YouMayLike(props){
 					closeTime={d.closeTime}
 					handleOpenService={()=>props.handleOpenService(d.id)}
 					VStatus = {d.VStatus}
+					RentalStatus = {d.RentalStatus}
 					fromYouMayLike={true}
 					removeItem={props.removeItem}
 					/>

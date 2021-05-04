@@ -150,11 +150,14 @@ function PostScreen(){
 								Image={post.Image}
 								Media={post.Media}
 							/>
+							{ser.VStatus && <h6 className='VStatus'>verified</h6>}
+							{ser.RentalStatus? <h6 className='VStatus'>Available</h6>:<h6 className='VStatus'>Unavailable</h6>}
 							
 							<details>
 								<summary>Description</summary>
 								<p className='post-desc'>{post.Text}</p>
 							</details>
+							
 
 							<div>
 								<button onClick={()=>likePost(post.id)}

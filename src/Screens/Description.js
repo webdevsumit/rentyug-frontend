@@ -137,6 +137,9 @@ function Description(props){
 				<p>Close Time to contact : {data.closeTime}</p>
 				<p>Rent : {data.PriceType}</p>
 
+				<p>Rental Status : {data.RentalStatus? <b>Available</b> : <b>Not available</b>}</p>
+				<p>No of items : {data.NoOfItems}</p>
+
 				<div className='descBox'>
 					<h3>Description</h3>
 					<p>{data.Description}</p>
