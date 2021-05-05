@@ -44,7 +44,6 @@ class MainScreen extends Component{
 	}
 
 	componentWillUnmount(){
-		localStorage.removeItem('user223');
 		localStorage.removeItem('url')
 	}
 	
