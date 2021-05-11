@@ -12,7 +12,7 @@ function App() {
     	    	People can buy or take anything on rent" />
     	    <meta id="og-title" property="og:title" content="MyApp" />
     		<meta id="og-image" property="og:image" content="path/to/image.jpg" />
-    		<link rel="icon" href={require('./logo.png')} />
+    		<link rel="icon" href={require('./logo.svg')} />
     	</MetaTags>
       	<MainScreen/>
     </div>
