@@ -16,6 +16,8 @@ import MySavedServices from './MySavedServices';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 
+import SearchIcon from '@material-ui/icons/Search';
+
 
 
 class MainScreen extends Component{
@@ -27,7 +29,6 @@ class MainScreen extends Component{
 		'productId':'',
 		'provider':'',
 		'showSearchBar':false,
-		'feedbackCard':true,
 	}
 
 	componentDidMount(){
@@ -80,26 +81,23 @@ class MainScreen extends Component{
 		this.setState({'screen':'AddNewSmsBox','mainPage':false,'provider':provider});
 	}
 	
+	handleSearchClick(){
+		this.setState({'showSearchBar':!this.state.showSearchBar});
+	}
+	
+	
 	render(){
 		return(
 			<div className='MainScreen'>
 				<Router>
 				
 				<Navbar 
+				 onSearchClick = {this.handleSearchClick.bind(this)}
 				 handleLogout={this.handleLogout.bind(this)}
 				 login={this.state.login}
 				/>
 				<div className='breakpoint'></div>
 				
-				<Route path='/' exact >
-					<Link to='/posts'>
-						<button className='search-btn'>Posts</button>
-					</Link>
-				</Route>
-				
-				{!this.state.showSearchBar && <button 
-				onClick={()=>this.setState({'showSearchBar':!this.state.showSearchBar})} 
-				className='search-btn'>Search</button>}
 				
 				{this.state.showSearchBar && <div className='searchBarDiv'>
 					<input 
@@ -109,15 +107,11 @@ class MainScreen extends Component{
 						onChange={e=>this.setState({'toSearch':e.target.value})}
 					/><em onClick={()=>this.setState({'showSearchBar':false})}>x</em>
 					<Link to={'/search/'+this.state.toSearch}>
-					<button 
-						onClick={this.handleSearch.bind(this)}
-						className=''>Search
-					</button>
+						<SearchIcon className='nav-icon'
+							onClick={this.handleSearch.bind(this)}
+						/>
 					</Link>
 				</div>}
-
-				{this.state.feedbackCard && this.state.login && <div className='feedNotice'>Please  give feedback. 
-				<h3 onClick={()=>this.setState({feedbackCard:false})}>X</h3></div>}
 
 				<Route path='/' exact >
 					<SubMainScreen

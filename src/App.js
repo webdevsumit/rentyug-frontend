@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import MainScreen from './Screens/MainScreen';
 import MetaTags from 'react-meta-tags';
 
