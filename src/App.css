@@ -110,7 +110,7 @@ a:hover{
 	left:10px;
 }
 
-.searchBarDiv em{
+.search-em{
 	font-size:16px;
 	display:inline-block;
 	cursor:pointer;
@@ -153,7 +153,10 @@ button{
 	cursor:pointer;
 	border:none;
 	padding:2px 5px;
-	box-shadow:1px 1px 2px 1px black;
+	box-shadow:0.5px 0.5px 1px 1px grey,
+				-0.5px -0.5px 1px 1px grey,
+				0.5px -0.5px 1px 1px grey,
+				-0.5px 0.5px 1px 1px grey;
 	border-radius:500000px;
 	outline:none;
 	background-color:black;
@@ -165,7 +168,11 @@ button{
 }
 
 button:hover{
-	box-shadow:1.5px 1.5px 6px 1px grey;
+	box-shadow:1px 1px 1px 1px grey, 
+				-1px -1px 1px 1px grey,
+				1px -1px 1px 1px grey,
+				-1px 1px 1px 1px grey;
+
 	color:orange;
 }
 
@@ -498,6 +505,7 @@ textarea, input{
 	top:0px;
 	right:0px;
 	border:none;
+	color:black;
 }
 
 .feedCross{
@@ -761,7 +769,7 @@ textarea, input{
 }
 
 .liked{
-	color:blue;
+	color:orange;
 }
 
 .PostScreen{
@@ -794,7 +802,7 @@ summary{
 }
 
 .whatsapp-share button{
-	color:green;
+	color:lightgreen;
 }
 
 .post-desc{

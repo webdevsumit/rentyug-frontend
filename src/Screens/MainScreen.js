@@ -105,7 +105,7 @@ class MainScreen extends Component{
 						type='text' 
 						value={this.state.toSearch}
 						onChange={e=>this.setState({'toSearch':e.target.value})}
-					/><em onClick={()=>this.setState({'showSearchBar':false})}>x</em>
+					/><em className='search-em' onClick={()=>this.setState({'showSearchBar':false})}>x</em>
 					<Link to={'/search/'+this.state.toSearch}>
 						<SearchIcon className='nav-icon'
 							onClick={this.handleSearch.bind(this)}
