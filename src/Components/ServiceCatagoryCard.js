@@ -4,16 +4,14 @@ import {Link } from 'react-router-dom';
 
 function ServiceCatagoryCard(props){
 	return(
-		<div className='ServiceCatagoryCard'>
-			<div onClick={props.handleChooseCatagory}>
+		<div onClick={props.handleChooseCatagory} className='nav-service-catagory-card'>
+			<Link to={'/search/'+props.Name}>
 				<img src={props.Image} alt='service catagory'/>
-				<Link to={'/search/'+props.Name}>
-					<div>
-						<h3>{props.Name}</h3>
-						<p>{props.Description}</p>
-					</div>
-				</Link>
-			</div>
+				<div>
+					<h5>{props.Name}</h5>
+					
+				</div>
+			</Link>
 		</div>
 	);
 }

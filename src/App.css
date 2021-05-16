@@ -71,7 +71,7 @@ a:hover{
 .nav-icon{
 	cursor:pointer;
 	transition:all ease 0.3s;
-	margin:auto 3px;;
+	margin:auto 3px;
 }
 
 .menu-icon{
@@ -80,6 +80,13 @@ a:hover{
 
 .nav-icon:hover{
 	border-bottom:1px solid white;
+}
+
+.like-icon{
+	font-size:12px !important;
+	color:white !important;
+	background-color:black;
+	margin:auto 5px auto 0px;
 }
 
 .searchBar{
@@ -315,6 +322,36 @@ em{
 
 .ServiceCatagories{
 	padding:40px 20px;
+}
+
+.nav-categories{
+	position:fixed;
+	top:40px;
+	right:0;
+	z-index:1;
+	height:70vh;
+	overflow:scroll;
+	padding:10px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+	background:rgba(255,255,255,0.7);
+	border:1px solid #ddd;
+	border-radius:10px;
+}
+
+.nav-service-catagory-card{
+	width:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	margin:5px;
+	background:transparent;
+}
+
+.nav-service-catagory-card img{
+	width:40px;
 }
 
 .ServiceCatagories div{
@@ -769,7 +806,7 @@ textarea, input{
 }
 
 .liked{
-	color:orange;
+	color:red;
 }
 
 .PostScreen{

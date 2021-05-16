@@ -29,13 +29,14 @@ class MainScreen extends Component{
 		'productId':'',
 		'provider':'',
 		'showSearchBar':false,
+		'showCategories' : false,
 	}
 
 	componentDidMount(){
 		const user = localStorage.getItem('user223');
 
-		localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
-		//localStorage.setItem('url','http://127.0.0.1:8000/');
+		//localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
+		localStorage.setItem('url','http://127.0.0.1:8000/');
 		
 		if((user===null) || (user==='')){
 			this.setState({'screen':'SubMainScreen','login':false});
@@ -80,11 +81,11 @@ class MainScreen extends Component{
 	afterAddingNewSms(user,provider){
 		this.setState({'screen':'AddNewSmsBox','mainPage':false,'provider':provider});
 	}
-	
-	handleSearchClick(){
-		this.setState({'showSearchBar':!this.state.showSearchBar});
+
+	handleShowCategories(btnStatus = "auto"){
+		if (btnStatus==='auto') this.setState({'showCategories':!this.state.showCategories});
+		else this.setState({'showCategories':btnStatus});
 	}
-	
 	
 	render(){
 		return(
@@ -92,12 +93,12 @@ class MainScreen extends Component{
 				<Router>
 				
 				<Navbar 
-				 onSearchClick = {this.handleSearchClick.bind(this)}
+				 onSearchClick = {()=>this.setState({'showSearchBar':!this.state.showSearchBar})}
+				 onShowCategories = {this.handleShowCategories.bind(this)}
 				 handleLogout={this.handleLogout.bind(this)}
 				 login={this.state.login}
 				/>
 				<div className='breakpoint'></div>
-				
 				
 				{this.state.showSearchBar && <div className='searchBarDiv'>
 					<input 
@@ -115,6 +116,7 @@ class MainScreen extends Component{
 
 				<Route path='/' exact >
 					<SubMainScreen
+					showCategories = {this.state.showCategories}
 					openAboutUs={()=>this.setState({'screen':'AboutUs','mainPage':false})}
 					handleChooseCatagory={this.handleChooseCatagory.bind(this)}
 					handleOpenService={this.handleOpenService.bind(this)}

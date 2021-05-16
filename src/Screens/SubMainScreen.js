@@ -45,6 +45,7 @@ class SubMainScreen extends Component{
 					{this.props.login?'':<SiteIntro openAboutUs={this.props.openAboutUs}/>}
 					
 					<ServiceCatagories
+					 showCategories = {this.props.showCategories}
 					 data={this.state.ServiceCatagories}
 					 handleChooseCatagory={this.props.handleChooseCatagory}
 					/>

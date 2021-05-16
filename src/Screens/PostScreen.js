@@ -3,6 +3,8 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import PostMedia from './../Components/PostMedia';
 
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
 
 function PostScreen(){
 
@@ -160,13 +162,25 @@ function PostScreen(){
 							
 
 							<div>
+
+								{post.LikedBy.filter(user=>user.username===localStorage.getItem('user223'))
+																		.length!==0?
 								<button onClick={()=>likePost(post.id)}
-								className = {post.LikedBy.filter(user=>user.username===localStorage.getItem('user223'))
-										.length!==0 && 'liked'}
-								>like {post.TotalLikes}</button>
+								className = 'liked'>
+										
+									<FavoriteIcon style={{fill: 'red'}}
+									  className='like-icon'/> {post.TotalLikes}
+								</button>:
+								<button onClick={()=>likePost(post.id)}>
+																		
+									<FavoriteIcon style={{fill: 'white'}}
+									 className='like-icon'/> {post.TotalLikes}
+								</button>}
 								
-								<button onClick={()=>savePost(ser.id)}>save</button>
-								<Link to={'/service/'+ser.id}><button>product</button></Link>
+								<button onClick={()=>savePost(ser.id)}>
+								<SaveRoundedIcon className='like-icon' style={{fill:'white'}}/>
+								Save</button>
+								<Link to={'/service/'+ser.id}><button>Product</button></Link>
 								<a href={"whatsapp://send?text="+localStorage.getItem('url')+"/service/"+ser.id}   
 										className='whatsapp-share'    
 										data-action="share/whatsapp/share"  
