@@ -8,7 +8,7 @@
 }
 
 .VStatus{
-	color:orange;
+	color:orange !important;
 	border:1px solid orange;
 	border-radius:50000px;
 	width:fit-content;
@@ -29,6 +29,7 @@ a{
 	transition:all ease 0.3s;
 	text-decoration:none;
 	padding:5px;
+	background:transition;
 }
 
 a:hover{
@@ -222,77 +223,112 @@ em{
 .SiteIntro{
 	position:relative;
 	top:-60px;
-	margin:0px 0;
+	margin:50px 0 0 0;
 	overflow:hiden;
 	padding:30px;
-	display:flex;
-	flex-direction:column;
-	justify-content:center;
 	box-shadow:0.1px 0.1px 4px #ddd;
+	background:rgba(0,0,0,0.5);
+	background-size:cover;
+	background-position:25% center;
+}
+
+.SiteIntro-bg{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
 	background:#f5fffe;
+	background-size:cover;
+	background-position:25% center;
+	filter:blur(2px);
 }
 
-.SiteIntro h1,.SiteIntro p,.SiteIntro a, .SiteIntro em{
+.SiteIntro-content{
+	position:relative;
+	width:100%;
+	height:100%;
+	background:rgba(255,255,255,0.4);
+	padding:20px;
+}
+
+.SiteIntro-content h3,.SiteIntro-content p,.SiteIntro-content a, .SiteIntro-content em{
 	background:transparent;
+	position:relative;
 }
 
-.SiteIntro em{
-	opacity:0.4;
-	font-size:10px;
-}
-
-.SiteIntro h1{
-	padding-left:16px;
-	font-family:helvetica;
-	font-size:20px;
-	opacity:0.4;
-}
-
-.SiteIntro div{
+.SiteIntro-content div{
 	width:100%;
 	background:transparent;
-	display:flex;
-	justify-content:center;	
 }
 
 
-.SiteIntro div img{
-	width:400px;
+.SiteIntro-content div img{
+	width:320px;
+	position:relative;
 }
 
-.SiteIntro p{
+.SiteIntro-content h3{
+	padding-left:18px;
+	font-family:helvetica;
+	transition:all ease 0.3s;
 	font-size:16px;
-	opacity:0.85;
 }
 
+.SiteIntro-content h3 b{
+	color:darkblue;
+}
 
+.head-des{
+	opacity:0.4;
+	text-align:left;
+	font-size:20px;
+	color:black;
+	padding-left:18px;
+	background:transparent;
+}
+
+.SiteIntro-content em{
+	opacity:0.5;
+	font-size:14px;
+}
+
+.SiteIntro-content p{
+	font-size:16px;
+	opacity:1;
+}
+
+.SiteIntro-content h3:hover{
+	color:darkblue;
+}
 
 .ServiceCatagoryCard{
 	padding:15px;
+	background:transparent;
 }
 
 .ServiceCatagoryCard div{
 	display:flex;
 	flex-direction:column;
 	justify-content:center;
-	align-item:center;
 	width:fit-content;
 	border-radius:500000px;
 	padding:20px;
 	background-color:#fff;
 	box-shadow:0.1px 0.1px 3px #ddd;
 	cursor:pointer;
+
 }
 
 .ServiceCatagoryCard div img{
 	width:80px;
-	height:80px;
 	border-radius:5px;
 	display:block;
-	background-color:black;
+	background-color:transparent;
 	overflow:hidden;
 	margin:auto;
 }
+
 
 .ServiceCatagoryCard div div{
 	border:none;
@@ -302,13 +338,17 @@ em{
 	width:fit-content;
 }
 
-.ServiceCatagoryCard div div h6, 
+.ServiceCatagoryCard div h6, 
 .ServiceCatagoryCard div div h3, 
 .ServiceCatagoryCard div div p{
 	background:transparent;
 	text-decoration:none;
+	color:#12014f;
 }
 
+.ServiceCatagoryCard div div p, .ServiceCatagoryCard div div h3{
+	color:black;
+}
 
 .ServiceCatagoryCard div div h3{
     font-size:17px;
@@ -316,12 +356,13 @@ em{
 
 
 .ServiceCatagoryCard div div p{
-	opacity:0.4;
+	opacity:0.6;
 }
 
 
 .ServiceCatagories{
 	padding:40px 20px;
+	background:transparent;
 }
 
 .nav-categories{
@@ -373,17 +414,13 @@ em{
 	opacity:0.9;
 }
 
-
-
-
 .ServiceCard div, .ServiceCard div img{
 	border-radius:0px;
 }
 
 .ServiceCard div img{
 	opacity:1;
-	width:150px;
-	height:150px;
+	width:200px;
 }
 
 .YouMayLike{
