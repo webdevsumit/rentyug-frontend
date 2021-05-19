@@ -252,20 +252,60 @@ em{
 	padding:20px;
 }
 
-.SiteIntro-content h3,.SiteIntro-content p,.SiteIntro-content a, .SiteIntro-content em{
+.SiteIntro-content h3, 
+.SiteIntro-content p, 
+.SiteIntro-content a, 
+.SiteIntro-content em, 
+.SiteIntro-content div{
 	background:transparent;
 	position:relative;
 }
 
-.SiteIntro-content div{
+.SiteIntro-content .img-div{
 	width:100%;
 	background:transparent;
+	transition:all ease 0.5s;
+	opacity:0;
+	animation: main-head 0.5s linear 0.5s forwards;
 }
 
 
-.SiteIntro-content div img{
+.SiteIntro-content .img-div img{
 	width:320px;
 	position:relative;
+}
+
+.head-des{
+	text-align:left;
+	font-size:20px;
+	color:black;
+	padding-left:18px;
+	background:transparent;
+	transition:all ease 0.5s;
+	opacity:0;
+	animation: main-head-des 0.5s linear 1s forwards;
+}
+
+@keyframes main-head {
+	0%{
+		opacity:0;
+		transform:translatey(50%);
+	}
+	100%{
+		opacity:1;
+		transform:translatey(0%);
+	}
+}
+
+@keyframes main-head-des {
+	0%{
+		opacity:0;
+		transform:translatey(50%);
+	}
+	100%{
+		opacity:0.4;
+		transform:translatey(0%);
+	}
 }
 
 .SiteIntro-content h3{
@@ -273,24 +313,18 @@ em{
 	font-family:helvetica;
 	transition:all ease 0.3s;
 	font-size:16px;
+	opacity:0;
 }
 
 .SiteIntro-content h3 b{
 	color:darkblue;
 }
 
-.head-des{
-	opacity:0.4;
-	text-align:left;
-	font-size:20px;
-	color:black;
-	padding-left:18px;
-	background:transparent;
-}
-
 .SiteIntro-content em{
 	opacity:0.5;
 	font-size:14px;
+	transition:all ease 0.3s;
+	opacity:0;
 }
 
 .SiteIntro-content p{
