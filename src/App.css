@@ -134,7 +134,7 @@ a:hover{
 	min-height:30px;
 	display:flex;
 	justify-content:center;
-	align-item:center;
+	align-items:center;
 	overflow:hidden;
 	background: transparent;
 }
@@ -266,6 +266,7 @@ em{
 	background:transparent;
 	transition:all ease 0.5s;
 	opacity:0;
+	padding-top:20vh;
 	animation: main-head 0.5s linear 0.5s forwards;
 }
 

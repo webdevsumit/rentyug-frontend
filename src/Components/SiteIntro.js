@@ -6,6 +6,8 @@ function SiteIntro(props){
 
 	const [logo, setLogo] = useState('');
 
+	let mainHead = useRef(null);
+	let mainHeadDes = useRef(null);
 	let head1 = useRef(null);
 	let head2 = useRef(null);
 	let head3 = useRef(null);
@@ -20,9 +22,24 @@ function SiteIntro(props){
 		
 		window.addEventListener('scroll',e=>{
 			
+			if (window.pageYOffset<=10){
+				mainHead.current.style.paddingTop = '20vh';
+				mainHead.current.style.width = '100%';
+				
+				mainHeadDes.current.style.color = 'blue';
+				
+			}
+			else {
+				mainHead.current.style.paddingTop = '0vh';
+				mainHead.current.style.width = '300px';
+				
+				mainHeadDes.current.style.color = 'black';
+			};
+			
 			if (window.pageYOffset>=40) {
 				head1.current.style.opacity=1;
 				head1.current.style.transform='translatey(-50%)';
+				head1.current.style.fontSize='18px';
 				
 			}
 			else {
@@ -31,8 +48,12 @@ function SiteIntro(props){
 			};
 			
 			if (window.pageYOffset>=160) {
+				head1.current.style.opacity=0.7;
+				head1.current.style.fontSize='16px';
+				
 				head2.current.style.opacity=1;
 				head2.current.style.transform='translatey(-50%)';
+				head2.current.style.fontSize='18px';
 				
 			}
 			else {
@@ -42,6 +63,7 @@ function SiteIntro(props){
 			
 			if (window.pageYOffset>=230) {
 				subHead1.current.style.opacity=1;
+				subHead1.current.style.fontSize='16px';
 				
 			}
 			else {
@@ -49,6 +71,11 @@ function SiteIntro(props){
 			};
 			
 			if (window.pageYOffset>=280) {
+				head2.current.style.opacity=0.7;
+				head2.current.style.fontSize='16px';
+				subHead1.current.style.opacity=0.5;
+				subHead1.current.style.fontSize='14px';
+			
 				head3.current.style.opacity=1;
 				head3.current.style.transform='translatey(-50%)';
 				
@@ -56,10 +83,12 @@ function SiteIntro(props){
 			else {
 				head3.current.style.opacity=0;
 				head3.current.style.transform='translatey(0%)';
+				head3.current.style.fontSize='18px';
 			};
 			
 			if (window.pageYOffset>=360) {
 				subHead2.current.style.opacity=1;
+				subHead2.current.style.fontSize='16px';
 				
 			}
 			else {
@@ -68,6 +97,7 @@ function SiteIntro(props){
 			
 			if (window.pageYOffset>=400) {
 				customerLink.current.style.opacity=1;
+				customerLink.current.style.fontSize='16px';
 				
 			}
 			else {
@@ -75,6 +105,13 @@ function SiteIntro(props){
 			};
 			
 			if (window.pageYOffset>=440) {
+				head3.current.style.opacity=0.7;
+				head3.current.style.fontSize='16px';
+				subHead2.current.style.opacity=0.5;
+				subHead2.current.style.fontSize='14px';
+				customerLink.current.style.opacity=0.5;
+				customerLink.current.style.fontSize='14px';
+			
 				leftButton.current.style.opacity=1;
 				middleButton.current.style.opacity=1;
 				rightButton.current.style.opacity=1;
@@ -84,9 +121,23 @@ function SiteIntro(props){
 				leftButton.current.style.opacity=0;
 				middleButton.current.style.opacity=0;
 				rightButton.current.style.opacity=0;
+				
+				leftButton.current.style.transform='translatex(-100%)';
+				middleButton.current.style.transform='scale(0.5)';
+				rightButton.current.style.transform='translatex(100%)';
+				
 			};
 			
-			
+			if (window.pageYOffset>=620) {
+				leftButton.current.style.transform='scale(1.2)';
+				middleButton.current.style.transform='scale(1.2)';
+				rightButton.current.style.transform='scale(1.2)';
+			}
+			else if(window.pageYOffset<=620 && window.pageYOffset>=440){
+				leftButton.current.style.transform='scale(1)';
+				middleButton.current.style.transform='scale(1)';
+				rightButton.current.style.transform='scale(1)';
+			}
 		});
 		
 		const url = localStorage.getItem('url');
@@ -105,10 +156,10 @@ function SiteIntro(props){
 				<div className='breakpoint'></div>
 				<div className='breakpoint'></div>
 				
-				<div className='img-div'>
+				<div className='img-div' ref={mainHead}>
 					<img className='logo' src={logo} alt='logo'/>
 				</div>
-				<h2 className='head-des'>Our First renting social media</h2>
+				<h2 className='head-des' ref={mainHeadDes}>Our First renting social media</h2>
 
 				<div className='breakpoint'></div>
 				<div className='breakpoint'></div>
@@ -138,9 +189,9 @@ function SiteIntro(props){
 				
 				<div className='breakpoint'></div>
 				
-				<Link to='/login' ref={leftButton}><button>login</button></Link>
-				<Link to='/signup' ref={middleButton}><button>signup</button></Link>
-				<Link to='/about' ref={rightButton}><button onClick={props.openAboutUs}>about us</button></Link>
+				<Link to='/login'><button ref={leftButton}>login</button></Link>
+				<Link to='/signup'><button ref={middleButton}>signup</button></Link>
+				<Link to='/about'><button ref={rightButton} onClick={props.openAboutUs}>about us</button></Link>
 			</div>
 		</div>
 	);
