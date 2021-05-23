@@ -51,7 +51,7 @@ function Navbar(props){
 				
 				<Link to='/messages'>
 					<Tooltip title='Messages'>
-						<ForumIcon className='nav-icon'/>
+						<ForumIcon onClick={()=>setShowMenu(false)} className='nav-icon'/>
 					</Tooltip>
 				</Link>
 				

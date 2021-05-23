@@ -287,7 +287,7 @@ function MyPostScreen(){
                             </details>                                                        
 					     </div>
 						<br/>
-						<h6><em>Your post is activated for  500 likes.</em></h6>
+						<h6><em>Your post is activated for  250 likes.</em></h6>
 						<h6><em>After that you have to contact us to reactivate that.</em></h6>
 						<h6><em>You can also do normal deactivation/reactivation.</em></h6>
 						
@@ -298,6 +298,8 @@ function MyPostScreen(){
 							<em>post status : deactivated</em><br/>
 							<button onClick={()=>activatePostTogle(post.id,ser.id)}>Re-activate</button>
 						</div>}
+						
+						<a href='tel:+91 7999004229'>Customer care</a>
 
 
 					</div>)}

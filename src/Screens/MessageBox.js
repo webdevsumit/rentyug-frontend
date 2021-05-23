@@ -63,7 +63,7 @@ function MessageBox(props){
 			</div>
 			<div className='toSend'>
 				<textarea value={msg} onChange={e=>setMsg(e.target.value)}></textarea>
-				<button onClick={()=>{props.handleSendingMsg(msg,props.msgingTo);setMsg('')}}><h4 className='button'>SEND</h4></button>
+				<button onClick={()=>{props.handleSendingMsg(msg,props.msgingTo);setMsg('')}}>send</button>
 			</div>
 		</div>
 	);

@@ -22,32 +22,32 @@ function SiteIntro(props){
 		
 		window.addEventListener('scroll',e=>{
 			
-			if (window.pageYOffset<=10){
+			if (window.pageYOffset<=10 && mainHead.current && mainHeadDes.current){
 				mainHead.current.style.paddingTop = '20vh';
 				mainHead.current.style.width = '100%';
 				
 				mainHeadDes.current.style.color = 'blue';
 				
 			}
-			else {
+			else if( mainHead.current && mainHeadDes.current) {
 				mainHead.current.style.paddingTop = '0vh';
 				mainHead.current.style.width = '300px';
 				
 				mainHeadDes.current.style.color = 'black';
 			};
 			
-			if (window.pageYOffset>=40) {
+			if (window.pageYOffset>=40 && head1.current) {
 				head1.current.style.opacity=1;
 				head1.current.style.transform='translatey(-50%)';
 				head1.current.style.fontSize='18px';
 				
 			}
-			else {
+			else if(head1.current) {
 				head1.current.style.opacity=0;
 				head1.current.style.transform='translatey(0%)';
 			};
 			
-			if (window.pageYOffset>=160) {
+			if (window.pageYOffset>=160 && head1.current && head2.current) {
 				head1.current.style.opacity=0.7;
 				head1.current.style.fontSize='16px';
 				
@@ -56,21 +56,21 @@ function SiteIntro(props){
 				head2.current.style.fontSize='18px';
 				
 			}
-			else {
+			else if(head2.current) {
 				head2.current.style.opacity=0;
 				head2.current.style.transform='translatey(0%)';
 			};
 			
-			if (window.pageYOffset>=230) {
+			if (window.pageYOffset>=230 && subHead1.current) {
 				subHead1.current.style.opacity=1;
 				subHead1.current.style.fontSize='16px';
 				
 			}
-			else {
+			else if(subHead1.current){
 				subHead1.current.style.opacity=0;
 			};
 			
-			if (window.pageYOffset>=280) {
+			if (window.pageYOffset>=280 && head2.current && subHead1.current && head3.current) {
 				head2.current.style.opacity=0.7;
 				head2.current.style.fontSize='16px';
 				subHead1.current.style.opacity=0.5;
@@ -80,31 +80,38 @@ function SiteIntro(props){
 				head3.current.style.transform='translatey(-50%)';
 				
 			}
-			else {
+			else if(head3.current){
 				head3.current.style.opacity=0;
 				head3.current.style.transform='translatey(0%)';
 				head3.current.style.fontSize='18px';
 			};
 			
-			if (window.pageYOffset>=360) {
+			if (window.pageYOffset>=360 && subHead2.current) {
 				subHead2.current.style.opacity=1;
 				subHead2.current.style.fontSize='16px';
 				
 			}
-			else {
+			else if(subHead2.current){
 				subHead2.current.style.opacity=0;
 			};
 			
-			if (window.pageYOffset>=400) {
+			if (window.pageYOffset>=400 && customerLink.current) {
 				customerLink.current.style.opacity=1;
 				customerLink.current.style.fontSize='16px';
 				
 			}
-			else {
+			else if(customerLink.current){
 				customerLink.current.style.opacity=0;
 			};
 			
-			if (window.pageYOffset>=440) {
+			if (window.pageYOffset>=440 
+				&& head3.current 
+				&& subHead2.current 
+				&& customerLink.current 
+				&& leftButton.current 
+				&& middleButton.current 
+				&& rightButton.current) {
+				
 				head3.current.style.opacity=0.7;
 				head3.current.style.fontSize='16px';
 				subHead2.current.style.opacity=0.5;
@@ -117,7 +124,10 @@ function SiteIntro(props){
 				rightButton.current.style.opacity=1;
 				
 			}
-			else {
+			else if(leftButton.current 
+					&& middleButton.current 
+					&& rightButton.current) {
+					
 				leftButton.current.style.opacity=0;
 				middleButton.current.style.opacity=0;
 				rightButton.current.style.opacity=0;
@@ -128,12 +138,18 @@ function SiteIntro(props){
 				
 			};
 			
-			if (window.pageYOffset>=620) {
+			if (window.pageYOffset>=620 && leftButton.current 
+							&& middleButton.current 
+							&& rightButton.current) {
+							
 				leftButton.current.style.transform='scale(1.2)';
 				middleButton.current.style.transform='scale(1.2)';
 				rightButton.current.style.transform='scale(1.2)';
 			}
-			else if(window.pageYOffset<=620 && window.pageYOffset>=440){
+			else if(window.pageYOffset<=620 && window.pageYOffset>=440 && leftButton.current 
+							&& middleButton.current 
+							&& rightButton.current){
+							
 				leftButton.current.style.transform='scale(1)';
 				middleButton.current.style.transform='scale(1)';
 				rightButton.current.style.transform='scale(1)';

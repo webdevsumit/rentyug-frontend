@@ -12,6 +12,8 @@ import AboutUs from './AboutUs';
 import PostScreen from './PostScreen';
 import MyPostScreen from './MyPostScreen';
 import MySavedServices from './MySavedServices';
+import PPScreen from './PPScreen';
+import FAQScreen from './FAQScreen';
 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
@@ -163,6 +165,10 @@ class MainScreen extends Component{
 				</Route>
 
 				<Route path='/myposts' component={MyPostScreen}/>
+				
+				<Route path='/privacy-policy' component={PPScreen}/>
+				
+				<Route path='/faq' component={FAQScreen}/>
 				
 				{this.state.screen==='AddNewSmsBox'?<AddNewSmsBox
 				back={()=>{this.setState({'screen':'SubMainScreen','mainPage':true})}}
