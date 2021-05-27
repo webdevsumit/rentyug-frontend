@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-// import RateReviewRoundedIcon from '@material-ui/icons/RateReviewRounded';
 import PhotoSizeSelectActualRoundedIcon from '@material-ui/icons/PhotoSizeSelectActualRounded';
 import ForumIcon from '@material-ui/icons/Forum';
 import SearchIcon from '@material-ui/icons/Search';
@@ -32,7 +31,6 @@ function Navbar(props){
 	return(
 		<div className='NavbarDiv'>
 			<img className='logo' src={logo} alt='logo'/>
-			<h3  className='Navhead'></h3>
 			{props.login?<div className='msg-menu-div'>
 
 				<Tooltip title='Search'>

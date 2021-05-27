@@ -236,7 +236,15 @@ function PostScreen(){
 					
 				</div>)}
 			</div>)}
-		</div>:<em>{localStorage.getItem('user223')?<i>loading...</i>:<i>please login</i>}</em>}
+		</div>:<em>{localStorage.getItem('user223')?<h1 className="loader">
+									  <span>L</span>
+									  <span>O</span>
+									  <span>A</span>
+									  <span>D</span>
+									  <span>I</span>
+									  <span>N</span>
+									  <span>G</span>
+									</h1>:<i>please login</i>}</em>}
 				
 	</div>)
 }

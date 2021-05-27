@@ -67,7 +67,15 @@ function AddNewSmsBox(props){
 			handleSendingMsg={handleSendingMsg}
 			msgingTo={msgingTo}
 			handleRegularRender={handleClick}
-			data={messages}/></div>:''}
+			data={messages}/></div>:<h1 className="loader">
+										  <span>L</span>
+										  <span>O</span>
+										  <span>A</span>
+										  <span>D</span>
+										  <span>I</span>
+										  <span>N</span>
+										  <span>G</span>
+										</h1>}
 			
 			{data.map(d=><div key={d.id} onClick={()=>handleClick(d.MessagePartner)}><MessageCard 
 			Username={d.Username}

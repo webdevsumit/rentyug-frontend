@@ -5,7 +5,7 @@ import axios from 'axios';
 
 class SearchScreen extends Component{
 	state={
-		'data':[],
+		'data':false,
 	}
 
 	componentDidMount(){
@@ -18,7 +18,8 @@ class SearchScreen extends Component{
 	
 	render(){
 		return(
-			<div className='SearchScreen'>
+			<React.Fragment>
+			{this.state.data?<div className='SearchScreen'>
 				<h6>Results for {this.props.Name}</h6>
 				<div>
 				{this.state.data.map(d=>{return(
@@ -42,7 +43,16 @@ class SearchScreen extends Component{
 				<div className='breakpoint'></div>
 				<h4>{this.state.data.length===0 && 'No results!'}</h4>
 				
-			</div>
+			</div>:<h1 className="loader">
+										  <span>L</span>
+										  <span>O</span>
+										  <span>A</span>
+										  <span>D</span>
+										  <span>I</span>
+										  <span>N</span>
+										  <span>G</span>
+										</h1>}
+		</React.Fragment>
 		);
 	}
 }

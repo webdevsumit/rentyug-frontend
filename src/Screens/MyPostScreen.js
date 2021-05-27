@@ -310,7 +310,15 @@ function MyPostScreen(){
 
 					
 				</div>)}
-			</div>:<em>loading...</em>}
+			</div>:<h1 className="loader">
+										  <span>L</span>
+										  <span>O</span>
+										  <span>A</span>
+										  <span>D</span>
+										  <span>I</span>
+										  <span>N</span>
+										  <span>G</span>
+										</h1>}<br/>
 
 			
 			{addPost?<div className='new-post'>

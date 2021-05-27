@@ -14,7 +14,7 @@ function FAQSceen(){
 
 	return(
 		<div className='FAQData'>
-			{FAQData && <div className='whitebg'>
+			{FAQData? <div className='whitebg'>
 				<h1>FAQ</h1>
 			
 				{FAQData.map(d=><React.Fragment>
@@ -23,7 +23,15 @@ function FAQSceen(){
 					<br/>
 				</React.Fragment>)}
 							
-			</div>}
+			</div>:<h1 className="loader">
+										  <span>L</span>
+										  <span>O</span>
+										  <span>A</span>
+										  <span>D</span>
+										  <span>I</span>
+										  <span>N</span>
+										  <span>G</span>
+										</h1>}
 		</div>
 	)
 }
