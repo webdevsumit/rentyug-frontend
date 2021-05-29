@@ -8,7 +8,7 @@ function PostMedia(props){
 	return(<div>
 	
 				{props.HasImage?<img src={props.Image} alt='Video' className='post-media'/>:
-		       	  <video width="80%" height="auto" controls autoPlay className='post-media'
+		       	  <video width="80%" height="auto" controls className='post-media'
 		       	  	loading='lazy'
                       poster={props.Image}>
             	      <source src={props.Media} loading='lazy' type="video/mp4"/>

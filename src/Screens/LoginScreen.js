@@ -1,14 +1,16 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 
 function LoginScreen(props){
 
-	const [username, setUsername]     = useState('');
-	const [password, setPassword]   = useState('');
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
 
-	const [hidePass, setHidePass]   = useState(true);
+	const [hidePass, setHidePass] = useState(true);
+
+	const [redirect, setRedirect] = useState(null)
 
 	const handleLogin=()=>{
 		 if(username==='' || password===''){
@@ -25,12 +27,16 @@ function LoginScreen(props){
 					localStorage.setItem('user223',username);
 					localStorage.setItem('token',res.data.token);
 					props.afterLogin();
+					setRedirect('redirect');
 				}
 			}).catch(err=>{
 				alert('Please provide valid details.'+err);
 			})
 		}
 	}
+
+	if (redirect) return <Redirect to='/'/>;
+	
 	return(
 		<div className='LoginScreen SignupScreen'>
 			<input type='text' value={username} 
@@ -44,12 +50,9 @@ function LoginScreen(props){
 			/>
 			<button onClick={()=>{setHidePass(!hidePass)}}>{hidePass?'show':'hide'}</button>
 						
-
-			<Link to='/'>
 			<button className='signup-btn' 
 				onClick={handleLogin}
 			>Login</button>
-			</Link>
 		</div>	
 	);
 }

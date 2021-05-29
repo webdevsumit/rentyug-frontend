@@ -20,6 +20,7 @@ function MyPostScreen(){
 	const [selectedServiceId, setSelectedServiceId] = useState(null);
 
 	const [preview, setPreview] = useState(false);
+	const [uploading, setUploading] = useState(true);
 		
 		
 	
@@ -166,6 +167,7 @@ function MyPostScreen(){
 			else{
 				if (selectedServiceId===null) alert('please add services first.');
 				else{
+					setUploading(true);
 					let formData = new FormData();
 					formData.append('Tittle',newTittle);
 					formData.append('Image',newImage);
@@ -190,6 +192,7 @@ function MyPostScreen(){
 							setNewText('');
 							setSelectedServiceId(null);
 							setAddPost(false);
+							setUploading(false);
 						}
 					})
 				}
@@ -203,6 +206,17 @@ function MyPostScreen(){
 
 	return(
 		<div className='MyPostScreen'>
+			{uploading && <div className='uploading'>
+			
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				
+			</div>}
 			<h3><em>Your posts</em></h3>
 			{data?<div>
 				{data.map(ser=><div key={ser.id}>
@@ -303,22 +317,19 @@ function MyPostScreen(){
 
 
 					</div>)}
-
-
-
-
-
 					
 				</div>)}
 			</div>:<h1 className="loader">
-										  <span>L</span>
-										  <span>O</span>
-										  <span>A</span>
-										  <span>D</span>
-										  <span>I</span>
-										  <span>N</span>
-										  <span>G</span>
-										</h1>}<br/>
+										<span>{localStorage.getItem('user223')?
+										localStorage.getItem('user223'):'Hey'},</span>
+										<span>we</span>
+										<span>are</span>
+										<span>loading</span>
+										<span>the</span>
+										<span>best</span>
+										<span>for</span>
+										<span>you</span>
+								</h1>}<br/>
 
 			
 			{addPost?<div className='new-post'>

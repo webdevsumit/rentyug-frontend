@@ -24,14 +24,16 @@ function FAQSceen(){
 				</React.Fragment>)}
 							
 			</div>:<h1 className="loader">
-										  <span>L</span>
-										  <span>O</span>
-										  <span>A</span>
-										  <span>D</span>
-										  <span>I</span>
-										  <span>N</span>
-										  <span>G</span>
-										</h1>}
+										<span>{localStorage.getItem('user223')?
+										localStorage.getItem('user223'):'Hey'},</span>
+										<span>we</span>
+										<span>are</span>
+										<span>loading</span>
+										<span>the</span>
+										<span>best</span>
+										<span>for</span>
+										<span>you</span>
+								</h1>}
 		</div>
 	)
 }

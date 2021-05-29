@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 
 function SignupScreen(props){
@@ -18,7 +18,7 @@ function SignupScreen(props){
 	const [hidePass1, setHidePass1]   = useState(true);
 	const [hidePass2, setHidePass2]   = useState(true);
 	
-	
+	const [redirect, setRedirect] = useState(null);
 
 	const handleSignup=(as)=>{
 		if(password1 !== password2){
@@ -43,12 +43,15 @@ function SignupScreen(props){
 						localStorage.setItem('user223',username);
 						localStorage.setItem('token',res.data.token);
 						props.afterSignup();
+						setRedirect('redirect');
 					}
 				}).catch(err=>{
 					alert('Please provide valid details.');
 				})
 		}
 	}
+
+	if (redirect) return <Redirect to='/'/>;
 	
 	return(
 		<div className='SignupScreen'>
@@ -103,11 +106,9 @@ function SignupScreen(props){
 
 			<div>
 				
-				<Link to='/'>
-					<button className='signup-btn' 
-						onClick={()=>{handleSignup('service-provider')}}
-					>Signup</button>
-				</Link>
+				<button className='signup-btn' 
+					onClick={()=>{handleSignup('service-provider')}}
+				>Signup</button>
 			</div>
 		</div>
 	);

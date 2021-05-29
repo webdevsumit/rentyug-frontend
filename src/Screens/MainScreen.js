@@ -69,6 +69,7 @@ class MainScreen extends Component{
 			this.setState({'showSearchBar':false});
 		}
 		this.setState({'showSearchBar':false});
+		this.setState({'toSearch':''})
 	}
 
 	handleOpenService(id){

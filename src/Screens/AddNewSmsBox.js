@@ -68,14 +68,16 @@ function AddNewSmsBox(props){
 			msgingTo={msgingTo}
 			handleRegularRender={handleClick}
 			data={messages}/></div>:<h1 className="loader">
-										  <span>L</span>
-										  <span>O</span>
-										  <span>A</span>
-										  <span>D</span>
-										  <span>I</span>
-										  <span>N</span>
-										  <span>G</span>
-										</h1>}
+										<span>{localStorage.getItem('user223')?
+										localStorage.getItem('user223'):'Hey'},</span>
+										<span>we</span>
+										<span>are</span>
+										<span>loading</span>
+										<span>the</span>
+										<span>best</span>
+										<span>for</span>
+										<span>you</span>
+								</h1>}
 			
 			{data.map(d=><div key={d.id} onClick={()=>handleClick(d.MessagePartner)}><MessageCard 
 			Username={d.Username}
