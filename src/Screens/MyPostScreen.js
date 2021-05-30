@@ -20,7 +20,7 @@ function MyPostScreen(){
 	const [selectedServiceId, setSelectedServiceId] = useState(null);
 
 	const [preview, setPreview] = useState(false);
-	const [uploading, setUploading] = useState(true);
+	const [uploading, setUploading] = useState(false);
 		
 		
 	
