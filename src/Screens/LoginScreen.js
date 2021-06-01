@@ -10,17 +10,21 @@ function LoginScreen(props){
 
 	const [hidePass, setHidePass] = useState(true);
 
-	const [redirect, setRedirect] = useState(null)
+	const [redirect, setRedirect] = useState(null);
+	const [uploading, setUploading] = useState(false);
 
 	const handleLogin=()=>{
 		 if(username==='' || password===''){
 			alert('All fields are required.');
 		}else{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'api-token-auth/',{
 				'username':username,
 				'password':password
 			}).then(res=>{
+				setUploading(false);
 				if(res.data.error){
 					alert(res.data.error)
 				}else{
@@ -39,6 +43,18 @@ function LoginScreen(props){
 	
 	return(
 		<div className='LoginScreen SignupScreen'>
+			{uploading && <div className='uploading'>
+								
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+							
+			</div>}
+			
 			<input type='text' value={username} 
 				onChange={e=>{setUsername(e.target.value)}}
 				placeholder='Username*' required

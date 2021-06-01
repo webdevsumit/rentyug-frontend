@@ -69,6 +69,8 @@ function AccountScreen(){
 
 	const [readTC, setReadTC] = useState(false);
 	const [agreeTC, setAgreeTC] = useState(false);
+
+	const [uploading, setUploading] = useState(false);
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
@@ -101,6 +103,7 @@ function AccountScreen(){
 		const url = localStorage.getItem('url');
 		if (firstname==='') alert('Cannot asign empty value.');
 		else{
+			setUploading(true);
 			axios.post(url+'setFirstname/',{
 					'username':localStorage.getItem('user223'),
 					'firstname':firstname
@@ -112,6 +115,7 @@ function AccountScreen(){
 			.then(res=>{
 				setData(res.data.profile);
 				setFirstname('');
+				setUploading(false);
 			})
 		}
 	}
@@ -121,6 +125,7 @@ function AccountScreen(){
 			if (newPassword.length<8) alert('Password should be of minmum 8 characters with the combination of words and numbers.');
 			else{
 				if(newPassword===newPassword2){
+					setUploading(true);
 					axios.post(url+'setPassword/',{
 							'username':localStorage.getItem('user223'),
 							'password':newPassword,
@@ -131,6 +136,7 @@ function AccountScreen(){
 								  }
 						})
 					.then(res=>{
+						setUploading(true);
 						if(res.data.msg) alert('Wrong password.');
 						else{
 							setData(res.data.profile);
@@ -145,7 +151,8 @@ function AccountScreen(){
 			if (lastname==='') alert('Cannot asign empty value.');
 			else{
 				const url = localStorage.getItem('url');
-			axios.post(url+'setLastname/',{
+				setUploading(true);
+				axios.post(url+'setLastname/',{
 					'username':localStorage.getItem('user223'),
 					'lastname':lastname
 				},{
@@ -154,6 +161,7 @@ function AccountScreen(){
 						  }
 				})
 			.then(res=>{
+				setUploading(false);
 				setData(res.data.profile);
 				setLastname('');
 			})
@@ -164,6 +172,7 @@ function AccountScreen(){
 		if (email==='') alert('Cannot asign empty value.');
 		else{
 			const url = localStorage.getItem('url');
+			setUploading(true);
 			axios.post(url+'setEmail/',{
 					'username':localStorage.getItem('user223'),
 					'email':email
@@ -173,6 +182,7 @@ function AccountScreen(){
 					  }
 			})
 		.then(res=>{
+				setUploading(false);
 				setData(res.data.profile);
 				setEmail('');
 			})
@@ -185,6 +195,7 @@ function AccountScreen(){
 			if (myAddr==='') alert('Cannot asign empty value.');
 			else{
 				const url = localStorage.getItem('url');
+				setUploading(true);
 				axios.post(url+'setMyAddr/',{
 						'username':localStorage.getItem('user223'),
 						'Address':myAddr
@@ -194,6 +205,7 @@ function AccountScreen(){
 						  }
 				})
 			.then(res=>{
+					setUploading(false);
 					setData(res.data.profile);
 					setEmail('');
 				})
@@ -206,6 +218,7 @@ function AccountScreen(){
 				if (myNo==='') alert('Cannot asign empty value.');
 				else{
 					const url = localStorage.getItem('url');
+					setUploading(true);
 					axios.post(url+'setMyNo/',{
 							'username':localStorage.getItem('user223'),
 							'MobileNo':myNo
@@ -215,6 +228,7 @@ function AccountScreen(){
 							  }
 					})
 				.then(res=>{
+						setUploading(false);
 						setData(res.data.profile);
 						setEmail('');
 					})
@@ -225,6 +239,7 @@ function AccountScreen(){
 			if (shopName==='') alert('Cannot asign empty value.');
 			else{
 				const url = localStorage.getItem('url');
+				setUploading(true);
 				axios.post(url+'setShopName/',{
 					'id':id,
 					'ShopName':shopName,
@@ -235,6 +250,7 @@ function AccountScreen(){
 						  }
 				})
 			.then(res=>{
+				setUploading(false);
 				setData(res.data.profile);
 				setShopName('');
 			})
@@ -243,6 +259,7 @@ function AccountScreen(){
 
 	const changeCatagory=(serviceId,catagoryId)=>{
 		const url = localStorage.getItem('url');
+		setUploading(true);
 		axios.post(url+'updateShopCatagory/',{
 					'serviceId':serviceId,
 					'catagoryId':catagoryId,
@@ -253,6 +270,7 @@ function AccountScreen(){
 						  }
 				})
 		.then(res=>{
+				setUploading(false);
 				setData(res.data.profile);
 				setChangeShopType(false);
 		})
@@ -267,12 +285,14 @@ function AccountScreen(){
 			formData.append('image',mainImage);
 			formData.append('username',localStorage.getItem('user223'));
 
+			setUploading(true);
 			axios.post(url+'updateMainImage/',formData,{
 					  headers: {
 					    'Authorization': `Token ${localStorage.getItem('token')}` 
 					  }
 					})
 			.then(res=>{
+				setUploading(false);
 				setData(res.data.profile);
 				setMainImage(null);
 			})
@@ -292,12 +312,15 @@ function AccountScreen(){
 			
 			formData.append('username',localStorage.getItem('user223'));
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'updateImage/',formData,{
 					  headers: {
 					    'Authorization': `Token ${localStorage.getItem('token')}` 
 					  }
 					})
 			.then(res=>{
+				setUploading(false);
 				setData(res.data.profile);
 				setMainImage(null);
 				setProfile(null);
@@ -316,12 +339,15 @@ function AccountScreen(){
 	        formData.append('image',mainImage);         
 	        formData.append('username',localStorage.getItem('user223'));
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 	        axios.post(url+'addNewImage/',formData,{
 	        		  headers: {
 	        		    'Authorization': `Token ${localStorage.getItem('token')}` 
 	        		  }
 	        		})
 	        .then(res=>{
+	        	setUploading(false);
 	            setData(res.data.profile);
 	            setMainImage(null);
 	        })
@@ -333,6 +359,8 @@ function AccountScreen(){
 	 	if (openTime==='') alert('Cannot asign empty value.');
 	 	else{
 	 		const url = localStorage.getItem('url');
+
+	 		setUploading(true);
 	 		axios.post(url+'setOpenTime/',{
 	 				'username':localStorage.getItem('user223'),
 	 				'id':id,
@@ -343,6 +371,7 @@ function AccountScreen(){
 	 					  }
 	 			})
 	 		.then(res=>{
+	 			setUploading(false);
 	 			setData(res.data.profile);
 	 			setOpenTime('');
 	 		})
@@ -353,6 +382,8 @@ function AccountScreen(){
 	 	if (closeTime==='') alert('Cannot asign empty value.');
 	 	else{
 	 		const url = localStorage.getItem('url');
+
+	 		setUploading(true);
 	 		axios.post(url+'setCloseTime/',{
 	 				'username':localStorage.getItem('user223'),
 	 				'id':id,
@@ -363,6 +394,7 @@ function AccountScreen(){
 	 					  }
 	 			})
 	 		.then(res=>{
+	 			setUploading(false);
 	 			setData(res.data.profile);
 	 			setCloseTime('');
 	 		})
@@ -376,6 +408,8 @@ function AccountScreen(){
 
 	 	if (rentalStatus===true || rentalStatus===false){
 	 		const url = localStorage.getItem('url');
+
+	 		setUploading(true);
 	 		axios.post(url+'setRentalStatus/',{
 	 				'username':localStorage.getItem('user223'),
 	 				'id':id,
@@ -386,6 +420,7 @@ function AccountScreen(){
 	 					  }
 	 			})
 	 		.then(res=>{
+	 			setUploading(false);
 	 			setData(res.data.profile);
 	 			setRentalStatus(false);
 	 		})
@@ -397,6 +432,8 @@ function AccountScreen(){
 
 	 	if (noOfItems){
 	 		const url = localStorage.getItem('url');
+
+	 		setUploading(true);
 	 		axios.post(url+'setNoOfItems/',{
 	 				'username':localStorage.getItem('user223'),
 	 				'id':id,
@@ -407,6 +444,7 @@ function AccountScreen(){
 	 					  }
 	 			})
 	 		.then(res=>{
+	 			setUploading(false);
 	 			setData(res.data.profile);
 	 			setNoOfItems(1);
 	 		})
@@ -417,6 +455,8 @@ function AccountScreen(){
 	 	if (priceType==='') alert('Cannot asign empty value.');
 	 	else{
 	 		const url = localStorage.getItem('url');
+
+	 		setUploading(true);
 	 		axios.post(url+'setPriceType/',{
 	 				'username':localStorage.getItem('user223'),
 	 				'id':id,
@@ -427,6 +467,7 @@ function AccountScreen(){
 	 					  }
 	 			})
 	 		.then(res=>{
+	 			setUploading(false);
 	 			setData(res.data.profile);
 	 			setPriceType('');
 	 		})
@@ -435,6 +476,8 @@ function AccountScreen(){
 	
 	const deleteSearchName=(id)=>{
 		const url = localStorage.getItem('url');
+
+		setUploading(true);
 	 	axios.post(url+'deleteSearchName/',{
  			'username':localStorage.getItem('user223'),
 			'id':id
@@ -444,12 +487,15 @@ function AccountScreen(){
 	 			  }
 	 	})
 	 	.then(res=>{
+	 		setUploading(false);
 	 		setData(res.data.profile);
 	 	})
 	 }
 	 
 	const deleteImage=(id)=>{
 		const url = localStorage.getItem('url');
+
+		setUploading(true);
 	 	axios.post(url+'deleteImage/',{
  			'username':localStorage.getItem('user223'),
 			'id':id
@@ -459,6 +505,7 @@ function AccountScreen(){
 	 			  }
 	 	})
 	 	.then(res=>{
+	 		setUploading(false);
 	 		setData(res.data.profile);
 	 	})
 	 }
@@ -467,6 +514,8 @@ function AccountScreen(){
 	 	if (searchName==='') alert('Cannot asign empty value.');
 	 	else{
 	 		const url = localStorage.getItem('url');
+
+	 		setUploading(true);
 	 		axios.post(url+'addSearchName/',{
 	 				'username':localStorage.getItem('user223'),
 	 				'serviceId':serviceId,
@@ -477,6 +526,7 @@ function AccountScreen(){
 	 					  }
 	 			})
 	 		.then(res=>{
+	 			setUploading(false);
 	 			setData(res.data.profile);
 	 			setSearchName('');
 	 		})
@@ -489,6 +539,8 @@ function AccountScreen(){
 	 		alert('Description box should not be empty.')
 	 	}else{
 	 		const url = localStorage.getItem('url');
+
+	 		setUploading(true);
 	 		axios.post(url+'updateDesc/',{
 	 							'username':localStorage.getItem('user223'),
 	 			 				'serviceId':serviceId,
@@ -499,6 +551,7 @@ function AccountScreen(){
 	 					  }
 	 				})
 	 		.then(res=>{
+	 			setUploading(false);
 	 			setData(res.data.profile);
 	 			setDesc('');
 	 			})
@@ -519,12 +572,15 @@ function AccountScreen(){
 	 		formData.append('PriceType',newItemPriceType);
 	 		formData.append('username', localStorage.getItem('user223'));
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 	 		axios.post(url+'addNewService/',formData,{
 	 			 					  headers: {
 	 			 					    'Authorization': `Token ${localStorage.getItem('token')}` 
 	 			 					  }
 	 			 				})
 	 		.then(res=>{
+	 			setUploading(false);
 	 			 setData(res.data.profile);
 	 			 setNewShopName('');
 	 			 setNewMainImage(null);
@@ -540,6 +596,16 @@ function AccountScreen(){
 	
 	return(
 		<div className='AccountScreen'>
+			{uploading && <div className='uploading'>
+									
+					<span className='loading-bars'></span>
+					<span className='loading-bars'></span>
+					<span className='loading-bars'></span>
+					<span className='loading-bars'></span>
+					<span className='loading-bars'></span>
+					<span className='loading-bars'></span>
+					<span className='loading-bars'></span>						
+				</div>}
 			{accScreen?<div>
 				<h2 className='m-20'>Account</h2>
 				

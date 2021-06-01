@@ -11,7 +11,7 @@ function PostScreen(){
 	const [data, setData] = useState(null);
 	const [commentWord, setCommentWord] = useState('');
 	const [replyWord, setReplyWord] = useState('');
-	
+	const [uploading, setUploading] = useState(false);
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
@@ -32,6 +32,8 @@ function PostScreen(){
 		if (commentWord==='') alert('Please write something!');
 		else{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'addPostComment/',{
 					'postId':postId,
 					'Username':localStorage.getItem('user223'),
@@ -42,6 +44,7 @@ function PostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					setData(res.data.data);
 					setCommentWord('');
 			})	
@@ -50,6 +53,8 @@ function PostScreen(){
 
 	const removeComment=(commentId)=>{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'removePostComment/',{
 					'commentId':commentId,
 					'Username':localStorage.getItem('user223'),
@@ -59,6 +64,7 @@ function PostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					setData(res.data.data);
 			})	
 	}
@@ -69,6 +75,8 @@ function PostScreen(){
 		if (replyWord==='') alert('Please write something!');
 		else{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'addPostCommentReply/',{
 					'commentId':commentId,
 					'Username':localStorage.getItem('user223'),
@@ -79,6 +87,7 @@ function PostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					setData(res.data.data);
 					setReplyWord('');
 			})	
@@ -87,6 +96,8 @@ function PostScreen(){
 
 	const removeReply=(replyId)=>{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'removePostCommentReply/',{
 					'replyId':replyId,
 					'Username':localStorage.getItem('user223'),
@@ -96,6 +107,7 @@ function PostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					setData(res.data.data);
 			})	
 	}
@@ -120,6 +132,8 @@ function PostScreen(){
 
 	const savePost=(serviceId)=>{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'savePost/',{
 					'serviceId':serviceId,
 					'Username':localStorage.getItem('user223')
@@ -128,6 +142,7 @@ function PostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					alert(res.data.msg);
 			})	
 	}
@@ -135,6 +150,18 @@ function PostScreen(){
 	
 	
 	return(<div className='PostScreen'>
+
+		{uploading && <div className='uploading'>
+					
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				
+			</div>}
 		<h3><em>Posts</em></h3>
 		<div className='breakpoint'></div>
 

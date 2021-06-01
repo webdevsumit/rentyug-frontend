@@ -42,6 +42,8 @@ function MyPostScreen(){
 		if (commentWord==='') alert('Please write something!');
 		else{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'addPostComment/',{
 					'postId':postId,
 					'Username':localStorage.getItem('user223'),
@@ -52,6 +54,7 @@ function MyPostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					setData(res.data.data);
 					setCommentWord('');
 			})	
@@ -60,6 +63,7 @@ function MyPostScreen(){
 
 	const removeComment=(commentId)=>{
 			const url = localStorage.getItem('url');
+			setUploading(true);
 			axios.post(url+'removePostComment/',{
 					'commentId':commentId,
 					'Username':localStorage.getItem('user223'),
@@ -69,6 +73,7 @@ function MyPostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					setData(res.data.data);
 			})	
 	}
@@ -79,6 +84,8 @@ function MyPostScreen(){
 		if (replyWord==='') alert('Please write something!');
 		else{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'addPostCommentReply/',{
 					'commentId':commentId,
 					'Username':localStorage.getItem('user223'),
@@ -89,6 +96,7 @@ function MyPostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					setData(res.data.data);
 					setReplyWord('');
 			})	
@@ -97,6 +105,8 @@ function MyPostScreen(){
 
 	const removeReply=(replyId)=>{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'removePostCommentReply/',{
 					'replyId':replyId,
 					'Username':localStorage.getItem('user223'),
@@ -106,6 +116,7 @@ function MyPostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					setData(res.data.data);
 			})	
 	}
@@ -130,6 +141,8 @@ function MyPostScreen(){
 
 	const savePost=(serviceId)=>{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'savePost/',{
 					'serviceId':serviceId,
 					'Username':localStorage.getItem('user223')
@@ -138,12 +151,15 @@ function MyPostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					alert(res.data.msg);
 			})	
 	}
 
 	const activatePostTogle=(postId,serviceId)=>{
 			const url = localStorage.getItem('url');
+
+			setUploading(true);
 			axios.post(url+'activatePostTogle/',{
 					'postId':postId,
 					'Username':localStorage.getItem('user223'),
@@ -153,6 +169,7 @@ function MyPostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 					}
 				}).then(res=>{
+					setUploading(false);
 					if (res.data.msg) alert(res.data.msg);
 					else setData(res.data);
 			})	
@@ -182,6 +199,7 @@ function MyPostScreen(){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 						}
 					}).then(res=>{
+						setUploading(true);
 						if(res.data.msg) alert(res.data.msg);
 						else{
 							setData(res.data);
@@ -192,7 +210,6 @@ function MyPostScreen(){
 							setNewText('');
 							setSelectedServiceId(null);
 							setAddPost(false);
-							setUploading(false);
 						}
 					})
 				}

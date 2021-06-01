@@ -19,7 +19,8 @@ function SignupScreen(props){
 	const [hidePass2, setHidePass2]   = useState(true);
 	
 	const [redirect, setRedirect] = useState(null);
-
+	const [uploading, setUploading] = useState(false);
+	
 	const handleSignup=(as)=>{
 		if(password1 !== password2){
 			alert('Passwords are not matching.');
@@ -36,7 +37,10 @@ function SignupScreen(props){
 				formData2.append('MobileNo',moNo);
 				formData2.append('image',image);
 				const url = localStorage.getItem('url');
+
+				setUploading(true);
 				axios.post(url+'signupAsProvider/',formData2).then(res=>{
+					setUploading(false);
 					if(res.data.error){
 						alert(res.data.error)
 					}else{
@@ -55,6 +59,18 @@ function SignupScreen(props){
 	
 	return(
 		<div className='SignupScreen'>
+
+			{uploading && <div className='uploading'>
+											
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+				<span className='loading-bars'></span>
+										
+			</div>}
 
 			<img className='profileImg'
 			src={image?URL.createObjectURL(image):''} alt='profile'/>
