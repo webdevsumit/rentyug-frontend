@@ -51,6 +51,7 @@ function SignupScreen(props){
 					}
 				}).catch(err=>{
 					alert('Please provide valid details.');
+					setUploading(false);
 				})
 		}
 	}

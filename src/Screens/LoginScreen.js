@@ -35,6 +35,7 @@ function LoginScreen(props){
 				}
 			}).catch(err=>{
 				alert('Please provide valid details.'+err);
+				setUploading(false);
 			})
 		}
 	}

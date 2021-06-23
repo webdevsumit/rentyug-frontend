@@ -1,5 +1,4 @@
-import React,{useState, useEffect} from 'react';
-import axios from 'axios';
+import React,{useState,} from 'react';
 import {Link} from 'react-router-dom';
 
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
@@ -19,18 +18,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 function Navbar(props){
 
 	const [showMenu, setShowMenu]=useState(false);
-	const [logo, setLogo]=useState('')
-
-	useEffect(()=>{
-		const url = localStorage.getItem('url');
-		axios.get(url+'logo/').then(res=>{
-			setLogo(res.data[0].Logo);
-		})
-	},[])
 
 	return(
 		<div className='NavbarDiv'>
-			<img className='logo' src={logo} alt='logo'/>
+			<img className='logo' src="./img/logo.png" alt='logo'/>
 			{props.login?<div className='msg-menu-div'>
 
 				<Tooltip title='Search'>
@@ -63,6 +54,11 @@ function Navbar(props){
 				</Tooltip>}
 				
 			</div>:<div className='msg-menu-div'>
+				<Tooltip title='Search'>
+					<SearchIcon onClick={props.onSearchClick} 
+					style={{marginTop:'12px'}}
+					className='nav-icon'/>
+				</Tooltip>
 				<Link to='/login'><button>LOGIN</button></Link>
 				<Link to='/signup'><button>SIGNUP</button></Link>
 			</div>}

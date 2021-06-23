@@ -4,8 +4,6 @@ import {Link} from 'react-router-dom';
 
 function SiteIntro(props){
 
-	const [logo, setLogo] = useState('');
-
 	let mainHead = useRef(null);
 	let mainHeadDes = useRef(null);
 	let head1 = useRef(null);
@@ -155,11 +153,6 @@ function SiteIntro(props){
 				rightButton.current.style.transform='scale(1)';
 			}
 		});
-		
-		const url = localStorage.getItem('url');
-		axios.get(url+'logo/').then(res=>{
-			setLogo(res.data[0].Logo);
-		});
 	},[]);
 	
 	return(
@@ -173,7 +166,7 @@ function SiteIntro(props){
 				<div className='breakpoint'></div>
 				
 				<div className='img-div' ref={mainHead}>
-					<img className='logo' src={logo} alt='logo'/>
+					<img className='logo' src="./img/logo.png" alt='logo'/>
 				</div>
 				<h2 className='head-des' ref={mainHeadDes}>Our First renting social media</h2>
 

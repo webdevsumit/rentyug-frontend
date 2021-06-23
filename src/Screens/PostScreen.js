@@ -12,6 +12,10 @@ function PostScreen(){
 	const [commentWord, setCommentWord] = useState('');
 	const [replyWord, setReplyWord] = useState('');
 	const [uploading, setUploading] = useState(false);
+	const [loadingMore, setLoadingMore] = useState(false);
+
+	const [contentLoaded, setContentLoaded] = useState(0);
+	const [allLoaded, setAllLoaded] = useState(false);
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
@@ -24,9 +28,31 @@ function PostScreen(){
 			}
 		}).then(res=>{
 			setData(res.data.data);
+			setContentLoaded(10);
 		})
 		}
 	},[]);
+
+	const morePosts=()=>{
+		setLoadingMore(true);
+		const url = localStorage.getItem('url');
+		axios.post(url+'morePosts/',{
+			'Username' : localStorage.getItem('user223'),
+			'data_count' : contentLoaded
+		},{
+			headers : {
+				'Authorization': `Token ${localStorage.getItem('token')}`
+			}
+		}).then(res=>{
+			const data = res.data.data;
+			if(data.length===0) setAllLoaded(true);
+			setData(val=>[...val,...data]);
+			setContentLoaded(val=>val+10);
+			setLoadingMore(false);
+		}).catch(err=>{
+			setLoadingMore(false);
+		});
+	}
 
 	const commentIt=(postId)=>{
 		if (commentWord==='') alert('Please write something!');
@@ -263,6 +289,7 @@ function PostScreen(){
 					
 				</div>)}
 			</div>)}
+			{loadingMore?<div>loading...</div>:!allLoaded && <button onClick={morePosts}>load more</button>}
 		</div>:<em>{localStorage.getItem('user223')?<h1 className="loader">
 									<span>{localStorage.getItem('user223')},</span>
 									<span>we</span>
@@ -277,3 +304,4 @@ function PostScreen(){
 	</div>)
 }
 export default PostScreen;
+
