@@ -1,28 +1,28 @@
-import React,{Component} from 'react';
+import React,{useState, useEffect} from 'react';
 import ServiceCard from '../Components/ServiceCard';
 import axios from 'axios';
 
 
-class SearchScreen extends Component{
-	state={
-		'data':false,
-	}
-
-	componentDidMount(){
-		const url = localStorage.getItem('url');
-		axios.post(url+'search/',{'searchName':this.props.Name,'Username':localStorage.getItem('user223')})
-		.then(res=>{
-			this.setState({'data':res.data.data});
-		})
-	}
+function SearchScreen(props){
 	
-	render(){
+	const [data, setData] = useState('');
+	console.log(props.Name);
+	useEffect(()=>{
+		console.log(props.Name);
+		const url = localStorage.getItem('url');
+		axios.post(url+'search/',{'searchName':props.Name,'Username':localStorage.getItem('user223')})
+		.then(res=>{
+			setData(res.data.data);
+		})
+	},[]);
+	
 		return(
 			<React.Fragment>
-			{this.state.data?<div className='SearchScreen'>
-				<h6>Results for {this.props.Name}</h6>
+			{data?<div className='SearchScreen'>
+				<h6>Results for {props.Name}</h6>
 				<div>
-				{this.state.data.map(d=>{return(
+					{console.log(props.Name)}
+				{data.map(d=>{return(
 					<div key={d.id}>
 						<ServiceCard 
 						id={d.id}
@@ -33,7 +33,7 @@ class SearchScreen extends Component{
 						Rating={d.Rating}
 						OpenTime={d.OpenTime}
 						closeTime={d.closeTime}
-						handleOpenService={()=>this.props.handleOpenService(d.id)}
+						handleOpenService={()=>props.handleOpenService(d.id)}
 						VStatus = {d.VStatus}
 						RentalStatus = {d.RentalStatus}
 						/>
@@ -41,7 +41,7 @@ class SearchScreen extends Component{
 				)})}
 				</div>
 				<div className='breakpoint'></div>
-				<h4>{this.state.data.length===0 && 'No results!'}</h4>
+				<h4>{data.length===0 && 'No results!'}</h4>
 				
 			</div>:<h1 className="loader">
 										<span>{localStorage.getItem('user223')?
@@ -56,7 +56,7 @@ class SearchScreen extends Component{
 								</h1>}
 		</React.Fragment>
 		);
-	}
+	
 }
 
 export default SearchScreen;
