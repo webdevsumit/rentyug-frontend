@@ -100,10 +100,9 @@ function Navbar(props){
 					<li><a href='https://www.facebook.com/sumit.dhakad.7587'>Facebook</a></li>
 					<li><a href='sms:+91 7999004229'>Give feedback</a></li>
 				</ul>
-				<Link to='/'><button onClick={()=>{props.handleLogout(); dispatch(setIsMenu(false))}}>Logout</button></Link>
-				<Link to='/about'><button onClick={()=>{dispatch(setIsMenu(false))}}>About us</button></Link>
-				<h6 className='f-cursive c-name'>BY</h6>
-				<h6 className='f-cursive'>ASSOCIATION YUG</h6>
+				<Link to='/about'><button onClick={()=>{dispatch(setIsMenu(false))}}>About us</button></Link><br/>
+				<Link to='/'><button onClick={()=>{props.handleLogout(); dispatch(setIsMenu(false))}}>Logout</button></Link><br/>
+				
 			</div>:''}
 		</div>	
 	);

@@ -7,6 +7,13 @@
 	color:black;
 }
 
+.map-container {
+	width: 100%;
+	height: 50vh;
+  }
+
+ 
+
 .VStatus{
 	color:orange !important;
 	border:1px solid orange;
@@ -404,7 +411,6 @@ em{
 	position:fixed;
 	top:40px;
 	right:0;
-	z-index:1;
 	height:70vh;
 	overflow:scroll;
 	padding:10px;
@@ -415,6 +421,7 @@ em{
 	background:rgba(255,255,255,0.9);
 	border:1px solid #ddd;
 	border-radius:10px;
+	z-index:100;
 }
 
 .nav-service-catagory-card{
