@@ -14,12 +14,15 @@ import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
 import ContactPhoneRoundedIcon from '@material-ui/icons/ContactPhoneRounded';
 
 import Tooltip from '@material-ui/core/Tooltip';
+import { setIsCategory ,setIsMenu} from './../redux/isCategory'
+import {useSelector, useDispatch } from 'react-redux'
 
 function Navbar(props){
 
-	const [showMenu, setShowMenu]=useState(false);
+	const dispatch = useDispatch();
+	const { isCategory, isMenu } = useSelector(state=>state.isCategory);
 
-	return(
+	return( 
 		<div className='NavbarDiv'>
 			<img className='logo' src="./img/logo.png" alt='logo'/>
 			{props.login?<div className='msg-menu-div'>
@@ -29,7 +32,7 @@ function Navbar(props){
 				</Tooltip>
 				
 				<Tooltip title='Categories'>
-					<CategoryIcon onClick={()=>{props.onShowCategories(); setShowMenu(false)}} className='nav-icon'/>
+					<CategoryIcon onClick={()=>{dispatch(setIsCategory(!isCategory))}} className='nav-icon'/>
 				</Tooltip>
 				
 				<Link to='/posts'>
@@ -40,17 +43,17 @@ function Navbar(props){
 				
 				<Link to='/messages'>
 					<Tooltip title='Messages'>
-						<ForumIcon onClick={()=>setShowMenu(false)} className='nav-icon'/>
+						<ForumIcon onClick={()=>dispatch(setIsMenu(false))} className='nav-icon'/>
 					</Tooltip>
 				</Link>
 				
 				
 				
-				{showMenu?<Tooltip title='Close menu'>
-					<CloseRoundedIcon onClick={()=>{showMenu?setShowMenu(false):setShowMenu(true)}} className='nav-icon menu-icon'/>
+				{isMenu?<Tooltip title='Close menu'>
+					<CloseRoundedIcon onClick={()=>{dispatch(setIsMenu(!isMenu))}} className='nav-icon menu-icon'/>
 				</Tooltip>
 				:<Tooltip title='Menu'>
-					<MenuRoundedIcon onClick={()=>{showMenu?setShowMenu(false):setShowMenu(true); props.onShowCategories(false)}} className='nav-icon menu-icon'/>
+					<MenuRoundedIcon onClick={()=>{dispatch(setIsMenu(!isMenu))}} className='nav-icon menu-icon'/>
 				</Tooltip>}
 				
 			</div>:<div className='msg-menu-div'>
@@ -63,27 +66,27 @@ function Navbar(props){
 				<Link to='/signup'><button>SIGNUP</button></Link>
 			</div>}
 			
-			{showMenu?<div className='menu'>
+			{isMenu?<div className='menu'>
 				<Link to='/'>
-					<button onClick={()=>{setShowMenu(false)}}><HomeRoundedIcon style={{'font-size':'10px'}}/> Home</button>
+					<button onClick={()=>{dispatch(setIsMenu(false))}}><HomeRoundedIcon style={{'font-size':'10px'}}/> Home</button>
 				</Link><br/>
 				<Link to={'/account/'+localStorage.getItem('user223')} >
-					<button onClick={()=>{setShowMenu(false)}}>
+					<button onClick={()=>{dispatch(setIsMenu(false))}}>
 					<AccountBoxRoundedIcon style={{'font-size':'10px'}}/> Account</button>
 				</Link><br/>
 				<Link to='/posts'>
-					<button onClick={()=>{setShowMenu(false)}}>
+					<button onClick={()=>{dispatch(setIsMenu(false))}}>
 						<PhotoSizeSelectActualRoundedIcon style={{'font-size':'10px'}}/> Posts</button>
 				</Link><br/>
-				<button onClick={()=>{props.onShowCategories(); setShowMenu(false)}}>
+				<button onClick={()=>{dispatch(setIsCategory(!isCategory))}}>
 				<CategoryIcon style={{'font-size':'10px'}}/> Categories</button>
 				
 				<Link to='/myposts'>
-					<button onClick={()=>{setShowMenu(false)}}>
+					<button onClick={()=>{dispatch(setIsMenu(false))}}>
 					<PhotoSizeSelectActualRoundedIcon style={{'font-size':'10px'}}/> My posts</button>
 				</Link><br/>
 				<Link to='/mysavedservices/'>
-					<button onClick={()=>{setShowMenu(false)}}>
+					<button onClick={()=>{dispatch(setIsMenu(false))}}>
 					<SettingsApplicationsRoundedIcon style={{'font-size':'10px'}}/> My saved services</button>
 				</Link><br/>
 				<h6>CONNECT WITH US THROUGH</h6>
@@ -97,8 +100,8 @@ function Navbar(props){
 					<li><a href='https://www.facebook.com/sumit.dhakad.7587'>Facebook</a></li>
 					<li><a href='sms:+91 7999004229'>Give feedback</a></li>
 				</ul>
-				<Link to='/'><button onClick={()=>{props.handleLogout(); setShowMenu(false);}}>Logout</button></Link>
-				<Link to='/about'><button onClick={()=>{setShowMenu(false);}}>About us</button></Link>
+				<Link to='/'><button onClick={()=>{props.handleLogout(); dispatch(setIsMenu(false))}}>Logout</button></Link>
+				<Link to='/about'><button onClick={()=>{dispatch(setIsMenu(false))}}>About us</button></Link>
 				<h6 className='f-cursive c-name'>BY</h6>
 				<h6 className='f-cursive'>ASSOCIATION YUG</h6>
 			</div>:''}

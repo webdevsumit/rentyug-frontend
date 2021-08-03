@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{useEffect, useState} from 'react';
 import  ServiceCatagories from '../Components/ServiceCatagories';
 import FamousServices from '../Components/FamousServices';
 import YouMayLike from '../Components/YouMayLike';
@@ -8,19 +8,26 @@ import SiteIntro from '../Components/SiteIntro';
 import AddFeedback from '../Components/AddFeedback';
 import axios from 'axios';
 
-class SubMainScreen extends Component{
-	state={
-		
-	}
+import { useSelector} from 'react-redux'
 
-	componentDidMount(){
+
+
+function SubMainScreen(props){
+
+	const [data, setData ] = useState({});
+
+	const { isCategory } = useSelector(state=>state.isCategory);
+
+
+	useEffect(() => {
 		const url = localStorage.getItem('url');
 		axios.post(url+'mainPageData/', {'user':localStorage.getItem('user223')}).then(res=>{
-			this.setState(res.data);
-		});
-	}
+			setData(res.data);
+		})
+	}, []);
 
-	removeItem(id){
+
+	const removeItem=id=>{
 		const url = localStorage.getItem('url');
 		axios.post( url+'removeItem/', 
 		{
@@ -31,42 +38,44 @@ class SubMainScreen extends Component{
 				    'Authorization': `Token ${localStorage.getItem('token')}` 
 				  }
 		}).then(res=>{
-			this.setState({'InterestedService':res.data.InterestedService});
+			setData(()=>{
+				data.InterestedService=res.data.InterestedService;
+				return data;
+			});
 		});
 
-	}
+	};
 
-	
-	render(){
-		return(
-			<div>
-				{this.state.ServiceCatagories?<div>
+
+	return(<div>
+		{data?.ServiceCatagories?<div>
 					
-					{this.props.login?'':<SiteIntro openAboutUs={this.props.openAboutUs}/>}
+					{props.login?'':<SiteIntro openAboutUs={props.openAboutUs}/>}
 					
 					<ServiceCatagories
-					 showCategories = {this.props.showCategories}
-					 data={this.state.ServiceCatagories}
-					 handleChooseCatagory={this.props.handleChooseCatagory}
+					 showCategories = {isCategory}
+					 data={data.ServiceCatagories}
+					 handleChooseCatagory={props.handleChooseCatagory}
 					/>
 
 
-					{this.state.InterestedService.Services && <YouMayLike
-										removeItem={this.removeItem.bind(this)}
-										data={this.state.InterestedService.Services} 
-										handleOpenService={this.props.handleOpenService}/>}
+					{data.InterestedService.Services && <YouMayLike
+										removeItem={removeItem}
+										data={data.InterestedService.Services} 
+										handleOpenService={props.handleOpenService}/>
+					}
 
 					<h3>Services nearby you.</h3>
 					<em>our engineers are working on it.</em>
 					
-					<FamousServices data={this.state.Plans[0].PlanServices} 
-					handleOpenService={this.props.handleOpenService}/>
+					<FamousServices data={data.Plans[0].PlanServices} 
+					handleOpenService={props.handleOpenService}/>
 
 					
 					
 
-					<Feedbacks data={this.state.FrontPageFeedback}/>
-					{this.props.login?<AddFeedback/>:<em>You can give feedback after signup/login.</em>}
+					<Feedbacks data={data.FrontPageFeedback}/>
+					{props.login?<AddFeedback/>:<em>You can give feedback after signup/login.</em>}
 					<hr/>
 					<Footer/>
 					
@@ -80,10 +89,9 @@ class SubMainScreen extends Component{
 							<span>best</span>
 							<span>for</span>
 							<span>you</span>
-					</h1>}
-			</div>
-		)
-	}
+					</h1>
+				}
+	</div>)
 }
 
 export default SubMainScreen;

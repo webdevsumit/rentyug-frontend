@@ -31,7 +31,6 @@ class MainScreen extends Component{
 		'productId':'',
 		'provider':'',
 		'showSearchBar':false,
-		'showCategories' : false,
 	}
 
 	componentDidMount(){
@@ -83,12 +82,6 @@ class MainScreen extends Component{
 	afterAddingNewSms(user,provider){
 		this.setState({'screen':'AddNewSmsBox','mainPage':false,'provider':provider});
 	}
-
-	handleShowCategories(btnStatus = "auto"){
-		if (btnStatus==='auto') this.setState({'showCategories':!this.state.showCategories});
-		else this.setState({'showCategories':btnStatus});
-	}
-	
 	render(){
 		return(
 			<div className='MainScreen'>
@@ -96,7 +89,6 @@ class MainScreen extends Component{
 				
 				<Navbar 
 				 onSearchClick = {()=>this.setState({'showSearchBar':!this.state.showSearchBar})}
-				 onShowCategories = {this.handleShowCategories.bind(this)}
 				 handleLogout={this.handleLogout.bind(this)}
 				 login={this.state.login}
 				/>
@@ -118,7 +110,6 @@ class MainScreen extends Component{
 
 				<Route path='/' exact >
 					<SubMainScreen
-					showCategories = {this.state.showCategories}
 					openAboutUs={()=>this.setState({'screen':'AboutUs','mainPage':false})}
 					handleChooseCatagory={this.handleChooseCatagory.bind(this)}
 					handleOpenService={this.handleOpenService.bind(this)}
