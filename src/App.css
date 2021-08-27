@@ -12,7 +12,9 @@
 	height: 50vh;
   }
 
- 
+ .marker{
+	 background:transparent;
+ }
 
 .VStatus{
 	color:orange !important;

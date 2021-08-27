@@ -1,5 +1,6 @@
 import React,{ useState, useEffect} from 'react';
 import axios from 'axios';
+import MMap from '../Components/MMap';
 
 function AccountScreen(){
 
@@ -71,6 +72,8 @@ function AccountScreen(){
 	const [agreeTC, setAgreeTC] = useState(false);
 
 	const [uploading, setUploading] = useState(false);
+
+	const [latLng, setLatLng] = useState(null);
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
@@ -82,6 +85,7 @@ function AccountScreen(){
 		.then(res=>{
 			setData(res.data.profile);
 			setAccScreen(true);
+			setLatLng({lat:res.data.profile.lat,lng:res.data.profile.lng});
 			
 		})
 	},[]);
@@ -212,7 +216,25 @@ function AccountScreen(){
 			}
 		}
 
+		const updateLoc=()=>{
+			
 
+				const url = localStorage.getItem('url');
+				setUploading(true);
+				axios.post(url+'setLoc/',{
+						'username':localStorage.getItem('user223'),
+						'lat':latLng.lat,
+						'lng':latLng.lng
+				},{
+						  headers: {
+						    'Authorization': `Token ${localStorage.getItem('token')}` 
+						  }
+				})
+			.then(res=>{
+					alert(res.data.msg);
+					setUploading(false);
+				})
+		}
 
 	const updateMyNo=()=>{
 				if (myNo==='') alert('Cannot asign empty value.');
@@ -673,6 +695,10 @@ function AccountScreen(){
 					onClick={()=>{setSettingMyAddr(true)}}
 				>Update</button></h3>}
 				
+				{latLng && <>
+					<MMap latLng={latLng} setLatLng={d=>setLatLng(d)}  />
+					<button onClick={updateLoc} >Set Location</button>
+				</>}
 
 				{data.Service && <React.Fragment>
 				{settingMyNo?<h3>Mobile No. : <input type='tel' 
