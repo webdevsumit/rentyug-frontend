@@ -9,6 +9,7 @@ import AddFeedback from '../Components/AddFeedback';
 import axios from 'axios';
 
 import { useSelector} from 'react-redux'
+import NearbyServices from '../Components/NearbyServices';
 
 
 
@@ -65,8 +66,7 @@ function SubMainScreen(props){
 										handleOpenService={props.handleOpenService}/>
 					}
 
-					<h3>Services nearby you.</h3>
-					<em>our engineers are working on it.</em>
+					<NearbyServices/>
 					
 					<FamousServices data={data.Plans[0].PlanServices} 
 					handleOpenService={props.handleOpenService}/>

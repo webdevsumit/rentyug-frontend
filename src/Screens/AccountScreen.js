@@ -74,10 +74,15 @@ function AccountScreen(){
 	const [uploading, setUploading] = useState(false);
 
 	const [latLng, setLatLng] = useState(null);
+
+	const [serviceLatLng, setServiceLatLng] = useState(null);
+	const [serviceAddr, setServiceAddr] = useState('');
+	const [settingAddr, setSettingAddr] = useState(false);
+	
 	
 	useEffect(()=>{
 		const url = localStorage.getItem('url');
-		axios.post(url+'account/',{'username':localStorage.getItem('user223')},{
+		axios.post(url+'account/',{'username':localStorage.getItem('user223')},{ 
 				  headers: {
 				    'Authorization': `Token ${localStorage.getItem('token')}` 
 				  }
@@ -580,6 +585,37 @@ function AccountScreen(){
 	 	}
 	 }
 
+
+	 const updateServiceAddr=(serviceId)=>{
+		if(serviceLatLng==='' || serviceAddr===''){
+			alert('Address box should not be empty. Also select location.')
+		}else{
+			const url = localStorage.getItem('url');
+
+			setUploading(true);
+			axios.post(url+'updateServiceAddr/',{
+								'username':localStorage.getItem('user223'),
+								 'id':serviceId,
+								 'serviceId':serviceId,
+								 'lat':serviceLatLng.lat,
+								 'lng':serviceLatLng.lng,
+								 'Address':serviceAddr
+				},{
+						  headers: {
+							'Authorization': `Token ${localStorage.getItem('token')}` 
+						  }
+					})
+			.then(res=>{
+				setUploading(false);
+				setData(res.data.profile);
+				setServiceAddr('');
+				setServiceLatLng('');
+				})
+		}
+	}
+
+
+
 	 const addNewService=()=>{
 	 	if(newShopName==='' || newMainImage===null || newItemOpenTime==='' || newItemCloseTime==='' || newItemPriceType==='' || newItemCataId===''){
 	 		alert('All fields are required.');
@@ -846,6 +882,18 @@ function AccountScreen(){
 												setSettingPriceType(false);}}>Set</button>
 							</div>:<p>Rent : {d.PriceType}<button
 							onClick={()=>setSettingPriceType(true)}
+							>Update</button></p>}
+
+							{settingAddr? <div>
+								Address : <input type='text' 
+									onChange={e=>{setServiceAddr(e.target.value)}}/>
+									{serviceLatLng && <MMap latLng={serviceLatLng} setLatLng={d=>setServiceLatLng(d)}  />}
+									<button
+									onClick={()=>{updateServiceAddr(d.id); setSettingAddr(false);}}
+								>Set</button><br/>
+
+							</div>:<p>Address : {d.Address}<button
+							onClick={()=>{setSettingAddr(true); setServiceLatLng({'lat':d.lat,'lng':d.lng})}}
 							>Update</button></p>}
 							
 							<div className='breakpoint'></div>
