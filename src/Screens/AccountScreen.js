@@ -236,7 +236,6 @@ function AccountScreen(){
 						  }
 				})
 			.then(res=>{
-					alert(res.data.msg);
 					setUploading(false);
 				})
 		}
@@ -304,7 +303,7 @@ function AccountScreen(){
 	}
 
 	const changeMainImage=(id)=>{
-		if (mainImage===null) alert('Imagen not selected.');
+		if (mainImage===null) alert('Image not selected.');
 		else{
 			const url = localStorage.getItem('url');
 			var formData = new FormData();
@@ -359,7 +358,7 @@ function AccountScreen(){
 
 
 	const addNewImg=(id)=>{
-	    if (mainImage===null) alert('Imagen not selected.');
+	    if (mainImage===null) alert('Image not selected.');
 	    else{                             
 	        var formData = new FormData();                                        
 	        formData.append('id',id);                        

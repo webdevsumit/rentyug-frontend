@@ -67,7 +67,8 @@ function Description(props){
 			axios.post(url+'giveRating/',{
 					'user':user,
 					'productId':props.productId,
-					'rating':rating
+					'rating':rating,
+					'provider':profile.User.username
 			},{
 							headers: {
 								'Authorization': `Token ${localStorage.getItem('token')}` 
