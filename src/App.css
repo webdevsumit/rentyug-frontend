@@ -7,6 +7,20 @@
 	color:black;
 }
 
+*::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  *::-webkit-scrollbar-track {
+	background: transparent;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 255, 0.548); 
+	border-radius: 20px;
+	border: 3px solid transparent;
+  }
+
 .map-container {
 	width: 100%;
 	height: 50vh;
@@ -513,7 +527,7 @@ em{
 .FeedbackCard p{
 	font-size:12px;
 	letter-spacing:1.3px;
-	height:60px;
+	height:100px;
 	overflow:scroll;
 }
 

@@ -19,6 +19,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 
 import SearchIcon from '@material-ui/icons/Search';
+import RequestPage from './RequestPage';
 
 
 
@@ -36,8 +37,9 @@ class MainScreen extends Component{
 	componentDidMount(){
 		const user = localStorage.getItem('user223');
 
-		localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
+		//localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
 		//localStorage.setItem('url','http://127.0.0.1:8000/');
+		localStorage.setItem('url','https://rentyug-backend.live/');
 		
 		if((user===null) || (user==='')){
 			this.setState({'screen':'SubMainScreen','login':false});
@@ -138,6 +140,8 @@ class MainScreen extends Component{
 				<Route path='/posts' component={PostScreen}/>
 
 				<Route path='/mysavedservices' component={MySavedServices}/>
+
+				<Route path='/request-page' component={RequestPage}/>
 				
 
 				<Route path={'/search/'+this.state.toSearch}>

@@ -12,6 +12,7 @@ import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import SettingsApplicationsRoundedIcon from '@material-ui/icons/SettingsApplicationsRounded';
 import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
 import ContactPhoneRoundedIcon from '@material-ui/icons/ContactPhoneRounded';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
 import Tooltip from '@material-ui/core/Tooltip';
 import { setIsCategory ,setIsMenu} from './../redux/isCategory'
@@ -77,6 +78,10 @@ function Navbar(props){
 				<Link to='/posts'>
 					<button onClick={()=>{dispatch(setIsMenu(false))}}>
 						<PhotoSizeSelectActualRoundedIcon style={{'font-size':'10px'}}/> Posts</button>
+				</Link><br/>
+				<Link to='/request-page'>
+					<button onClick={()=>{dispatch(setIsMenu(false))}}>
+						<PlaylistAddIcon style={{'font-size':'10px'}}/> Requests</button>
 				</Link><br/>
 				<button onClick={()=>{dispatch(setIsCategory(!isCategory))}}>
 				<CategoryIcon style={{'font-size':'10px'}}/> Categories</button>
