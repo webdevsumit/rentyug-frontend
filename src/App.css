@@ -145,10 +145,11 @@ a:hover{
 	font-size:16px;
 	display:inline-block;
 	cursor:pointer;
-	color:white;
+	color:rgb(255, 255, 255);
 	background:transparent;
 	position:relative;
-	left:-10px;
+	left:0px;
+	top: -5px;
 	opacity:0.9;
 }
 
@@ -1189,5 +1190,18 @@ summary{
   animation-delay:0.90s;
 }
 
+
+
+.popup{
+	background-color: black;
+	color: rgb(255, 255, 255);
+	overflow: hidden;
+	padding: 20px;
+}
+
+.popup>*,.popup>*>*{
+	background-color: black;
+	color: rgb(255, 255, 255);
+}
 
 

@@ -24,7 +24,6 @@ function SubMainScreen(props){
 		const url = localStorage.getItem('url');
 		axios.post(url+'mainPageData/', {'user':localStorage.getItem('user223')}).then(res=>{
 			setData(res.data);
-			console.log(res.data.NearbyServices)
 		})
 	}, []);
 
@@ -67,7 +66,7 @@ function SubMainScreen(props){
 										handleOpenService={props.handleOpenService}/>
 					}
 
-					<NearbyServices/>
+					{data.NearbyServices.length && <NearbyServices data={data.NearbyServices}/>}
 					
 					<FamousServices data={data.Plans[0].PlanServices} 
 					handleOpenService={props.handleOpenService}/>

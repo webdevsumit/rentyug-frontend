@@ -25,7 +25,7 @@ function Navbar(props){
 
 	return( 
 		<div className='NavbarDiv'>
-			<img className='logo' src="./img/logo.png" alt='logo'/>
+			<img className='logo' src="/img/logo.png" alt='logo' loading='lazy'/>
 			{props.login?<div className='msg-menu-div'>
 
 				<Tooltip title='Search'>

@@ -38,7 +38,7 @@ class MainScreen extends Component{
 		const user = localStorage.getItem('user223');
 
 		//localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
-		//localStorage.setItem('url','http://127.0.0.1:8000/');
+		//localStorage.setItem('url','http://127.0.0.1/');
 		localStorage.setItem('url','https://rentyug-backend.live/');
 		
 		if((user===null) || (user==='')){
@@ -99,12 +99,12 @@ class MainScreen extends Component{
 				{this.state.showSearchBar && <div className='searchBarDiv'>
 					<input 
 						className='searchBar'
-						type='text' 
+						type='search' 
 						value={this.state.toSearch}
 						onChange={e=>this.setState({'toSearch':e.target.value})}
-					/><em className='search-em' onClick={()=>this.setState({'showSearchBar':false})}>x</em>
+					/><b className='search-em' onClick={()=>this.setState({'showSearchBar':false})}>-</b>
 					<Link to={'/search/'+this.state.toSearch}>
-						<SearchIcon className='nav-icon'
+						<SearchIcon className='nav-icon' type='submit'
 							onClick={this.handleSearch.bind(this)}
 						/>
 					</Link>
