@@ -20,6 +20,7 @@ function AboutUs(){
 			<p>Ajay Patel</p>
 			<p>Aniket Verma</p>
 			<p>Sumit Dhakad</p>
+			<p>Amarjeet Patidar</p>
 		</div>
 	)
 }

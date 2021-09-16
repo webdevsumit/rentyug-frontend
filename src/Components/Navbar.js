@@ -81,7 +81,7 @@ function Navbar(props){
 				</Link><br/>
 				<Link to='/request-page'>
 					<button onClick={()=>{dispatch(setIsMenu(false))}}>
-						<PlaylistAddIcon style={{'font-size':'10px'}}/> Requests</button>
+						<PlaylistAddIcon style={{'font-size':'10px'}}/> Request Page</button>
 				</Link><br/>
 				<button onClick={()=>{dispatch(setIsCategory(!isCategory))}}>
 				<CategoryIcon style={{'font-size':'10px'}}/> Categories</button>

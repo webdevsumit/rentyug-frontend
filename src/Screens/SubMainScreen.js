@@ -60,21 +60,21 @@ function SubMainScreen(props){
 					/>
 
 
-					{data.InterestedService.Services && <YouMayLike
+					{data?.InterestedService?.Services && <YouMayLike
 										removeItem={removeItem}
-										data={data.InterestedService.Services} 
+										data={data?.InterestedService?.Services} 
 										handleOpenService={props.handleOpenService}/>
 					}
 
-					{data.NearbyServices.length && <NearbyServices data={data.NearbyServices}/>}
+					{data?.NearbyServices.length && <NearbyServices data={data.NearbyServices}/>}
 					
-					<FamousServices data={data.Plans[0].PlanServices} 
+					<FamousServices data={data?.Plans[0].PlanServices} 
 					handleOpenService={props.handleOpenService}/>
 
 					
 					
 
-					<Feedbacks data={data.FrontPageFeedback}/>
+					<Feedbacks data={data?.FrontPageFeedback}/>
 					{props.login?<AddFeedback/>:<em>You can give feedback after signup/login.</em>}
 					<hr/>
 					<Footer/>

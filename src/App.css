@@ -5,6 +5,7 @@
 	background-color:#ffffff;
 	scroll-behavior:smooth;
 	color:black;
+	font-family: sans-serif;
 }
 
 *::-webkit-scrollbar {
