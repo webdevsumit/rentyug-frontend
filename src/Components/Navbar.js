@@ -100,9 +100,9 @@ function Navbar(props){
 						<EmailRoundedIcon style={{'font-size':'20px'}}/></a>
 					<a href='tel:+91 7999004229'>
 						<ContactPhoneRoundedIcon style={{'font-size':'20px'}}/></a></li>
-					<li><a href='https://www.linkedin.com/company/rentyug/'>Linkedin</a></li>
-					<li><a href='https://www.instagram.com/RentYug/'>Instagram</a></li>
-					<li><a href='https://www.facebook.com/RentYug/'>Facebook</a></li>
+					<li><a target='blank' href='https://www.linkedin.com/company/rentyug/'>Linkedin</a></li>
+					<li><a target='blank' href='https://www.instagram.com/RentYug/'>Instagram</a></li>
+					<li><a target='blank' href='https://www.facebook.com/RentYug/'>Facebook</a></li>
 					<li><a href='sms:+91 7999004229'>Give feedback</a></li>
 				</ul>
 				<Link to='/about'><button onClick={()=>{dispatch(setIsMenu(false))}}>About us</button></Link><br/>

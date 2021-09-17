@@ -1025,7 +1025,7 @@ function AccountScreen(){
 
 							
 							
-						</div>:<button onClick={()=>setReadTC(!readTC)}>Read T&C </button>}
+						</div>:<button onClick={()=>setReadTC(!readTC)}>Read 8 points to keep in mind. </button>}
 						
 						<input type='checkbox' onChange={()=>setAgreeTC(!agreeTC)}/>
 						<label>I agree</label>

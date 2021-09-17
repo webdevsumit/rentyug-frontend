@@ -771,16 +771,40 @@ textarea, input{
 	margin:20px;
 	display:flex;
 	flex-direction:column;
+	justify-content: center;
+	align-items: center;
 }
 
 .SignupScreen input{
 	margin:20px 50px;
-	font-size:12px;
+	font-size:14px;
 	outline:none;
 	padding:4px 10px;
 	text-align:center;
-	opacity:0.8;
+	opacity:1;
+	max-width: 500px;
+	width: 100%;
+	border-bottom: 1px solid blueviolet;
+	box-shadow: 0.2px 0.2px 1px rgb(43, 89, 173);
+	padding-top: 20px;
 }
+
+.just-signup input, .just-signup button,.just-signup .signup-map,.just-signup textarea{
+	transform: translateY(-220px);
+}
+
+.SignupScreen input[type=file]{
+	position: relative;
+	transform: translateY(-220px);
+	outline: none;
+	display: block;
+	width: 200px;
+	height: 200px;
+	cursor: pointer;
+	border-radius: 50%;
+	opacity: 0;
+}
+
 
 .SignupScreen button{
 	width:fit-content;
@@ -789,9 +813,9 @@ textarea, input{
 }
 
 .SignupScreen .signup-btn{
-	width:80%;
 	margin:10px 10%;
-	font-size:18px;;
+	font-size:18px;
+	font-family: fantasy;
 }
 
 .SignupScreen textarea{

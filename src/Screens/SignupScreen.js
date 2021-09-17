@@ -66,7 +66,7 @@ function SignupScreen(props){
 	if (redirect) return <Redirect to='/'/>;
 	
 	return(
-		<div className='SignupScreen'>
+		<div className='SignupScreen just-signup'>
 
 			{uploading && <div className='uploading'>
 											
@@ -123,11 +123,11 @@ function SignupScreen(props){
 				pattern='[0-9]{2} [0-9]{10}'
 			/>
 
-			<div>
+			<div className='signup-map'>
 				<MMap latLng={latLng} setLatLng={d=>setLatLng(d)} />
 			</div>
 
-			<textarea rows='7'
+			<textarea rows='7' cols='40'
 				value={addrs} onChange={e=>{setAddrs(e.target.value)}}
 				placeholder={'Enter full address*'} required
 			></textarea>
