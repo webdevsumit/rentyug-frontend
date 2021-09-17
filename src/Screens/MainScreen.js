@@ -39,8 +39,8 @@ class MainScreen extends Component{
 
 		//localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
 		//localStorage.setItem('url','http://127.0.0.1/');
-		localStorage.setItem('url','http://127.0.0.1:8000/');
-		//localStorage.setItem('url','https://rentyug-backend.live/');
+		//localStorage.setItem('url','http://127.0.0.1:8000/');
+		localStorage.setItem('url','https://rentyug-backend.live/');
 		
 		if((user===null) || (user==='')){
 			this.setState({'screen':'SubMainScreen','login':false});
