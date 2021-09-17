@@ -124,6 +124,7 @@ function SignupScreen(props){
 			/>
 
 			<div className='signup-map'>
+				<em>Add your exact location so we can show you perfect NEARBY services</em>
 				<MMap latLng={latLng} setLatLng={d=>setLatLng(d)} />
 			</div>
 

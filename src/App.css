@@ -793,6 +793,10 @@ textarea, input{
 	transform: translateY(-220px);
 }
 
+.signup-map>*{
+	width: 100%;
+}
+
 .SignupScreen input[type=file]{
 	position: relative;
 	transform: translateY(-220px);
