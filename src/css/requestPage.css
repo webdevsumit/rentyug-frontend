@@ -20,6 +20,7 @@
     border-radius: 10px;
     font-family: monospace;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .request-card:hover{
