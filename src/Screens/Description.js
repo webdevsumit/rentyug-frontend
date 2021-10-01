@@ -1,6 +1,7 @@
 import React,{ useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import ShowError from '../Components/ShowError';
 
 function Description(props){
 
@@ -11,7 +12,10 @@ function Description(props){
 	
 	const [rating, setRating] = useState(25);
 
-	const [feed, addFeed] = useState('')
+	const [feed, addFeed] = useState('');
+
+	const [errorMessage, setErrorMessage] = useState('');
+	const [isError, setIsError] = useState(false);
 
 	useEffect(()=>{
 	
@@ -40,9 +44,13 @@ function Description(props){
 
 	const addNewSmsBox=(provider)=>{
 		const user = localStorage.getItem('user223');
-		if(user===provider) alert('You cannot send message to yourself.');
-		else if(user===null) alert('Please login or signup.')
-		else{
+		if(user===provider){
+			setIsError(true);
+			setErrorMessage('You cannot send message to yourself.');
+		}else if(user===null){
+			setIsError(true);
+			setErrorMessage('Please signup or login.');
+		}else{
 			const url = localStorage.getItem('url');
 			axios.post(url+'addNewSmsBox/',{
 				'user':user,
@@ -61,8 +69,10 @@ function Description(props){
 
 	const giveRating=()=>{
 		const user = localStorage.getItem('user223')
-		if(user===null) alert('Please signup or login.');
-		else{
+		if(user===null){
+			setIsError(true);
+			setErrorMessage('Please signup or login.');
+		}else{
 			const url = localStorage.getItem('url');
 			axios.post(url+'giveRating/',{
 					'user':user,
@@ -75,7 +85,8 @@ function Description(props){
 							}
 						}).then(res=>{
 			if(res.data.msg){
-				alert(res.data.msg);
+				setIsError(true);
+				setErrorMessage(res.data.msg);
 			}else{
 				setData(res.data.data);
 				setProfile(res.data.providerDetail);
@@ -88,9 +99,13 @@ function Description(props){
 
 	const giveFeed=()=>{
 		const user = localStorage.getItem('user223')
-		if (feed==='') alert('Feedback should not be empty.');
-		else if(user===null) alert('Please signup or login.');
-		else{
+		if (feed===''){
+			setIsError(true);
+			setErrorMessage('Feedback should not be empty.');
+		}else if(user===null){
+			setIsError(true);
+			setErrorMessage('Please signup or login.');
+		}else{
 			const url = localStorage.getItem('url');
 			axios.post(url+'addServiceFeed/',{
 							'user':user,
@@ -109,6 +124,7 @@ function Description(props){
 	}
 	return(
 		<div className='Description'>
+			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
 			<h1>Details</h1>
 			{data?<div>
 				<h6>Rating : {data.Rating}</h6>
@@ -153,8 +169,7 @@ function Description(props){
 					<p><em>If you would get something wrong from provider please contact
 						customer care instantly to remove verified tag. 
 						This will help us to give better services to you.</em></p>
-					<a href={'tel:'+profile.MobileNo}><button>Call</button></a>
-					<a href={'sms:'+profile.MobileNo}><button>Direct message</button></a>
+					<a href={'tel:'+profile.MobileNo}><button>Rent Now</button></a>
 					<Link to='/messages'><button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button></Link>
 				</div>:''}
 

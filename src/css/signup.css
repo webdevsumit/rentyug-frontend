@@ -1,0 +1,40 @@
+.main-container{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.295);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.signup-card{
+    width: 100%;
+    max-width: 400px;
+    max-height: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup-input{
+    width: 100%;
+}
+
+.signup-input>input{
+    margin: 5px auto;
+    flex: 1;
+}
+
+.show-btn{
+    position: absolute;
+}
+
+

@@ -1,72 +1,67 @@
-import React,{ useState, useEffect, useRef } from 'react';
+import React,{ useState } from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
-import MMap from '../Components/MMap';
+import {Link, Redirect} from 'react-router-dom';
+import ShowError from '../Components/ShowError';
+import "./../css/signup.css";
 
 
 function SignupScreen(props){
 
-	const [latLng, setLatLng] = useState({lat:0,lng:0});
-
 	const [username, setUsername]     = useState('');
-	const [firstname, setFirstname]   = useState('');
-	const [lastname, setLastname]     = useState('');
 	const [email, setEmail]           = useState('');
 	const [password1, setPassword1]   = useState('');
 	const [password2, setPassword2]   = useState('');
-	const [moNo, setMoNo]   		  = useState('');
-	const [addrs, setAddrs]   		  = useState('');
-	const [image, setImage]   		  = useState(null);
 
 	const [hidePass1, setHidePass1]   = useState(true);
 	const [hidePass2, setHidePass2]   = useState(true);
 	
 	const [redirect, setRedirect] = useState(null);
 	const [uploading, setUploading] = useState(false);
+
+	const [errorMessage, setErrorMessage] = useState('');
+	const [isError, setIsError] = useState(false);
 	
-	const handleSignup=(as)=>{
+	const handleSignup=(e)=>{
+		e.preventDefault();
 		if(password1 !== password2){
-			alert('Passwords are not matching.');
+			setErrorMessage('Passwords are not matching.');
+			setIsError(true);
 		}else if(username==='' || password1==='' || email===''){
-			alert('* fields are required.');
+			setErrorMessage('Email, Username and Password fields are required.');
+			setIsError(true);
 		}else{
 				let formData2 = new FormData();
 				formData2.append('username',username);
-				formData2.append('first_name',firstname);
-				formData2.append('last_name',lastname);
 				formData2.append('email',email);
 				formData2.append('password',password1);
-				formData2.append('Address',addrs);
-				formData2.append('MobileNo',moNo);
-				formData2.append('image',image);
-
-				formData2.append('lat',latLng.lat);
-				formData2.append('lng',latLng.lng);
-
 				const url = localStorage.getItem('url');
 
 				setUploading(true);
 				axios.post(url+'signupAsProvider/',formData2).then(res=>{
 					setUploading(false);
 					if(res.data.error){
-						alert(res.data.error)
+						setErrorMessage(res.data.error)
+						setIsError(true);
 					}else{
 						localStorage.setItem('user223',username);
 						localStorage.setItem('token',res.data.token);
 						props.afterSignup();
-						setRedirect('redirect');
+						setRedirect(username);
 					}
 				}).catch(err=>{
-					alert('Please provide valid details.');
+					setErrorMessage('Please provide valid details.');
+					setIsError(true);
 					setUploading(false);
 				})
 		}
 	}
 
-	if (redirect) return <Redirect to='/'/>;
+	if (redirect) return <Redirect to={'/account/'+redirect}/>;
 	
 	return(
-		<div className='SignupScreen just-signup'>
+		<div className='main-container'>
+
+			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
 
 			{uploading && <div className='uploading'>
 											
@@ -79,66 +74,51 @@ function SignupScreen(props){
 				<span className='loading-bars'></span>
 										
 			</div>}
-
-			<img className='profileImg'
-			src={image?URL.createObjectURL(image):''} alt='profile'/>
 			
-			<input type='file' accept='image/*' 
-			onChange={e=>{setImage(e.target.files[0]); console.log(image)}}/>
-
-			
-			<input type='text' value={username} 
-				onChange={e=>{setUsername(e.target.value)}}
-				placeholder='Username*' required
-			/>
-			<input type='text' value={firstname} 
-				onChange={e=>{setFirstname(e.target.value)}}
-				placeholder='Firstname'
-			/>
-			<input type='text' value={lastname} 
-				onChange={e=>{setLastname(e.target.value)}}
-				placeholder='Lastname'
-			/>
-			<input type='email' value={email} 
-				onChange={e=>{setEmail(e.target.value)}}
-				placeholder='Email*' required
-			/>
-			
-			<input type={hidePass1?'password':'text'} 
-				value={password1} onChange={e=>{setPassword1(e.target.value)}}
-				placeholder='Password*' required
-			/>
-			<button onClick={()=>{setHidePass1(!hidePass1)}}>{hidePass1?'show':'hide'}</button>
-			
-			<input type={hidePass2?'password':'text'} 
-				value={password2} onChange={e=>{setPassword2(e.target.value)}}
-				placeholder='Confirm Password*' required
-			/>
-			<button onClick={()=>{setHidePass2(!hidePass2)}}>{hidePass2?'show':'hide'}</button>
-
-
-			<input type='tel'
-				value={moNo} onChange={e=>{setMoNo(e.target.value)}}
-				placeholder='Mobile no. eg +91 9876543210*' required
-				pattern='[0-9]{2} [0-9]{10}'
-			/>
-
-			<div className='signup-map'>
-				<em>Add your exact location so we can show you perfect NEARBY services</em>
-				<MMap latLng={latLng} setLatLng={d=>setLatLng(d)} />
-			</div>
-
-			<textarea rows='7' cols='40'
-				value={addrs} onChange={e=>{setAddrs(e.target.value)}}
-				placeholder={'Enter full address*'} required
-			></textarea>
-
-			<div>
+				<form className="signup-card">
 				
-				<button className='signup-btn' 
-					onClick={()=>{handleSignup('service-provider')}}
-				>Signup</button>
-			</div>
+				<div className="signup-input" >
+					<input type='text' value={username} 
+						onChange={e=>{setUsername(e.target.value)}}
+						placeholder='One word Username*' required
+					/>
+				</div>
+
+				<div className="signup-input" >
+					<input type='email' value={email} 
+						onChange={e=>{setEmail(e.target.value)}}
+						placeholder='Email*' required
+					/>
+				</div>
+				
+				<div className="signup-input" >
+					<input type={hidePass1?'password':'text'} 
+						value={password1} onChange={e=>{setPassword1(e.target.value)}}
+						placeholder='Password*' required
+					/>
+					<button type="button" className="show-btn" onClick={()=>{setHidePass1(!hidePass1)}}>{hidePass1?'show':'hide'}</button>
+				</div>
+				
+				<div className="signup-input" >
+					<input type={hidePass2?'password':'text'} 
+						value={password2} onChange={e=>{setPassword2(e.target.value)}}
+						placeholder='Confirm Password*' required
+					/>
+					<button type="button" className="show-btn" onClick={()=>{setHidePass2(!hidePass2)}}>{hidePass2?'show':'hide'}</button>
+				</div>
+
+				<div>
+					
+					<button className='signup-btn' type="submit"
+						onClick={handleSignup}
+					>Signup</button>
+				</div>
+
+				<h6>Already have an account?<Link to="/login">login</Link></h6>
+
+
+			</form>
+
 		</div>
 	);
 }

@@ -8,7 +8,7 @@ function ServiceCard(props){
 	return(
 		<div className='ServiceCatagoryCard ServiceCard'>
 		
-			<div onClick={props.handleOpenService}>
+			<div onClick={props.handleOpenService} className="shadow">
 				<h6><em>{props.Type}</em></h6>
 				<h6>Rating :  {props.Rating} <StarIcon style={{fill:'orange',fontSize:'14px',marginTop:'5px'}}/> </h6>
 				<Link to={'/service/'+props.id} style={{'background':'transparent'}}>

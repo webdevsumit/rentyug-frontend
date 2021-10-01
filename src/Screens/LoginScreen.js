@@ -1,6 +1,9 @@
 import React,{ useState } from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import ShowError from '../Components/ShowError';
+import "./../css/login.css";
+import { } from 'react-router-dom';
 
 
 function LoginScreen(props){
@@ -13,9 +16,14 @@ function LoginScreen(props){
 	const [redirect, setRedirect] = useState(null);
 	const [uploading, setUploading] = useState(false);
 
-	const handleLogin=()=>{
-		 if(username==='' || password===''){
-			alert('All fields are required.');
+	const [errorMessage, setErrorMessage] = useState('');
+	const [isError, setIsError] = useState(false);
+
+	const handleLogin=(e)=>{
+		e.preventDefault();
+		if(username==='' || password===''){
+			setErrorMessage('All fields are required.');
+			setIsError(true);
 		}else{
 			const url = localStorage.getItem('url');
 
@@ -34,7 +42,8 @@ function LoginScreen(props){
 					setRedirect('redirect');
 				}
 			}).catch(err=>{
-				alert('Please provide valid details.'+err);
+				setErrorMessage('Username or Password is not correct.');
+				setIsError(true);
 				setUploading(false);
 			})
 		}
@@ -43,7 +52,7 @@ function LoginScreen(props){
 	if (redirect) return <Redirect to='/'/>;
 	
 	return(
-		<div className='LoginScreen SignupScreen'>
+		<div className='main-container'>
 			{uploading && <div className='uploading'>
 								
 				<span className='loading-bars'></span>
@@ -55,21 +64,30 @@ function LoginScreen(props){
 				<span className='loading-bars'></span>
 							
 			</div>}
-			
-			<input type='text' value={username} 
-				onChange={e=>{setUsername(e.target.value)}}
-				placeholder='Username*' required
-			/>
+			<form className="login-card">
 
-			<input type={hidePass?'password':'text'} 
-				value={password} onChange={e=>{setPassword(e.target.value)}}
-				placeholder='Password*' required
-			/>
-			<button onClick={()=>{setHidePass(!hidePass)}}>{hidePass?'show':'hide'}</button>
-						
-			<button className='signup-btn' 
-				onClick={handleLogin}
-			>Login</button>
+				<div className="login-input">
+				<input type='text' value={username} 
+					onChange={e=>{setUsername(e.target.value)}}
+					placeholder='Username*' required
+				/>
+				</div>
+
+				<div className="login-input">
+					<input type={hidePass?'password':'text'} 
+						value={password} onChange={e=>{setPassword(e.target.value)}}
+						placeholder='Password*' required
+					/>
+					<button className="show-btn" type='button' onClick={()=>{setHidePass(!hidePass)}}>{hidePass?'show':'hide'}</button>
+				</div>
+
+				<div className="login-input">	
+					<button type="submit" className='login-btn' 
+						onClick={handleLogin}
+					>Login</button>
+				</div>
+				<h6>Do not have account yet?<Link to="/signup">signup</Link></h6>
+			</form>
 		</div>	
 	);
 }

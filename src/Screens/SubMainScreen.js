@@ -7,6 +7,7 @@ import Footer from '../Components/Footer';
 import SiteIntro from '../Components/SiteIntro';
 import AddFeedback from '../Components/AddFeedback';
 import axios from 'axios';
+import "./../css/submainscreen.css";
 
 import { useSelector} from 'react-redux'
 import NearbyServices from '../Components/NearbyServices';
@@ -51,7 +52,9 @@ function SubMainScreen(props){
 	return(<div>
 		{data?.ServiceCatagories?<div>
 					
-					{props.login?'':<SiteIntro openAboutUs={props.openAboutUs}/>}
+					{props.login?<>{data?.UnreadMsg && <h6 className="unread-messages">{data.UnreadMsg}</h6>}</>:<SiteIntro openAboutUs={props.openAboutUs}/>}
+
+
 					
 					<ServiceCatagories
 					 showCategories = {isCategory}
@@ -66,9 +69,9 @@ function SubMainScreen(props){
 										handleOpenService={props.handleOpenService}/>
 					}
 
-					{data?.NearbyServices.length && <NearbyServices data={data.NearbyServices}/>}
+					{data?.NearbyServices.length>0 && <NearbyServices data={data.NearbyServices}/>}
 					
-					<FamousServices data={data?.Plans[0].PlanServices} 
+					<FamousServices data={data.Plans[0].PlanServices?data.Plans[0].PlanServices:[]} 
 					handleOpenService={props.handleOpenService}/>
 
 					

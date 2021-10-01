@@ -1,4 +1,5 @@
 import React,{ useState, useEffect} from 'react';
+import ShowError from '../Components/ShowError';
 import axios from 'axios';
 import MMap from '../Components/MMap';
 
@@ -78,6 +79,13 @@ function AccountScreen(){
 	const [serviceLatLng, setServiceLatLng] = useState(null);
 	const [serviceAddr, setServiceAddr] = useState('');
 	const [settingAddr, setSettingAddr] = useState(false);
+
+	const [errorMessage, setErrorMessage] = useState('');
+	const [isError, setIsError] = useState(false);
+	
+	const [getNotification, setGetNotification] = useState(false);
+	const [settingGetNotification, setSettingGetNotification] = useState(false);
+	
 	
 	
 	useEffect(()=>{
@@ -91,7 +99,13 @@ function AccountScreen(){
 			setData(res.data.profile);
 			setAccScreen(true);
 			setLatLng({lat:res.data.profile.lat,lng:res.data.profile.lng});
-			
+			if(res.data.profile.User.first_name==='' || res.data.profile.User.last_name==='' || res.data.profile.Address==='' || res.data.profile.Address==='' || res.data.profile.MobileNo===''){
+				setIsError(true);
+				setErrorMessage("Please complete the profile. It will help us to provide the best for you.");
+			}else if(res.data.profile.lat===23.25 && res.data.profile.lng===77.41){
+				setIsError(true);
+				setErrorMessage("Settnig your location on map help us to show nearby services.");
+			}
 		})
 	},[]);
 
@@ -110,8 +124,10 @@ function AccountScreen(){
 
 	const updateFirstname=()=>{
 		const url = localStorage.getItem('url');
-		if (firstname==='') alert('Cannot asign empty value.');
-		else{
+		if (firstname===''){
+			setIsError(true);
+			setErrorMessage('Cannot asign empty value.');
+		}else{
 			setUploading(true);
 			axios.post(url+'setFirstname/',{
 					'username':localStorage.getItem('user223'),
@@ -131,7 +147,10 @@ function AccountScreen(){
 
 	const updatePassword=()=>{
 			const url = localStorage.getItem('url');
-			if (newPassword.length<8) alert('Password should be of minmum 8 characters with the combination of words and numbers.');
+			if (newPassword.length<8) {
+				setIsError(true);
+				setErrorMessage('Password should be of minmum 8 characters with the combination of words and numbers.');
+			}
 			else{
 				if(newPassword===newPassword2){
 					setUploading(true);
@@ -146,19 +165,26 @@ function AccountScreen(){
 						})
 					.then(res=>{
 						setUploading(true);
-						if(res.data.msg) alert('Wrong password.');
-						else{
+						if(res.data.msg){
+							setIsError(true);
+							setErrorMessage('Wrong password.');
+						}else{
 							setData(res.data.profile);
 							setNewPassword('');
 						}
 					})
-				}else alert('Password should be same.')
+				}else{
+					setIsError(true);
+					setErrorMessage('Password should be same.');
+				}
 			}
 		}
 
 	const updateLastname=()=>{
-			if (lastname==='') alert('Cannot asign empty value.');
-			else{
+			if (lastname===''){
+				setIsError(true);
+				setErrorMessage('Cannot asign empty value.');
+			}else{
 				const url = localStorage.getItem('url');
 				setUploading(true);
 				axios.post(url+'setLastname/',{
@@ -178,7 +204,10 @@ function AccountScreen(){
 	}
 	
 	const updateEmail=()=>{
-		if (email==='') alert('Cannot asign empty value.');
+		if (email===''){
+			setIsError(true);
+			setErrorMessage('Cannot asign empty value.');
+		}
 		else{
 			const url = localStorage.getItem('url');
 			setUploading(true);
@@ -191,18 +220,46 @@ function AccountScreen(){
 					  }
 			})
 		.then(res=>{
+				if (res.data.error){
+					setIsError(true);
+					setErrorMessage(res.data.error);
+				}else{
+					setData(res.data.profile);
+					console.log(res.data);
+				};
 				setUploading(false);
-				setData(res.data.profile);
 				setEmail('');
 			})
 		}
+		setSettingEmail(false);
+	}
+
+	const configEmail=()=>{
+			const url = localStorage.getItem('url');
+			setUploading(true);
+			axios.post(url+'configEmail/',{
+					'username':localStorage.getItem('user223'),
+			},{
+					  headers: {
+					    'Authorization': `Token ${localStorage.getItem('token')}` 
+					  }
+			})
+		.then(res=>{
+				if (res.data.message){
+					setIsError(true);
+					setErrorMessage(res.data.message);
+				};
+				setUploading(false);
+			})
 	}
 
 
 
 	const updateMyAddr=()=>{
-			if (myAddr==='') alert('Cannot asign empty value.');
-			else{
+			if (myAddr===''){
+				setIsError(true);
+				setErrorMessage('Cannot asign empty value.');
+			}else{
 				const url = localStorage.getItem('url');
 				setUploading(true);
 				axios.post(url+'setMyAddr/',{
@@ -241,8 +298,10 @@ function AccountScreen(){
 		}
 
 	const updateMyNo=()=>{
-				if (myNo==='') alert('Cannot asign empty value.');
-				else{
+				if (myNo===''){
+					setIsError(true);
+					setErrorMessage('Cannot asign empty value.');
+				}else{
 					const url = localStorage.getItem('url');
 					setUploading(true);
 					axios.post(url+'setMyNo/',{
@@ -262,8 +321,10 @@ function AccountScreen(){
 			}
 	
 	const updateShopName=(id)=>{
-			if (shopName==='') alert('Cannot asign empty value.');
-			else{
+			if (shopName===''){
+				setIsError(true);
+				setErrorMessage('Cannot asign empty value.');
+			}else{
 				const url = localStorage.getItem('url');
 				setUploading(true);
 				axios.post(url+'setShopName/',{
@@ -303,8 +364,10 @@ function AccountScreen(){
 	}
 
 	const changeMainImage=(id)=>{
-		if (mainImage===null) alert('Image not selected.');
-		else{
+		if (mainImage===null){
+			setIsError(true);
+			setErrorMessage('Image not selected.');
+		}else{
 			const url = localStorage.getItem('url');
 			var formData = new FormData();
 			formData.append('id',id);
@@ -327,8 +390,10 @@ function AccountScreen(){
 	}
 	
 	const changeImage=(id)=>{
-		if (mainImage===null && profile===null) alert('Image not selected.');
-		else{
+		if (mainImage===null && profile===null){
+			setIsError(true);
+			setErrorMessage('Image not selected.');
+		}else{
 			var formData = new FormData();
 			formData.append('id',id);
 			
@@ -358,8 +423,10 @@ function AccountScreen(){
 
 
 	const addNewImg=(id)=>{
-	    if (mainImage===null) alert('Image not selected.');
-	    else{                             
+	    if (mainImage===null){
+			setIsError(true);
+			setErrorMessage('Image not selected.');
+		}else{                             
 	        var formData = new FormData();                                        
 	        formData.append('id',id);                        
 	        formData.append('image',mainImage);         
@@ -382,8 +449,10 @@ function AccountScreen(){
 	 }
 
 	 const changeOpenTime=(id)=>{
-	 	if (openTime==='') alert('Cannot asign empty value.');
-	 	else{
+	 	if (openTime===''){
+			setIsError(true);
+			setErrorMessage('Cannot asign empty value.');
+		}else{
 	 		const url = localStorage.getItem('url');
 
 	 		setUploading(true);
@@ -405,8 +474,10 @@ function AccountScreen(){
 	 }
 
 	const changeCloseTime=(id)=>{
-	 	if (closeTime==='') alert('Cannot asign empty value.');
-	 	else{
+	 	if (closeTime===''){
+			setIsError(true);
+			setErrorMessage('Cannot asign empty value.');
+		}else{
 	 		const url = localStorage.getItem('url');
 
 	 		setUploading(true);
@@ -453,6 +524,26 @@ function AccountScreen(){
 	 	}
 	 }
 	
+	const changeGetNotification=()=>{
+	 		const url = localStorage.getItem('url');
+
+	 		setUploading(true);
+	 		axios.post(url+'setGetNotification/',{
+	 				'username':localStorage.getItem('user223'),
+	 				'getNotification':(getNotification===true)?true:false
+	 			},{
+	 					  headers: {
+	 					    'Authorization': `Token ${localStorage.getItem('token')}` 
+	 					  }
+	 			})
+	 		.then(res=>{
+	 			setUploading(false);
+	 			setData(res.data.profile);
+	 			setSettingGetNotification(false);
+				 setGetNotification(false);
+	 		})
+	 }
+	
 	
 	const changeNoOfItems=(id)=>{
 
@@ -478,8 +569,10 @@ function AccountScreen(){
 	 }
 	
 	const changePriceType=(id)=>{
-	 	if (priceType==='') alert('Cannot asign empty value.');
-	 	else{
+	 	if (priceType===''){
+			setIsError(true);
+			setErrorMessage('Cannot asign empty value.');
+		}else{
 	 		const url = localStorage.getItem('url');
 
 	 		setUploading(true);
@@ -537,8 +630,10 @@ function AccountScreen(){
 	 }
 	 
 	const addSearchName=(serviceId)=>{
-	 	if (searchName==='') alert('Cannot asign empty value.');
-	 	else{
+	 	if (searchName===''){
+			setIsError(true);
+			setErrorMessage('Cannot asign empty value.');
+		}else{
 	 		const url = localStorage.getItem('url');
 
 	 		setUploading(true);
@@ -562,8 +657,9 @@ function AccountScreen(){
 
 	 const updateDesc=(serviceId)=>{
 	 	if(desc===''){
-	 		alert('Description box should not be empty.')
-	 	}else{
+			setIsError(true);
+			setErrorMessage('Desciption box should not be empty.');
+		}else{
 	 		const url = localStorage.getItem('url');
 
 	 		setUploading(true);
@@ -587,7 +683,8 @@ function AccountScreen(){
 
 	 const updateServiceAddr=(serviceId)=>{
 		if(serviceLatLng==='' || serviceAddr===''){
-			alert('Address box should not be empty. Also select location.')
+			setIsError(true);
+			setErrorMessage('Address box should not be empty. Also select location.');
 		}else{
 			const url = localStorage.getItem('url');
 
@@ -617,9 +714,9 @@ function AccountScreen(){
 
 	 const addNewService=()=>{
 	 	if(newShopName==='' || newMainImage===null || newItemOpenTime==='' || newItemCloseTime==='' || newItemPriceType==='' || newItemCataId===''){
-	 		alert('All fields are required.');
-	 	}
-	 	else{
+			setIsError(true);
+			setErrorMessage('All fields are required.');
+		}else{
 	 		var formData = new FormData();
 	 		formData.append('ShopName',newShopName);
 	 		formData.append('MainImage',newMainImage);
@@ -653,6 +750,7 @@ function AccountScreen(){
 	
 	return(
 		<div className='AccountScreen'>
+			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
 			{uploading && <div className='uploading'>
 									
 					<span className='loading-bars'></span>
@@ -667,7 +765,7 @@ function AccountScreen(){
 				<h2 className='m-20'>Account</h2>
 				
 				<img className='profileImg' 
-				src={profile?URL.createObjectURL(profile):data.Image.Image} alt='Profile'/><br/>
+				src={profile?URL.createObjectURL(profile):data?.Image?.Image} alt='Profile'/><br/>
 				<input type='file'
 				onChange={(e)=>setProfile(e.target.files[0])}
 				accept='image/*'/>
@@ -696,12 +794,24 @@ function AccountScreen(){
 
 				{settingEmail?<h3>Email : <input type='text' 
 					onChange={e=>{setEmail(e.target.value)}}/><button
-						onClick={()=>{updateEmail(); setSettingEmail(false);}}
+						onClick={updateEmail}
 				>Set</button>
 				</h3>:<h3>
 				Email : {data.User.email}<button
 					onClick={()=>{setSettingEmail(true)}}
-				>Update</button></h3>}
+				>Update</button>
+					{data.emailConfirmed?<h6>Verified</h6>:<button onClick={configEmail}>Verify Now</button>}
+				</h3>}
+
+				{settingGetNotification?<div>
+								<p>Get Notifications (Typically on new <b>MESSAGES</b>) : </p>
+								<input type='checkbox'
+								onChange={e=>setGetNotification(e.target.checked)}
+								/><button onClick={()=>{changeGetNotification();
+												setSettingGetNotification(false);}}>Set</button>
+							</div>:<p>Get Notifications (Typically on new <b>MESSAGES</b>) : {data.emailNotification?<b>&#10003;</b>:<b>x</b>}<button
+							onClick={()=>setSettingGetNotification(true)}
+							>Update</button></p>}
 
 
 				{settingNewPassword?<React.Fragment><h3>Old password : <input type='text' 
@@ -1030,7 +1140,10 @@ function AccountScreen(){
 						<input type='checkbox' onChange={()=>setAgreeTC(!agreeTC)}/>
 						<label>I agree</label>
 
-						{agreeTC?<button onClick={addNewService}>Add</button>:<button onClick={()=>alert('Agree T&C')}>Add</button>}
+						{agreeTC?<button onClick={addNewService}>Add</button>:<button onClick={()=>{
+			setIsError(true);
+			setErrorMessage('Please read carefully and agree that terms and conditions.');
+		}}>Add</button>}
 						
 					</div>:<button onClick={()=>setCanAddNewItem(true)}>Add new service</button>}
 					

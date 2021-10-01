@@ -5,8 +5,8 @@ import ServiceCard from './ServiceCard';
 function FamousServices(props){
 	return(
 		<div className='ServiceCatagories FamousServices'>
-			<h3>Services by Supporters .</h3><em>#supporting</em>
-			{props.data.map(d=>{return(
+			<h3>Deal Of The Day</h3><em>get your best here.</em>
+			{props.data?.map(d=>{return(
 				<div key={d.id}>
 					<ServiceCard 
 					id={d.id}
