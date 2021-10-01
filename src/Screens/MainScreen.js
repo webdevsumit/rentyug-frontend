@@ -37,9 +37,8 @@ class MainScreen extends Component{
 	componentDidMount(){
 		const user = localStorage.getItem('user223');
 
-		//localStorage.setItem('url','https://sumit2232.pythonanywhere.com/');
-		//localStorage.setItem('url','http://127.0.0.1/');
-		localStorage.setItem('url','http://127.0.0.1:8000/');
+		localStorage.setItem('url','http://127.0.0.1/');
+		//localStorage.setItem('url','http://127.0.0.1:8000/');
 		//localStorage.setItem('url','https://rentyug-backend.live/');
 		
 		if((user===null) || (user==='')){

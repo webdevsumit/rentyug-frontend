@@ -164,7 +164,7 @@ function AccountScreen(){
 								  }
 						})
 					.then(res=>{
-						setUploading(true);
+						setUploading(false);
 						if(res.data.msg){
 							setIsError(true);
 							setErrorMessage('Wrong password.');
@@ -225,7 +225,6 @@ function AccountScreen(){
 					setErrorMessage(res.data.error);
 				}else{
 					setData(res.data.profile);
-					console.log(res.data);
 				};
 				setUploading(false);
 				setEmail('');
@@ -831,6 +830,18 @@ function AccountScreen(){
 				>Change Password</button>}
 
 
+				{data.Service && <React.Fragment>
+					{settingMyNo?<h3>Mobile No. : <input type='tel' 
+						onChange={e=>{setMyNo(e.target.value)}}/><button
+						onClick={()=>{updateMyNo(); setSettingMyNo(false);}}
+					>Set</button>
+					</h3>:<h3>
+					Mobile No. : {data.MobileNo}<button
+						onClick={()=>{setSettingMyNo(true)}}
+					>Update</button></h3>}
+				</React.Fragment>
+				}
+
 				{settingMyAddr?<h3>Address : <input type='text' 
 					onChange={e=>{setMyAddr(e.target.value)}}/><button
 					onClick={()=>{updateMyAddr(); setSettingMyAddr(false);}}
@@ -844,18 +855,6 @@ function AccountScreen(){
 					<MMap latLng={latLng} setLatLng={d=>setLatLng(d)}  />
 					<button onClick={updateLoc} >Set Location</button>
 				</>}
-
-				{data.Service && <React.Fragment>
-				{settingMyNo?<h3>Mobile No. : <input type='tel' 
-					onChange={e=>{setMyNo(e.target.value)}}/><button
-					onClick={()=>{updateMyNo(); setSettingMyNo(false);}}
-				>Set</button>
-				</h3>:<h3>
-				Mobile No. : {data.MobileNo}<button
-					onClick={()=>{setSettingMyNo(true)}}
-				>Update</button></h3>}
-				</React.Fragment>
-				}
 												
 								
 				{data.Service?<div>

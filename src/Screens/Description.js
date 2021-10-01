@@ -1,7 +1,8 @@
 import React,{ useState, useEffect} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import ShowError from '../Components/ShowError';
+import "./../css/description.css";
 
 function Description(props){
 
@@ -16,6 +17,13 @@ function Description(props){
 
 	const [errorMessage, setErrorMessage] = useState('');
 	const [isError, setIsError] = useState(false);
+	const [isGoodMessage, setIsGoodMessage] = useState(false);
+
+
+	const [showConfirmBox, setShowConfirmBox] = useState(false);
+	const [consumerContact, setConsumerContact] = useState('');
+
+	const [redirectToAccount, setRedirectToAccount] = useState(false);
 
 	useEffect(()=>{
 	
@@ -96,6 +104,52 @@ function Description(props){
 		}
 	}
 
+	const RentNow=()=>{
+		const user = localStorage.getItem('user223');
+		const url = localStorage.getItem('url');
+		axios.post(url+'rentnow/',{
+			'username':user,
+		},{
+				headers: {
+					'Authorization': `Token ${localStorage.getItem('token')}` 
+				}
+			}).then(res=>{
+			if (res.data.error){
+				setIsError(true);
+				setErrorMessage(res.data.error);
+				setTimeout(() => {
+					setRedirectToAccount(true);
+				}, 4000)
+			}else{
+				setShowConfirmBox(true);
+				setConsumerContact(res.data.ContactNo);
+			}
+		})
+	}
+
+	const handleConfirRentNow=(profileId, productId)=>{
+		setShowConfirmBox(false);
+		const user = localStorage.getItem('user223');
+		const url = localStorage.getItem('url');
+		axios.post(url+'rentnowconfirmed/',{
+			'username':user,
+			'profileId':profileId,
+			'productId':productId,
+			'consumerContact':consumerContact
+		},{
+				headers: {
+					'Authorization': `Token ${localStorage.getItem('token')}` 
+				}
+			}).then(res=>{
+			
+				setIsGoodMessage(true);
+				setErrorMessage(res.data.msg);
+				setTimeout(() => {
+					setIsGoodMessage(false);
+				}, 8000);
+		})
+	}
+
 
 	const giveFeed=()=>{
 		const user = localStorage.getItem('user223')
@@ -122,9 +176,13 @@ function Description(props){
 			})
 		}
 	}
+
+	if(redirectToAccount) return <Redirect to={"/account/"+localStorage.getItem('user223')}/>
 	return(
 		<div className='Description'>
 			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
+			{isGoodMessage && <ShowError message={errorMessage} goodMessage={true} onclose={()=>setIsGoodMessage(false)}/>}
+
 			<h1>Details</h1>
 			{data?<div>
 				<h6>Rating : {data.Rating}</h6>
@@ -169,7 +227,19 @@ function Description(props){
 					<p><em>If you would get something wrong from provider please contact
 						customer care instantly to remove verified tag. 
 						This will help us to give better services to you.</em></p>
-					<a href={'tel:'+profile.MobileNo}><button>Rent Now</button></a>
+						{showConfirmBox && <>
+							<div className="show-confirm-main-container">
+								<div className="confirm-card">
+									<h3>You will get a phone call in just 5 minutes.</h3>
+									<p>Please confirm your mobile number or change it.</p>
+									<form className="confirm-message">
+										<input type="text" value={consumerContact} onChange={e=>setConsumerContact(e.target.value)} />
+										<h5 className="confirm-button" onClick={()=>handleConfirRentNow(profile.id, data.id)}>Confirm</h5>
+									</form>
+								</div>
+							</div>
+						</>}
+					<button onClick={RentNow}>Rent Now</button>
 					<Link to='/messages'><button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button></Link>
 				</div>:''}
 

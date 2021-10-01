@@ -37,4 +37,10 @@
     position: absolute;
 }
 
+.forgot-pass{
+    font-size: 10px;
+    cursor: pointer;
+    color: gray;
+    
+}
 

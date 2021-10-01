@@ -6,7 +6,7 @@ function ShowError(props){
         <>
             <div className="main-container">
                 <div className="error-card">
-                    <h3>Oh, Something is not Good!</h3>
+                    {props.goodMessage?<h3>Good News</h3>:<h3>Oh, Something is not Good!</h3>}
                     <p className="error-message">
                         {props.message}
                     </p>
