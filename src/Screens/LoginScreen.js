@@ -86,6 +86,7 @@ function LoginScreen(props){
 	
 	return(
 		<div className='main-container'>
+			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
 			{uploading && <div className='uploading'>
 								
 				<span className='loading-bars'></span>
