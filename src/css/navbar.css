@@ -1,0 +1,73 @@
+
+.Navbar-div{
+	display:flex;
+	padding:4px;
+	box-shadow:1px 1px 5px 1px rgba(0, 0, 0, 0.466);
+	width:100%;
+	position:fixed;
+	z-index:1;
+	opacity:0.95;
+	align-items:center;
+    background: rgba(255, 255, 255, 0.904);
+}
+
+.nav-icon{
+	cursor:pointer;
+	transition:all ease 0.3s;
+	margin:auto 3px;
+}
+
+.menu-icon{
+	margin:auto 10px;
+}
+
+.nav-icon:hover{
+	border-bottom:1px solid white;
+}
+
+.Navhead{
+	font-size:25px;
+	margin:0 5px 0 5px;
+	font-family:cursive;
+	font-weight: 900;
+}
+
+.msg-menu-div{
+	display:flex;
+	position:absolute;
+	justify-content: center;
+	align-items: center;
+	right:0;
+	top:0;
+	height:100%;
+}
+
+.msg-menu-div>a{
+	margin: 0%;
+}
+
+
+.menu{
+	position:absolute;
+	top:40px;
+	right:0;
+	border:1px solid #ddd;
+	padding:10px;
+	border-radius:10px;
+	width:200px;
+	height:62vh;
+	overflow:scroll;
+	background-color: rgba(255, 255, 255, 0.39);
+}
+
+.menu ul{
+	list-style:none;
+}
+
+.menu ul li{
+	margin:10px 0;	
+}
+
+.MainScreen{
+	margin-top:0px;
+}

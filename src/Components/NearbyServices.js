@@ -1,7 +1,7 @@
 import React,{ useState, useEffect, useRef } from 'react';
 import ReactDOM from "react-dom";
-import EditLocationIcon from '@material-ui/icons/EditLocation';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
+import "./../css/services-nearby.css";
 
 import mapboxgl from 'mapbox-gl';
 
@@ -71,10 +71,10 @@ function NearbyServices(props){
           );
 		};
     return(
-        <div>
+        <div className="service-nearby-main-container">
             <h3>Services nearby you.</h3>
             <form>
-                <input type="search" placeholder="Search filter" value={filteredFor} onChange={e=>setFilteredFor(e.target.value.toUpperCase())}/>
+                <input className="search-nearby" type="search" placeholder="Search filter" value={filteredFor} onChange={e=>setFilteredFor(e.target.value.toUpperCase())}/>
                 <button type="submit" onClick={handleMapFiltered}>filter</button>
             </form>
             <em>Adjust zoom and click on icon to know more.</em>

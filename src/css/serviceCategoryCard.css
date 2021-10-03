@@ -1,0 +1,21 @@
+.service-catagory-card{
+    width: fit-content;
+    margin: 10px;
+    padding: 10px 30px;
+    border-radius: 10px;
+    transition: all ease 0.4s;
+}
+
+.service-catagory-card:hover{
+    padding: 15px 35px;
+}
+
+.service-catagory-card-img{
+    width: 100px;
+    height: 100px;
+}
+
+.category-name{
+    margin-top: 20px;
+    margin-bottom: 0;
+}

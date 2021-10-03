@@ -5,8 +5,13 @@ import PostMedia from './../Components/PostMedia';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SaveRoundedIcon from '@material-ui/icons/SaveRounded';
+import { useSelector } from "react-redux";
+import UploadingAnim from '../Components/UploadingAnim';
+import LoadingAnim from '../Components/LoadingAnim';
 
 function PostScreen(){
+
+	const { url } = useSelector(state=>state.isLogin);
 
 	const [data, setData] = useState(null);
 	const [commentWord, setCommentWord] = useState('');
@@ -18,7 +23,7 @@ function PostScreen(){
 	const [allLoaded, setAllLoaded] = useState(false);
 	
 	useEffect(()=>{
-		const url = localStorage.getItem('url');
+		
 		if (localStorage.getItem('user223')){
 		axios.post(url+'posts/',{
 			'Username':localStorage.getItem('user223')
@@ -35,7 +40,7 @@ function PostScreen(){
 
 	const morePosts=()=>{
 		setLoadingMore(true);
-		const url = localStorage.getItem('url');
+		
 		axios.post(url+'morePosts/',{
 			'Username' : localStorage.getItem('user223'),
 			'data_count' : contentLoaded
@@ -57,7 +62,7 @@ function PostScreen(){
 	const commentIt=(postId)=>{
 		if (commentWord==='') alert('Please write something!');
 		else{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'addPostComment/',{
@@ -78,7 +83,7 @@ function PostScreen(){
 	}
 
 	const removeComment=(commentId)=>{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'removePostComment/',{
@@ -100,7 +105,7 @@ function PostScreen(){
 	const replyIt=(commentId)=>{
 		if (replyWord==='') alert('Please write something!');
 		else{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'addPostCommentReply/',{
@@ -121,7 +126,7 @@ function PostScreen(){
 	}
 
 	const removeReply=(replyId)=>{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'removePostCommentReply/',{
@@ -140,7 +145,7 @@ function PostScreen(){
 	
 
 	const likePost=(postId)=>{
-			const url = localStorage.getItem('url');
+			
 			axios.post(url+'addPostLike/',{
 					'postId':postId,
 					'Username':localStorage.getItem('user223'),
@@ -157,7 +162,7 @@ function PostScreen(){
 	
 
 	const savePost=(serviceId)=>{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'savePost/',{
@@ -177,17 +182,7 @@ function PostScreen(){
 	
 	return(<div className='PostScreen'>
 
-		{uploading && <div className='uploading'>
-					
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				
-			</div>}
+		{uploading && <UploadingAnim/>}
 		<h3><em>Posts</em></h3>
 		<div className='breakpoint'></div>
 
@@ -290,16 +285,7 @@ function PostScreen(){
 				</div>)}
 			</div>)}
 			{loadingMore?<div>loading...</div>:!allLoaded && <button onClick={morePosts}>load more</button>}
-		</div>:<em>{localStorage.getItem('user223')?<h1 className="loader">
-									<span>{localStorage.getItem('user223')},</span>
-									<span>we</span>
-									<span>are</span>
-									<span>loading</span>
-									<span>the</span>
-									<span>best</span>
-									<span>for</span>
-									<span>you</span>
-							</h1>:<i>please login</i>}</em>}
+		</div>:<em>{localStorage.getItem('user223')?<LoadingAnim/>:<i>please login</i>}</em>}
 				
 	</div>)
 }

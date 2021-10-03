@@ -1,0 +1,11 @@
+.Feedbacks{
+	padding:20px 0;
+	margin:40px auto;
+}
+
+.feedback-container{
+	display:flex;
+	padding:10px 0;
+	width:100%;
+	overflow:scroll;
+}

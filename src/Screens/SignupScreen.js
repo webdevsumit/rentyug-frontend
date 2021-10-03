@@ -3,9 +3,13 @@ import axios from 'axios';
 import {Link, Redirect} from 'react-router-dom';
 import ShowError from '../Components/ShowError';
 import "./../css/signup.css";
+import { useSelector} from "react-redux";
+import UploadingAnim from '../Components/UploadingAnim';
 
 
 function SignupScreen(props){
+
+	const { url } = useSelector(state=>state.isLogin);
 
 	const [username, setUsername]     = useState('');
 	const [email, setEmail]           = useState('');
@@ -20,6 +24,7 @@ function SignupScreen(props){
 
 	const [errorMessage, setErrorMessage] = useState('');
 	const [isError, setIsError] = useState(false);
+	const [isGoodMessage, setIsGoodMessage] = useState(false);
 	
 	const handleSignup=(e)=>{
 		e.preventDefault();
@@ -34,7 +39,7 @@ function SignupScreen(props){
 				formData2.append('username',username);
 				formData2.append('email',email);
 				formData2.append('password',password1);
-				const url = localStorage.getItem('url');
+				
 
 				setUploading(true);
 				axios.post(url+'signupAsProvider/',formData2).then(res=>{
@@ -45,11 +50,14 @@ function SignupScreen(props){
 					}else{
 						localStorage.setItem('user223',username);
 						localStorage.setItem('token',res.data.token);
-						props.afterSignup();
-						setRedirect(username);
+						setErrorMessage('Signup is successfull. please check your email inbox. There is something for you.')
+						setIsGoodMessage(true);
+						setTimeout(()=>{
+							setRedirect(username);
+						},5000);
 					}
 				}).catch(err=>{
-					setErrorMessage('Please provide valid details.');
+					setErrorMessage('Please provide valid Username or password.');
 					setIsError(true);
 					setUploading(false);
 				})
@@ -59,28 +67,19 @@ function SignupScreen(props){
 	if (redirect) return <Redirect to={'/account/'+redirect}/>;
 	
 	return(
-		<div className='main-container'>
+		<div className='signup-main-container'>
 
 			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
+			{isGoodMessage && <ShowError message={errorMessage} goodMessage={true} onclose={()=>setIsError(false)}/>}
 
-			{uploading && <div className='uploading'>
-											
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-										
-			</div>}
+			{uploading && <UploadingAnim/>}
 			
 				<form className="signup-card">
 				
 				<div className="signup-input" >
 					<input type='text' value={username} 
 						onChange={e=>{setUsername(e.target.value)}}
-						placeholder='One word Username*' required
+						placeholder='Username* (in 1 word)' required
 					/>
 				</div>
 
@@ -94,7 +93,7 @@ function SignupScreen(props){
 				<div className="signup-input" >
 					<input type={hidePass1?'password':'text'} 
 						value={password1} onChange={e=>{setPassword1(e.target.value)}}
-						placeholder='Password*' required
+						placeholder='Create Password*' required
 					/>
 					<button type="button" className="show-btn" onClick={()=>{setHidePass1(!hidePass1)}}>{hidePass1?'show':'hide'}</button>
 				</div>

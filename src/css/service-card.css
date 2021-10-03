@@ -1,0 +1,47 @@
+.Service-card{
+	margin: 20px;
+}
+
+.Service-card div{
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	width: 100%;
+	max-width:350px;
+	min-height: 200px;
+	border-radius:10px;
+	padding: 5px;
+	cursor:pointer;
+	transition: all ease 0.4s;
+}
+
+.Service-card div:hover{
+	max-width:355px;
+	padding: 10px;
+}
+
+.react-link{
+	text-decoration: none;
+}
+
+.card-details{
+	font-size: 14px;
+}
+
+.card-head{
+	font-family: monospace;
+	margin: 5px auto;
+}
+
+.img-wrapper{
+	max-width: 150px;
+	max-height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.product-image{
+    width: 90%;
+}

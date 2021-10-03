@@ -1,15 +1,15 @@
 import React from 'react';
 import ServiceCard from './ServiceCard';
+import "./../css/you-may-like.css";
 
 
 function YouMayLike(props){
 	return(
-		<div className='ServiceCatagories'>
+		<div className='you-may-like-main-container'>
 			<h3>You May Like</h3>
-			<div className='YouMayLike'>
+			<div className='you-may-like-container'>
 			{props.data.map(d=>{return(
 				<div key={d.id}>
-
 					<ServiceCard 
 					id={d.id}
 					Image={d.MainImage} 

@@ -3,10 +3,15 @@ import axios from 'axios';
 import {Link, Redirect} from 'react-router-dom';
 import ShowError from '../Components/ShowError';
 import "./../css/login.css";
-import { } from 'react-router-dom';
+import { setIsLogin} from '../redux/isLogin'
+import {useSelector, useDispatch } from 'react-redux'
+import UploadingAnim from '../Components/UploadingAnim';
 
 
 function LoginScreen(props){
+
+	const dispatch = useDispatch();
+	const { isLogin, url} = useSelector(state=>state.isLogin);
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -27,7 +32,6 @@ function LoginScreen(props){
 			setErrorMessage('All fields are required.');
 			setIsError(true);
 		}else{
-			const url = localStorage.getItem('url');
 
 			setUploading(true);
 			axios.post(url+'api-token-auth/',{
@@ -41,8 +45,8 @@ function LoginScreen(props){
 				}else{
 					localStorage.setItem('user223',username);
 					localStorage.setItem('token',res.data.token);
-					props.afterLogin();
 					setRedirect('redirect');
+					dispatch(setIsLogin(true));
 				}
 			}).catch(err=>{
 				setErrorMessage('Username or Password is not correct.');
@@ -58,7 +62,7 @@ function LoginScreen(props){
 			setErrorMessage('All fields are required.');
 			setIsError(true);
 		}else{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'forgotpass/',{
@@ -87,21 +91,11 @@ function LoginScreen(props){
 	return(
 		<div className='main-container'>
 			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
-			{uploading && <div className='uploading'>
-								
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-							
-			</div>}
+			{uploading && <UploadingAnim/>}
 			<form className="login-card">
 
 				<div className="login-input">
-				<input type='text' value={username} 
+				<input type='text' value={username} autoFocus={true}
 					onChange={e=>{setUsername(e.target.value)}}
 					placeholder='Username*' required
 				/>

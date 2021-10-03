@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import  ServiceCatagories from '../Components/ServiceCatagories';
+import  ServiceCategories from '../Components/ServiceCategories';
 import FamousServices from '../Components/FamousServices';
 import YouMayLike from '../Components/YouMayLike';
 import Feedbacks from '../Components/Feedbacks';
@@ -9,20 +9,21 @@ import AddFeedback from '../Components/AddFeedback';
 import axios from 'axios';
 import "./../css/submainscreen.css";
 
-import { useSelector} from 'react-redux'
+import {useSelector } from 'react-redux'
 import NearbyServices from '../Components/NearbyServices';
+import LoadingAnim from '../Components/LoadingAnim';
 
 
 
 function SubMainScreen(props){
 
 	const [data, setData ] = useState({});
-
-	const { isCategory } = useSelector(state=>state.isCategory);
-
+	const { isLogin, url } = useSelector(state=>state.isLogin);
 
 	useEffect(() => {
-		const url = localStorage.getItem('url');
+		
+		console.log(url);
+
 		axios.post(url+'mainPageData/', {'user':localStorage.getItem('user223')}).then(res=>{
 			setData(res.data);
 		})
@@ -30,7 +31,7 @@ function SubMainScreen(props){
 
 
 	const removeItem=id=>{
-		const url = localStorage.getItem('url');
+		
 		axios.post( url+'removeItem/', 
 		{
 		'user':localStorage.getItem('user223'),
@@ -52,47 +53,31 @@ function SubMainScreen(props){
 	return(<div>
 		{data?.ServiceCatagories?<div>
 					
-					{props.login?<>{data?.UnreadMsg && <h6 className="unread-messages">{data.UnreadMsg}</h6>}</>:<SiteIntro openAboutUs={props.openAboutUs}/>}
+					{isLogin?<>{data?.UnreadMsg && <h6 className="unread-messages">{data.UnreadMsg}</h6>}</>:<SiteIntro openAboutUs={props.openAboutUs}/>}
 
 
-					
-					<ServiceCatagories
-					 showCategories = {isCategory}
-					 data={data.ServiceCatagories}
-					 handleChooseCatagory={props.handleChooseCatagory}
-					/>
+					<FamousServices data={data.Plans[0].PlanServices?data.Plans[0].PlanServices:[]} />
 
 
 					{data?.InterestedService?.Services && <YouMayLike
-										removeItem={removeItem}
-										data={data?.InterestedService?.Services} 
-										handleOpenService={props.handleOpenService}/>
+						removeItem={removeItem}
+						data={data?.InterestedService?.Services}/>
 					}
 
-					{data?.NearbyServices.length>0 && <NearbyServices data={data.NearbyServices}/>}
-					
-					<FamousServices data={data.Plans[0].PlanServices?data.Plans[0].PlanServices:[]} 
-					handleOpenService={props.handleOpenService}/>
+					<ServiceCategories
+						data={data.ServiceCatagories}
+					/>
 
-					
-					
+					{data?.NearbyServices.length>0 && <NearbyServices data={data.NearbyServices}/>}
 
 					<Feedbacks data={data?.FrontPageFeedback}/>
-					{props.login?<AddFeedback/>:<em>You can give feedback after signup/login.</em>}
+
+					{isLogin?<AddFeedback/>:<em>You can give feedback after signup/login.</em>}
+					
 					<hr/>
 					<Footer/>
 					
-				</div>:<h1 className="loader">
-							<span>{localStorage.getItem('user223')?
-							localStorage.getItem('user223'):'Hey'},</span>
-							<span>we</span>
-							<span>are</span>
-							<span>loading</span>
-							<span>the</span>
-							<span>best</span>
-							<span>for</span>
-							<span>you</span>
-					</h1>
+				</div>:<LoadingAnim/>
 				}
 	</div>)
 }

@@ -20,8 +20,8 @@ function SiteIntro(props){
 		
 		window.addEventListener('scroll',e=>{
 			
-			if (window.pageYOffset<=10 && mainHead.current && mainHeadDes.current){
-				mainHead.current.style.paddingTop = '20vh';
+			if (window.pageYOffset<=5 && mainHead.current && mainHeadDes.current){
+				mainHead.current.style.paddingTop = '30vh';
 				mainHead.current.style.width = '100%';
 				
 				mainHeadDes.current.style.color = 'blue';
@@ -34,7 +34,7 @@ function SiteIntro(props){
 				mainHeadDes.current.style.color = 'black';
 			};
 			
-			if (window.pageYOffset>=40 && head1.current) {
+			if (window.pageYOffset>=20 && head1.current) {
 				head1.current.style.opacity=1;
 				head1.current.style.transform='translatey(-50%)';
 				head1.current.style.fontSize='18px';
@@ -45,7 +45,7 @@ function SiteIntro(props){
 				head1.current.style.transform='translatey(0%)';
 			};
 			
-			if (window.pageYOffset>=160 && head1.current && head2.current) {
+			if (window.pageYOffset>=70 && head1.current && head2.current) {
 				head1.current.style.opacity=0.7;
 				head1.current.style.fontSize='16px';
 				
@@ -59,7 +59,7 @@ function SiteIntro(props){
 				head2.current.style.transform='translatey(0%)';
 			};
 			
-			if (window.pageYOffset>=230 && subHead1.current) {
+			if (window.pageYOffset>=90 && subHead1.current) {
 				subHead1.current.style.opacity=1;
 				subHead1.current.style.fontSize='16px';
 				
@@ -68,10 +68,10 @@ function SiteIntro(props){
 				subHead1.current.style.opacity=0;
 			};
 			
-			if (window.pageYOffset>=280 && head2.current && subHead1.current && head3.current) {
-				head2.current.style.opacity=0.7;
+			if (window.pageYOffset>=100 && head2.current && subHead1.current && head3.current) {
+				head2.current.style.opacity=0.85;
 				head2.current.style.fontSize='16px';
-				subHead1.current.style.opacity=0.5;
+				subHead1.current.style.opacity=0.7;
 				subHead1.current.style.fontSize='14px';
 			
 				head3.current.style.opacity=1;
@@ -84,7 +84,7 @@ function SiteIntro(props){
 				head3.current.style.fontSize='18px';
 			};
 			
-			if (window.pageYOffset>=360 && subHead2.current) {
+			if (window.pageYOffset>=110 && subHead2.current) {
 				subHead2.current.style.opacity=1;
 				subHead2.current.style.fontSize='16px';
 				
@@ -93,7 +93,7 @@ function SiteIntro(props){
 				subHead2.current.style.opacity=0;
 			};
 			
-			if (window.pageYOffset>=400 && customerLink.current) {
+			if (window.pageYOffset>=120 && customerLink.current) {
 				customerLink.current.style.opacity=1;
 				customerLink.current.style.fontSize='16px';
 				
@@ -102,7 +102,7 @@ function SiteIntro(props){
 				customerLink.current.style.opacity=0;
 			};
 			
-			if (window.pageYOffset>=440 
+			if (window.pageYOffset>=100 
 				&& head3.current 
 				&& subHead2.current 
 				&& customerLink.current 
@@ -110,9 +110,9 @@ function SiteIntro(props){
 				&& middleButton.current 
 				&& rightButton.current) {
 				
-				head3.current.style.opacity=0.7;
+				head3.current.style.opacity=0.85;
 				head3.current.style.fontSize='16px';
-				subHead2.current.style.opacity=0.5;
+				subHead2.current.style.opacity=0.7;
 				subHead2.current.style.fontSize='14px';
 				customerLink.current.style.opacity=0.5;
 				customerLink.current.style.fontSize='14px';
@@ -136,7 +136,7 @@ function SiteIntro(props){
 				
 			};
 			
-			if (window.pageYOffset>=620 && leftButton.current 
+			if (window.pageYOffset>=100 && leftButton.current 
 							&& middleButton.current 
 							&& rightButton.current) {
 							
@@ -144,7 +144,7 @@ function SiteIntro(props){
 				middleButton.current.style.transform='scale(1.2)';
 				rightButton.current.style.transform='scale(1.2)';
 			}
-			else if(window.pageYOffset<=620 && window.pageYOffset>=440 && leftButton.current 
+			else if(window.pageYOffset<=700 && window.pageYOffset>=120 && leftButton.current 
 							&& middleButton.current 
 							&& rightButton.current){
 							
@@ -168,7 +168,7 @@ function SiteIntro(props){
 				<div className='img-div' ref={mainHead}>
 					<img className='logo' src="./img/logo.png" alt='logo'/>
 				</div>
-				<h2 className='head-des' ref={mainHeadDes}>Our First renting social media</h2>
+				<h6 className='head-des' ref={mainHeadDes}>Our First renting social media</h6>
 
 				<div className='breakpoint'></div>
 				<div className='breakpoint'></div>

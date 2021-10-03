@@ -1,61 +1,81 @@
 import React,{useState, useEffect} from 'react';
 import ServiceCard from '../Components/ServiceCard';
 import axios from 'axios';
-
+import "./../css/searchscreen.css";
+import SearchIcon from '@material-ui/icons/Search';
+import { useSelector } from "react-redux";
+import LoadingAnim from '../Components/LoadingAnim';
 
 function SearchScreen(props){
+
+	const { url } = useSelector(state=>state.isLogin);
 	
 	const [data, setData] = useState('');
-	console.log(props.Name);
-	useEffect(()=>{
-		console.log(props.Name);
-		const url = localStorage.getItem('url');
-		axios.post(url+'search/',{'searchName':props.Name,'Username':localStorage.getItem('user223')})
+	const [searched, setSearched] = useState(false);
+	const [searchedName, setSearchedName] = useState('');
+
+	const onSearch=e=>{
+		e.preventDefault();
+		setSearched(true);
+		
+		axios.post(url+'search/',{'searchName':searchedName,'Username':localStorage.getItem('user223')})
 		.then(res=>{
 			setData(res.data.data);
 		})
-	},[]);
+	};
 	
-		return(
-			<React.Fragment>
-			{data?<div className='SearchScreen'>
-				<h6>Results for {props.Name}</h6>
-				<div>
-					{console.log(props.Name)}
-				{data.map(d=>{return(
-					<div key={d.id}>
-						<ServiceCard 
-						id={d.id}
-						Image={d.MainImage} 
-						Type={d.Type.Name} 
-						PriceType={d.PriceType}
-						ShopName={d.ShopName}
-						Rating={d.Rating}
-						OpenTime={d.OpenTime}
-						closeTime={d.closeTime}
-						handleOpenService={()=>props.handleOpenService(d.id)}
-						VStatus = {d.VStatus}
-						RentalStatus = {d.RentalStatus}
-						/>
+		return(<>
+
+				<form className="search-form">
+					<input 
+						className='search-input'
+						type='search'
+						placeholder="&#128269; Search for Products, Categories and More."
+						autoFocus={true}
+						onChange={e=>setSearchedName(e.target.value)}
+						/><button className="search-btn" type="submit" onClick={onSearch}>
+							<SearchIcon className='search-icon'/>
+						</button>
+				</form>
+
+				{searched?
+				<>
+				{data?
+					<div className='search-screen'>
+						<h6>Results for {searchedName}</h6>
+						<div className="search-container">
+							{data.map(d=>{return(
+								<div key={d.id}>
+									<ServiceCard 
+									id={d.id}
+									Image={d.MainImage} 
+									Type={d.Type.Name} 
+									PriceType={d.PriceType}
+									ShopName={d.ShopName}
+									Rating={d.Rating}
+									OpenTime={d.OpenTime}
+									closeTime={d.closeTime}
+									handleOpenService={()=>props.handleOpenService(d.id)}
+									VStatus = {d.VStatus}
+									RentalStatus = {d.RentalStatus}
+									/>
+								</div>
+							)})}
+						</div>
+						<div className='breakpoint'></div>
+						<h4>{data.length===0 && 'No results!'}</h4>
 					</div>
-				)})}
-				</div>
-				<div className='breakpoint'></div>
-				<h4>{data.length===0 && 'No results!'}</h4>
-				
-			</div>:<h1 className="loader">
-										<span>{localStorage.getItem('user223')?
-										localStorage.getItem('user223'):'Hey'},</span>
-										<span>we</span>
-										<span>are</span>
-										<span>loading</span>
-										<span>the</span>
-										<span>best</span>
-										<span>for</span>
-										<span>you</span>
-								</h1>}
-		</React.Fragment>
-		);
+				:
+					<LoadingAnim/>
+				}
+			</>
+		:
+			<div className="non-searched-first-visit">
+					<h5><em>If your search will not be available. Do not worry we will inform you when it will be available on our website.</em></h5>
+					<h5><em>Or you can put in it Request Page.</em></h5>
+			</div>
+		}
+		</>);
 	
 }
 

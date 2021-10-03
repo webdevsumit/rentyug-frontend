@@ -1,13 +1,21 @@
 import React,{ useState, useEffect} from 'react';
 import axios from 'axios';
-import {Link, Redirect} from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 import ShowError from '../Components/ShowError';
+import MessageBox from './MessageBox';
 import "./../css/description.css";
+import {useSelector} from 'react-redux'
+import UploadingAnim from '../Components/UploadingAnim';
+import LoadingAnim from '../Components/LoadingAnim';
 
-function Description(props){
+function Description(){
+
+	const { url } = useSelector(state=>state.isLogin);
 
 	const [data, setData] = useState(false);
 	const [profile, setProfile] = useState(false);
+
+	const [productId, setProductId] = useState(false);
 
 	const [canRate, setCanRate] = useState(false);
 	
@@ -24,19 +32,25 @@ function Description(props){
 	const [consumerContact, setConsumerContact] = useState('');
 
 	const [redirectToAccount, setRedirectToAccount] = useState(false);
+	const [redirectToLogin, setRedirectToLogin] = useState(false);
+
+	const [Messaging, setMessaging] = useState(false);
+	const [msgingTo, setMsgingTo] = useState(false);
+
+	const [uploading, setUploading] = useState(false);
 
 	useEffect(()=>{
 	
 		const user = localStorage.getItem('user223');
 		if((user===null) || (user==='')){
-			let productId = -1;
+			setRedirectToLogin(true);
 		}else{
-			var productId = window.location.href.split('/')[4];
+			var product_id = window.location.href.split('/')[4];
+			setProductId(product_id);
 		
 		
-		const url = localStorage.getItem('url');
 		axios.post(url+'productData/',{
-					'productId':productId,
+					'productId':product_id,
 					'Username': localStorage.getItem('user223')
 			},{
 				headers: {
@@ -45,12 +59,13 @@ function Description(props){
 			}).then(res=>{
 			setData(res.data.data);
 			setProfile(res.data.providerDetail);
-		})
+		}).catch(()=>setRedirectToLogin(true))
 		}
 	},[]);
 
 
 	const addNewSmsBox=(provider)=>{
+		setUploading(true);
 		const user = localStorage.getItem('user223');
 		if(user===provider){
 			setIsError(true);
@@ -59,7 +74,7 @@ function Description(props){
 			setIsError(true);
 			setErrorMessage('Please signup or login.');
 		}else{
-			const url = localStorage.getItem('url');
+			
 			axios.post(url+'addNewSmsBox/',{
 				'user':user,
 				'provider':provider
@@ -69,7 +84,9 @@ function Description(props){
 							}
 						}).then(res=>{
 				if (res.data.msg){
-					props.afterAddingNewSms(user,provider);
+					setMessaging(true);
+					setMsgingTo(provider);
+					setUploading(false);
 				}
 			})
 		}
@@ -81,32 +98,33 @@ function Description(props){
 			setIsError(true);
 			setErrorMessage('Please signup or login.');
 		}else{
-			const url = localStorage.getItem('url');
+			setUploading(true);
 			axios.post(url+'giveRating/',{
 					'user':user,
-					'productId':props.productId,
+					'productId':productId,
 					'rating':rating,
 					'provider':profile.User.username
 			},{
-							headers: {
-								'Authorization': `Token ${localStorage.getItem('token')}` 
-							}
-						}).then(res=>{
-			if(res.data.msg){
-				setIsError(true);
-				setErrorMessage(res.data.msg);
-			}else{
-				setData(res.data.data);
-				setProfile(res.data.providerDetail);
-			}
-			setCanRate(false);
+				headers: {
+					'Authorization': `Token ${localStorage.getItem('token')}` 
+				}
+			}).then(res=>{
+				if(res.data.msg){
+					setIsError(true);
+					setErrorMessage(res.data.msg);
+				}else{
+					setData(res.data.data);
+					setProfile(res.data.providerDetail);
+				}
+				setUploading(false);
+				setCanRate(false);
 			})
 		}
 	}
 
 	const RentNow=()=>{
 		const user = localStorage.getItem('user223');
-		const url = localStorage.getItem('url');
+		 
 		axios.post(url+'rentnow/',{
 			'username':user,
 		},{
@@ -129,8 +147,9 @@ function Description(props){
 
 	const handleConfirRentNow=(profileId, productId)=>{
 		setShowConfirmBox(false);
+		setUploading(true);
 		const user = localStorage.getItem('user223');
-		const url = localStorage.getItem('url');
+		 
 		axios.post(url+'rentnowconfirmed/',{
 			'username':user,
 			'profileId':profileId,
@@ -144,6 +163,7 @@ function Description(props){
 			
 				setIsGoodMessage(true);
 				setErrorMessage(res.data.msg);
+				setUploading(false);
 				setTimeout(() => {
 					setIsGoodMessage(false);
 				}, 8000);
@@ -160,16 +180,18 @@ function Description(props){
 			setIsError(true);
 			setErrorMessage('Please signup or login.');
 		}else{
-			const url = localStorage.getItem('url');
+			 
+			setUploading(true);
 			axios.post(url+'addServiceFeed/',{
 							'user':user,
-							'productId':props.productId,
+							'productId':productId,
 							'feed':feed
 			},{
-							headers: {
-								'Authorization': `Token ${localStorage.getItem('token')}` 
-							}
-						}).then(res=>{
+				headers: {
+					'Authorization': `Token ${localStorage.getItem('token')}` 
+				}
+			}).then(res=>{
+				setUploading(false);
 				setData(res.data.data);
 				setProfile(res.data.providerDetail);
 				addFeed('');
@@ -178,10 +200,16 @@ function Description(props){
 	}
 
 	if(redirectToAccount) return <Redirect to={"/account/"+localStorage.getItem('user223')}/>
+	if(redirectToLogin) return <Redirect to="/login"/>
 	return(
 		<div className='Description'>
+			{Messaging && <MessageBox 
+				msgingTo={msgingTo}
+				onClose={()=>setMessaging(false)}
+			/>}
 			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
 			{isGoodMessage && <ShowError message={errorMessage} goodMessage={true} onclose={()=>setIsGoodMessage(false)}/>}
+			{uploading && <UploadingAnim/>}
 
 			<h1>Details</h1>
 			{data?<div>
@@ -240,7 +268,7 @@ function Description(props){
 							</div>
 						</>}
 					<button onClick={RentNow}>Rent Now</button>
-					<Link to='/messages'><button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button></Link>
+					<button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button>
 				</div>:''}
 
 
@@ -265,17 +293,7 @@ function Description(props){
 					onClick={giveFeed}
 					>give feedback</button>
 				</div>
-			</div>:<h1 className="loader">
-										<span>{localStorage.getItem('user223')?
-										localStorage.getItem('user223'):'Hey'},</span>
-										<span>we</span>
-										<span>are</span>
-										<span>loading</span>
-										<span>the</span>
-										<span>best</span>
-										<span>for</span>
-										<span>you</span>
-								</h1>}
+			</div>:<LoadingAnim/>}
 		</div>
 	)
 }

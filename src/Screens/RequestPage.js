@@ -2,9 +2,14 @@ import React,{useState, useEffect} from "react";
 import axios from 'axios';
 import './../css/requestPage.css';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { useSelector } from "react-redux";
+import MessageBox from "./MessageBox";
 
 
 function RequestPage(){
+
+    const { url } = useSelector(state=>state.isLogin);
+    
     const [data, setData] = useState(null);
     const [filteredData, setFilteredData] = useState(null);
     const [isCompleted, setIsCompleted] = useState(false);
@@ -15,10 +20,11 @@ function RequestPage(){
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
     const [newContactInfo, setNewContactInfo] = useState('');
+    const [msgBox, setMsgBox] = useState(false);
 
 
     useEffect(()=>{
-        axios.get(localStorage.getItem('url')+'requestedServices/', {'user':localStorage.getItem('user223')},{
+        axios.get(url+'requestedServices/', {'user':localStorage.getItem('user223')},{
 			headers: {
 				'Authorization': `Token ${localStorage.getItem('token')}` 
 			}
@@ -37,7 +43,7 @@ function RequestPage(){
     }
 
     const handleCompleteRequest=(id)=>{
-        axios.post(localStorage.getItem('url')+'completedRequestService/', {
+        axios.post(url+'completedRequestService/', {
                         'id':id
                     },{
 			headers: {
@@ -53,7 +59,7 @@ function RequestPage(){
 
     const handleNewItem=e=>{
         e.preventDefault();
-        axios.post(localStorage.getItem('url')+'addingServiceRequest/', {
+        axios.post(url+'addingServiceRequest/', {
             'username':localStorage.getItem('user223'),
             'title':newTitle,
             'description':newDescription,
@@ -73,19 +79,28 @@ function RequestPage(){
         <div className='request-page'>
             <div className='request-page-main'>
                 <form>
-                    <input type="search" value={searchedData} onChange={e=>setSearchedData(e.target.value)} />
-                    <button type="submit" onClick={handleFilter} >search</button>
+                    <input type="search" class="request-search" value={searchedData} onChange={e=>setSearchedData(e.target.value)}  />
+                    <button type="submit" onClick={handleFilter} >filter</button>
                 </form>
                 {filteredData && filteredData.map(d=><div key={d.id} className="request-card">
                     <h4>{d.Title}</h4>
                     <p>{d.Description}
                     </p>
                     <p>{d.ContactInfo}</p>
-                    {d.User.username===localStorage.getItem('user223') && <p>
+                    {msgBox && <MessageBox 
+                        msgingTo={d.User.username}
+                        onClose={()=>setMsgBox(false)}
+                    />}
+
+
+                    {d.User.username===localStorage.getItem('user223')?
+                     <p>
                         <label>Request completed </label>
                             <input type='checkbox' value={isCompleted} onChange={e=>setIsCompleted(e.target.checked)} />
                             {isCompleted && <button onClick={()=>handleCompleteRequest(d.id)}>Confirm</button>}
-                        </p>}
+                    </p>
+                    :
+                    <button type="button" onClick={()=>setMsgBox(true)}>message</button>}
                 </div>)}
 
                 <AddCircleIcon className='add-button' onClick={()=>setAddingNew(true)} />

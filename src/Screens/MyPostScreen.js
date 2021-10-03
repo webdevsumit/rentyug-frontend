@@ -2,10 +2,15 @@ import React,{useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import PostMedia from './../Components/PostMedia';
+import {useSelector} from "react-redux";
+import UploadingAnim from '../Components/UploadingAnim';
+import LoadingAnim from '../Components/LoadingAnim';
 
 
 
 function MyPostScreen(){
+
+	const { url } = useSelector(state=>state.isLogin);
 
 	const [data, setData] = useState(null);
 	const [commentWord, setCommentWord] = useState('');
@@ -41,7 +46,7 @@ function MyPostScreen(){
 	const commentIt=(postId)=>{
 		if (commentWord==='') alert('Please write something!');
 		else{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'addPostComment/',{
@@ -62,7 +67,7 @@ function MyPostScreen(){
 	}
 
 	const removeComment=(commentId)=>{
-			const url = localStorage.getItem('url');
+			
 			setUploading(true);
 			axios.post(url+'removePostComment/',{
 					'commentId':commentId,
@@ -83,7 +88,7 @@ function MyPostScreen(){
 	const replyIt=(commentId)=>{
 		if (replyWord==='') alert('Please write something!');
 		else{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'addPostCommentReply/',{
@@ -104,7 +109,7 @@ function MyPostScreen(){
 	}
 
 	const removeReply=(replyId)=>{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'removePostCommentReply/',{
@@ -123,7 +128,7 @@ function MyPostScreen(){
 	
 
 	const likePost=(postId)=>{
-			const url = localStorage.getItem('url');
+			
 			axios.post(url+'addPostLike/',{
 					'postId':postId,
 					'Username':localStorage.getItem('user223'),
@@ -140,7 +145,7 @@ function MyPostScreen(){
 	
 
 	const savePost=(serviceId)=>{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'savePost/',{
@@ -157,7 +162,7 @@ function MyPostScreen(){
 	}
 
 	const activatePostTogle=(postId,serviceId)=>{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'activatePostTogle/',{
@@ -223,17 +228,7 @@ function MyPostScreen(){
 
 	return(
 		<div className='MyPostScreen'>
-			{uploading && <div className='uploading'>
-			
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				<span className='loading-bars'></span>
-				
-			</div>}
+			{uploading && <UploadingAnim/>}
 			<h3><em>Your posts</em></h3>
 			{data?<div>
 				{data.map(ser=><div key={ser.id}>
@@ -336,17 +331,7 @@ function MyPostScreen(){
 					</div>)}
 					
 				</div>)}
-			</div>:<h1 className="loader">
-										<span>{localStorage.getItem('user223')?
-										localStorage.getItem('user223'):'Hey'},</span>
-										<span>we</span>
-										<span>are</span>
-										<span>loading</span>
-										<span>the</span>
-										<span>best</span>
-										<span>for</span>
-										<span>you</span>
-								</h1>}<br/>
+			</div>:<LoadingAnim/>}<br/>
 
 			
 			{addPost?<div className='new-post'>

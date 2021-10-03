@@ -2,8 +2,15 @@ import React,{ useState, useEffect} from 'react';
 import ShowError from '../Components/ShowError';
 import axios from 'axios';
 import MMap from '../Components/MMap';
+import "./../css/account.css";
+import UploadingAnim from '../Components/UploadingAnim';
+import { useSelector } from 'react-redux';
+import LoadingAnim from '../Components/LoadingAnim';
+import ServiceCategoryCard from '../Components/ServiceCategoryCard';
 
 function AccountScreen(){
+
+	const { url } = useSelector(state=>state.isLogin);
 
 	const [accScreen, setAccScreen] = useState(false);
 	const [data, setData] = useState({});
@@ -89,7 +96,7 @@ function AccountScreen(){
 	
 	
 	useEffect(()=>{
-		const url = localStorage.getItem('url');
+		
 		axios.post(url+'account/',{'username':localStorage.getItem('user223')},{ 
 				  headers: {
 				    'Authorization': `Token ${localStorage.getItem('token')}` 
@@ -110,7 +117,7 @@ function AccountScreen(){
 	},[]);
 
 	useEffect(()=>{
-		const url = localStorage.getItem('url');
+		
 		axios.get(url+'ShopCatagories/',{
 				  headers: {
 				    'Authorization': `Token ${localStorage.getItem('token')}` 
@@ -123,7 +130,7 @@ function AccountScreen(){
 
 
 	const updateFirstname=()=>{
-		const url = localStorage.getItem('url');
+		
 		if (firstname===''){
 			setIsError(true);
 			setErrorMessage('Cannot asign empty value.');
@@ -146,7 +153,7 @@ function AccountScreen(){
 	}
 
 	const updatePassword=()=>{
-			const url = localStorage.getItem('url');
+			
 			if (newPassword.length<8) {
 				setIsError(true);
 				setErrorMessage('Password should be of minmum 8 characters with the combination of words and numbers.');
@@ -185,7 +192,7 @@ function AccountScreen(){
 				setIsError(true);
 				setErrorMessage('Cannot asign empty value.');
 			}else{
-				const url = localStorage.getItem('url');
+				
 				setUploading(true);
 				axios.post(url+'setLastname/',{
 					'username':localStorage.getItem('user223'),
@@ -209,7 +216,7 @@ function AccountScreen(){
 			setErrorMessage('Cannot asign empty value.');
 		}
 		else{
-			const url = localStorage.getItem('url');
+			
 			setUploading(true);
 			axios.post(url+'setEmail/',{
 					'username':localStorage.getItem('user223'),
@@ -234,7 +241,7 @@ function AccountScreen(){
 	}
 
 	const configEmail=()=>{
-			const url = localStorage.getItem('url');
+			
 			setUploading(true);
 			axios.post(url+'configEmail/',{
 					'username':localStorage.getItem('user223'),
@@ -259,7 +266,7 @@ function AccountScreen(){
 				setIsError(true);
 				setErrorMessage('Cannot asign empty value.');
 			}else{
-				const url = localStorage.getItem('url');
+				
 				setUploading(true);
 				axios.post(url+'setMyAddr/',{
 						'username':localStorage.getItem('user223'),
@@ -280,7 +287,7 @@ function AccountScreen(){
 		const updateLoc=()=>{
 			
 
-				const url = localStorage.getItem('url');
+				
 				setUploading(true);
 				axios.post(url+'setLoc/',{
 						'username':localStorage.getItem('user223'),
@@ -301,7 +308,7 @@ function AccountScreen(){
 					setIsError(true);
 					setErrorMessage('Cannot asign empty value.');
 				}else{
-					const url = localStorage.getItem('url');
+					
 					setUploading(true);
 					axios.post(url+'setMyNo/',{
 							'username':localStorage.getItem('user223'),
@@ -324,7 +331,7 @@ function AccountScreen(){
 				setIsError(true);
 				setErrorMessage('Cannot asign empty value.');
 			}else{
-				const url = localStorage.getItem('url');
+				
 				setUploading(true);
 				axios.post(url+'setShopName/',{
 					'id':id,
@@ -344,7 +351,7 @@ function AccountScreen(){
 	}
 
 	const changeCatagory=(serviceId,catagoryId)=>{
-		const url = localStorage.getItem('url');
+		
 		setUploading(true);
 		axios.post(url+'updateShopCatagory/',{
 					'serviceId':serviceId,
@@ -367,7 +374,7 @@ function AccountScreen(){
 			setIsError(true);
 			setErrorMessage('Image not selected.');
 		}else{
-			const url = localStorage.getItem('url');
+			
 			var formData = new FormData();
 			formData.append('id',id);
 			formData.append('image',mainImage);
@@ -401,7 +408,7 @@ function AccountScreen(){
 			else formData.append('image',profile);
 			
 			formData.append('username',localStorage.getItem('user223'));
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'updateImage/',formData,{
@@ -430,7 +437,7 @@ function AccountScreen(){
 	        formData.append('id',id);                        
 	        formData.append('image',mainImage);         
 	        formData.append('username',localStorage.getItem('user223'));
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 	        axios.post(url+'addNewImage/',formData,{
@@ -452,7 +459,7 @@ function AccountScreen(){
 			setIsError(true);
 			setErrorMessage('Cannot asign empty value.');
 		}else{
-	 		const url = localStorage.getItem('url');
+	 		
 
 	 		setUploading(true);
 	 		axios.post(url+'setOpenTime/',{
@@ -477,7 +484,7 @@ function AccountScreen(){
 			setIsError(true);
 			setErrorMessage('Cannot asign empty value.');
 		}else{
-	 		const url = localStorage.getItem('url');
+	 		
 
 	 		setUploading(true);
 	 		axios.post(url+'setCloseTime/',{
@@ -503,7 +510,7 @@ function AccountScreen(){
 
 
 	 	if (rentalStatus===true || rentalStatus===false){
-	 		const url = localStorage.getItem('url');
+	 		
 
 	 		setUploading(true);
 	 		axios.post(url+'setRentalStatus/',{
@@ -524,7 +531,7 @@ function AccountScreen(){
 	 }
 	
 	const changeGetNotification=()=>{
-	 		const url = localStorage.getItem('url');
+	 		
 
 	 		setUploading(true);
 	 		axios.post(url+'setGetNotification/',{
@@ -547,7 +554,7 @@ function AccountScreen(){
 	const changeNoOfItems=(id)=>{
 
 	 	if (noOfItems){
-	 		const url = localStorage.getItem('url');
+	 		
 
 	 		setUploading(true);
 	 		axios.post(url+'setNoOfItems/',{
@@ -572,7 +579,7 @@ function AccountScreen(){
 			setIsError(true);
 			setErrorMessage('Cannot asign empty value.');
 		}else{
-	 		const url = localStorage.getItem('url');
+	 		
 
 	 		setUploading(true);
 	 		axios.post(url+'setPriceType/',{
@@ -593,7 +600,7 @@ function AccountScreen(){
 	 }
 	
 	const deleteSearchName=(id)=>{
-		const url = localStorage.getItem('url');
+		
 
 		setUploading(true);
 	 	axios.post(url+'deleteSearchName/',{
@@ -611,7 +618,7 @@ function AccountScreen(){
 	 }
 	 
 	const deleteImage=(id)=>{
-		const url = localStorage.getItem('url');
+		
 
 		setUploading(true);
 	 	axios.post(url+'deleteImage/',{
@@ -633,7 +640,7 @@ function AccountScreen(){
 			setIsError(true);
 			setErrorMessage('Cannot asign empty value.');
 		}else{
-	 		const url = localStorage.getItem('url');
+	 		
 
 	 		setUploading(true);
 	 		axios.post(url+'addSearchName/',{
@@ -659,7 +666,7 @@ function AccountScreen(){
 			setIsError(true);
 			setErrorMessage('Desciption box should not be empty.');
 		}else{
-	 		const url = localStorage.getItem('url');
+	 		
 
 	 		setUploading(true);
 	 		axios.post(url+'updateDesc/',{
@@ -685,7 +692,7 @@ function AccountScreen(){
 			setIsError(true);
 			setErrorMessage('Address box should not be empty. Also select location.');
 		}else{
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 			axios.post(url+'updateServiceAddr/',{
@@ -724,7 +731,7 @@ function AccountScreen(){
 	 		formData.append('CloseTime',newItemCloseTime);
 	 		formData.append('PriceType',newItemPriceType);
 	 		formData.append('username', localStorage.getItem('user223'));
-			const url = localStorage.getItem('url');
+			
 
 			setUploading(true);
 	 		axios.post(url+'addNewService/',formData,{
@@ -745,21 +752,28 @@ function AccountScreen(){
 	 		})
 	 	}
 	 }
+
+
+	const handleAddNewBtn=()=>{
+		if(data.User.first_name==='' ||data.User.last_name==='' || data.Address==='' || data.Address==='' || data.MobileNo===''){
+			setIsError(true);
+			setErrorMessage("Sorry we can not move forward because your profile is not completed.");
+		}else if(data.lat===23.25 && data.lng===77.41){
+			setIsError(true);
+			setErrorMessage("Settnig your location on map help us to show your service to rearby customers.");
+		}else if(!data.emailConfirmed){
+			setIsError(true);
+			setErrorMessage("First, Please verify your email.");
+		}else{
+			setCanAddNewItem(true);
+		}
+	}
 	
 	
 	return(
 		<div className='AccountScreen'>
 			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
-			{uploading && <div className='uploading'>
-									
-					<span className='loading-bars'></span>
-					<span className='loading-bars'></span>
-					<span className='loading-bars'></span>
-					<span className='loading-bars'></span>
-					<span className='loading-bars'></span>
-					<span className='loading-bars'></span>
-					<span className='loading-bars'></span>						
-				</div>}
+			{uploading && <UploadingAnim/>}
 			{accScreen?<div>
 				<h2 className='m-20'>Account</h2>
 				
@@ -1052,15 +1066,23 @@ function AccountScreen(){
 
 						<p>Catagory : select from below list.</p>
 						
-						<div>
-						{shopCatagories.map(Sc=>{return(
-								<div key={Sc.id} className='ShopType' 
-								onClick={()=>setNewItemCataId(Sc.id)}>
-								<h5>{Sc.Name}</h5>
-								<p>{Sc.Description}</p>
-								{newItemCataId===Sc.id && <p><em>selected</em></p>}
+
+						<div className="service-categories">
+							<div className="service-card-container">
+							{shopCatagories.map(Sc=>{return(
+									<div key={Sc.id} className='accoount-page-category' 
+									onClick={()=>setNewItemCataId(Sc.id)}>
+										<ServiceCategoryCard
+											id={Sc.id}
+											Name={Sc.Name}
+											Image={Sc.Image}
+										/>
+									<h4>CLICK HERE TO SELECT</h4>
+									<p>{Sc.Description}</p>
+									{newItemCataId===Sc.id && <p><em>selected</em></p>}
+								</div>
+								)})}
 							</div>
-							)})}
 						</div>
 						
 						<p>Description is most important and describing way.<br/>
@@ -1144,21 +1166,11 @@ function AccountScreen(){
 			setErrorMessage('Please read carefully and agree that terms and conditions.');
 		}}>Add</button>}
 						
-					</div>:<button onClick={()=>setCanAddNewItem(true)}>Add new service</button>}
+					</div>:<button onClick={handleAddNewBtn}>Add new service</button>}
 					
 				</div>:''}
 					
-			</div>:<h1 className="loader">
-										<span>{localStorage.getItem('user223')?
-										localStorage.getItem('user223'):'Hey'},</span>
-										<span>we</span>
-										<span>are</span>
-										<span>loading</span>
-										<span>the</span>
-										<span>best</span>
-										<span>for</span>
-										<span>you</span>
-								</h1>}
+			</div>:<LoadingAnim/>}
 			
 		</div>
 	);

@@ -1,5 +1,6 @@
 import React from 'react';
 import FeedbackCard from './FeedbackCard';
+import "./../css/feedback.css";
 
 function Feedbacks(props){
 	return(

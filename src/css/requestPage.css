@@ -2,16 +2,29 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    background-color: rgb(214, 214, 214);
+    min-height: 100vh;
 }
 
+
 .request-page-main{
-    max-width: 600px;
+    max-width: 700px;
     margin: 10px;
+    width: 100%;
+    
 }
 
 .request-page-main>form{
-    margin: 10px;
+    margin: 10px 5px;
+    display: flex;
+    position: sticky;
+    top: 45px;
+}
+
+.request-search{
+    width: 90%;
+    max-width: 700px;
 }
 
 .request-card{
@@ -21,6 +34,7 @@
     font-family: monospace;
     cursor: pointer;
     margin-bottom: 20px;
+    background-color: white;
 }
 
 .request-card:hover{

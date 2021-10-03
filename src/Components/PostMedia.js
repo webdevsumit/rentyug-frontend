@@ -1,9 +1,5 @@
 import React from 'react';
 
-
-
-
-
 function PostMedia(props){
 	return(<div>
 	

@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import {useSelector} from "react-redux";
+import LoadingAnim from '../Components/LoadingAnim';
 
 function FAQSceen(){
 
 	const [FAQData, setFAQData] = useState([]);
+	const { url } = useSelector(state=>state.isLogin);
 
 	useEffect(()=>{
-		const url = localStorage.getItem('url');
 		axios.get(url+'FAQData/').then(res=>{
 			setFAQData(res.data);
 		});
@@ -23,17 +25,7 @@ function FAQSceen(){
 					<br/>
 				</React.Fragment>)}
 							
-			</div>:<h1 className="loader">
-										<span>{localStorage.getItem('user223')?
-										localStorage.getItem('user223'):'Hey'},</span>
-										<span>we</span>
-										<span>are</span>
-										<span>loading</span>
-										<span>the</span>
-										<span>best</span>
-										<span>for</span>
-										<span>you</span>
-								</h1>}
+			</div>:<LoadingAnim/>}
 		</div>
 	)
 }

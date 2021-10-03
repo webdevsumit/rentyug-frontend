@@ -1,0 +1,130 @@
+
+.profileImg{
+	height:200px;
+	width:200px;;
+	margin:auto;
+	border-radius:50%;
+	box-shadow:1px 1px 5px #ddd;
+}
+
+.AccountScreen{
+	margin:20px;
+	border-radius:20px;
+	box-shadow:1px 1px 5px #ddd;
+}
+
+.AccountScreen div{
+	background:transparent;
+}
+
+.m-20{
+	margin:20px;
+}
+
+.AccountScreen div h3{
+	margin:15px;
+	font-size:14px;
+	opacity:0.8;
+}
+
+.editServiceCard{
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	padding:10px 0;
+	font-size:14px;
+}
+
+.editServiceCard p{
+	padding:4px;
+}
+
+.imageSlider{
+	width:100%;
+	overflow:scroll;
+	display:flex;
+	margin:20px 0px;
+	padding:10px;
+}
+
+.imageSlider span{
+	height:300px;
+	display:flex;
+	justify-content:center;
+}
+
+.imageSlider span img, .previewImage img{
+	height:300px;
+	margin:2px;
+	box-shadow:1px 1px 5px #ddd;
+	border-radius:10px;
+}
+
+.feed{
+	margin:20px;;
+	border-radius:10px;
+	box-shadow:1px 1px 5px #ddd ;
+}
+
+.accoount-page-category{
+	border-radius:20px;
+	box-shadow:1px 1px 5px rgb(141, 141, 141);
+	margin:5px 20px;
+	padding:5px 40px;
+	cursor:pointer;
+}
+
+
+.previewImage{
+	background:transparent;
+}
+
+.addServiceCard{
+	margin:20px;
+}
+
+.addServiceCard p{
+	margin:20px;
+	font-size:14px;
+	line-height:18px;
+	opacity:0.8;
+}
+
+
+.Description h1{
+	border-bottom:2px solid black;
+	margin:20px;
+	font-size:20px;
+	opacity:0.8;
+}
+
+.Description p{
+	margin:10px;
+	font-size:14px;
+	opacity:0.8;
+	letter-spacing:1.3px;
+	word-spacing:4px;
+}
+
+.descBox{
+	border: 1px solid #ddd;
+	margin:5px;
+	padding:10px;
+}
+
+.service-categories{
+    width: 100%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-card-container{
+    width: 100%;
+    max-width: 850px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
