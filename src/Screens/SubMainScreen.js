@@ -19,13 +19,13 @@ function SubMainScreen(props){
 
 	const [data, setData ] = useState({});
 	const { isLogin, url } = useSelector(state=>state.isLogin);
+	const [interestedServiceData, setInterestedServiceData] = useState([]);
 
 	useEffect(() => {
-		
-		console.log(url);
 
 		axios.post(url+'mainPageData/', {'user':localStorage.getItem('user223')}).then(res=>{
 			setData(res.data);
+			setInterestedServiceData(res.data.InterestedService.Services);
 		})
 	}, []);
 
@@ -41,10 +41,7 @@ function SubMainScreen(props){
 				    'Authorization': `Token ${localStorage.getItem('token')}` 
 				  }
 		}).then(res=>{
-			setData(()=>{
-				data.InterestedService=res.data.InterestedService;
-				return data;
-			});
+			setInterestedServiceData(res.data.InterestedService.Services);
 		});
 
 	};
@@ -61,7 +58,7 @@ function SubMainScreen(props){
 
 					{data?.InterestedService?.Services && <YouMayLike
 						removeItem={removeItem}
-						data={data?.InterestedService?.Services}/>
+						data={interestedServiceData}/>
 					}
 
 					<ServiceCategories

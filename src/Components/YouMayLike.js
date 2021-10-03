@@ -19,7 +19,6 @@ function YouMayLike(props){
 					PriceType={d.PriceType}
 					OpenTime={d.OpenTime}
 					closeTime={d.closeTime}
-					handleOpenService={()=>props.handleOpenService(d.id)}
 					VStatus = {d.VStatus}
 					RentalStatus = {d.RentalStatus}
 					fromYouMayLike={true}
