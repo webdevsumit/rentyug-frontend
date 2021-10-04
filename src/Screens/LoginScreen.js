@@ -96,7 +96,7 @@ function LoginScreen(props){
 
 				<div className="login-input">
 				<input type='text' value={username} autoFocus={true}
-					onChange={e=>{setUsername(e.target.value)}}
+					onChange={e=>{setUsername(e.target.value.replace(/\s/g,''))}}
 					placeholder='Username*' required
 				/>
 				</div>
