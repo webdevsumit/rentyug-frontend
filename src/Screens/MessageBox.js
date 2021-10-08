@@ -2,10 +2,12 @@ import React,{useState, useEffect, useRef} from 'react';
 import "./../css/message-box.css";
 
 import axios from 'axios';
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch } from "react-redux";
+import { setUnreadMsg } from '../redux/isLogin'
 
 function MessageBox(props){
 
+	const dispatch = useDispatch();
 	const [msg,setMsg] = useState('');
 	const [count, setCount] = useState(0);
 	const { url } = useSelector(state=>state.isLogin);
@@ -26,7 +28,8 @@ function MessageBox(props){
 							'Authorization': `Token ${localStorage.getItem('token')}` 
 						}
 			}).then(res=>{
-			setMessages(res.data);
+			setMessages(res.data.messages);
+			dispatch(setUnreadMsg(res.data.unreadMsg));
 		})
 	}
 
@@ -40,7 +43,7 @@ function MessageBox(props){
 
 	const handleSendMessage=e=>{
 		e.preventDefault();
-		
+
 		setMsg('');
 		axios.post(url+'addMessages/',{
 			'SendBy':localStorage.getItem('user223'),

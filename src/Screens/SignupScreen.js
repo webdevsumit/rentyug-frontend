@@ -5,9 +5,10 @@ import ShowError from '../Components/ShowError';
 import "./../css/signup.css";
 import { useSelector} from "react-redux";
 import UploadingAnim from '../Components/UploadingAnim';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 
-function SignupScreen(props){
+function SignupScreen(){
 
 	const { url } = useSelector(state=>state.isLogin);
 
@@ -87,24 +88,24 @@ function SignupScreen(props){
 				<div className="signup-input" >
 					<input type='email' value={email} 
 						onChange={e=>{setEmail(e.target.value)}}
-						placeholder='Email*' required
+						placeholder='email id*' required
 					/>
 				</div>
 				
 				<div className="signup-input" >
 					<input type={hidePass1?'password':'text'} 
 						value={password1} onChange={e=>{setPassword1(e.target.value)}}
-						placeholder='Create Password*' required
+						placeholder='create Password*' required
 					/>
-					<button type="button" className="show-btn" onClick={()=>{setHidePass1(!hidePass1)}}>{hidePass1?'show':'hide'}</button>
+					<button type="button" className="show-btn" onClick={()=>{setHidePass1(!hidePass1)}}>{hidePass1?<Visibility/>:<VisibilityOff/>}</button>
 				</div>
 				
 				<div className="signup-input" >
 					<input type={hidePass2?'password':'text'} 
 						value={password2} onChange={e=>{setPassword2(e.target.value)}}
-						placeholder='Confirm Password*' required
+						placeholder='confirm Password*' required
 					/>
-					<button type="button" className="show-btn" onClick={()=>{setHidePass2(!hidePass2)}}>{hidePass2?'show':'hide'}</button>
+					<button type="button" className="show-btn" onClick={()=>{setHidePass2(!hidePass2)}}>{hidePass2?<Visibility/>:<VisibilityOff/>}</button>
 				</div>
 
 				<div>

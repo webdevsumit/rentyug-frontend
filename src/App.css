@@ -53,6 +53,7 @@ a{
 	padding:5px;
 	background:transparent;
 	color: rgba(0, 0, 0, 0.9);
+	letter-spacing: 1px;
 }
 
 a:hover{
@@ -64,6 +65,10 @@ a:hover{
   text-align: center;
 }
 
+.para-whitespace{
+	white-space: pre-wrap;
+	text-align: left;
+}
 
 .whitebg{
 	background-color:white;
@@ -308,133 +313,25 @@ textarea, input{
 	cursor:pointer;
 }
 
+.cross-for-delete-search-name{
+	font-size: 14px!important;
+	fill: red!important;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
 .cross:hover{
 	box-shadow:1px 1px 15px red;
 	background:red;
 	opacity:0.8;
 }
 
-
-.liked{
-	color:red;
-}
-
-.PostScreen{
-	margin:10px;
-}
-
-.post{
-	display:flex;
-	flex-wrap:wrap;
-	justify-content:center;
-	box-shadow:1px 1px 5px #ddd;
-	margin:20px 0px;
-}
-
-.post-tittle{
-	margin:10px;
-	opacity:0.6;
-	font-weight:normal;
-	letter-spacing:2px;
-	font-size:17px;
-}
-
-summary{
-	outline:none;
-	cursor:pointer;
-	opacity:0.7;
-	margin:10px auto;
-	color:blue;
-	font-size:10px;
-}
-
-.whatsapp-share button{
-	color:lightgreen;
-}
-
-.post-desc{
-	word-spacing:4px;
-	letter-spacing:1px;
-	padding:20px;
-}
-
-.post-media{
-	width:330px;
-	margin:20px;
-	border:1px solid #ddd;
-	outline:none;
-}
-
-.posts-main-section{
-	padding:20px 0;
-	flex:5;
-	margin:auto;
-}
-
-.post-comment-section{
-	border-left:1px solid #eee;
-	flex:2;
-}
-
-.post-comment-section-div{
-	height:300px;
-	overflow:scroll;
-}
-
-.post-user{
-	font-size:10px;
-}
-
-.post-comment{
-	height:fit-content;
-	margin:5px;
-}
-
-.post-comment-text{
-	border-radius:0 5000px 5000px 5000px;
-	box-shadow:1px 1px 5px #ddd;
-	padding:10px;
-	margin:5px auto 5px 5px;
-	font-size:14px;
-	width:fit-content;
-}
-
-.post-reply-text{
-	border-radius:5000px 0 5000px 5000px;
-	box-shadow:1px 1px 5px #ddd;
-	margin:5px auto 35px 5px;
-	padding:10px;
-	font-size:14px;
-	width:fit-content;
-}
-
-.new-post{
-	margin:20px;
-	padding:20px 10px;
-	box-shadow:1px 1px 5px #ddd;
-}
-
-.post-image-lable{
-	font-size:10px;
-	opacity:0.8;
-}
-
-.post-checkbox{
-	margin:10px;
-}
-
-.post-tittle-input, .post-description-input{
-	outline:none;
-	border-radius:5px;
-	padding:5px;
-	margin:5px;
-}
-
 .service-card-input-post{
-	border-radius:5000px;
-	box-shadow:1px 1px 5pc #ddd;
-	margin:10px;
+	border-radius:10px;
+	box-shadow:1px 1px 5px rgb(156, 156, 156);
+	margin:auto;
 	padding:5px;
+	max-width: 700px;
 }
 
 .service-card-input-post h5{
@@ -464,4 +361,19 @@ summary{
 	color: rgb(255, 255, 255);
 }
 
+.unread-messages{
+    position: fixed;
+    top: 5px;
+    right: 48px;
+    z-index: 10;
+    padding: 2px;
+    border-radius: 50%;
+    width: auto;
+    height: auto;
+    font-size: 8px;
+    background-color: orange;
+    box-shadow: 0.1px 0.1px 2px black;
+	font-weight: 900;
+	font-family: Arial, Helvetica, sans-serif;
+}
 

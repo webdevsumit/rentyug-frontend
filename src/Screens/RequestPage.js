@@ -4,11 +4,14 @@ import './../css/requestPage.css';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { useSelector } from "react-redux";
 import MessageBox from "./MessageBox";
+import { Redirect } from "react-router-dom";
+import ShowError from "../Components/ShowError";
+import UploadingAnim from "../Components/UploadingAnim";
 
 
 function RequestPage(){
 
-    const { url } = useSelector(state=>state.isLogin);
+    const { isLogin, url } = useSelector(state=>state.isLogin);
     
     const [data, setData] = useState(null);
     const [filteredData, setFilteredData] = useState(null);
@@ -22,7 +25,11 @@ function RequestPage(){
     const [newContactInfo, setNewContactInfo] = useState('');
     const [msgBox, setMsgBox] = useState(false);
 
-
+    const [isError, setIsError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [uploading, setUploading] = useState('');
+    
+    
     useEffect(()=>{
         axios.get(url+'requestedServices/', {'user':localStorage.getItem('user223')},{
 			headers: {
@@ -59,24 +66,42 @@ function RequestPage(){
 
     const handleNewItem=e=>{
         e.preventDefault();
-        axios.post(url+'addingServiceRequest/', {
-            'username':localStorage.getItem('user223'),
-            'title':newTitle,
-            'description':newDescription,
-            'contactInfo':newContactInfo
-        },{
-        headers: {
-            'Authorization': `Token ${localStorage.getItem('token')}` 
+        setUploading(true);
+        
+        if (newDescription===''){
+            setIsError(true);
+            setErrorMessage('Please describe what do you want.');
         }
-        }).then(res=>{
-            setData(res.data.data);
-            setFilteredData(res.data.data);
-            setAddingNew(false);
-        })
+        else if (newTitle===''){
+            setIsError(true);
+            setErrorMessage('Please describe what do you want.');
+        }
+        else{
+            axios.post(url+'addingServiceRequest/', {
+                'username':localStorage.getItem('user223'),
+                'title':newTitle,
+                'description':newDescription,
+                'contactInfo':newContactInfo
+            },{
+            headers: {
+                'Authorization': `Token ${localStorage.getItem('token')}` 
+            }
+            }).then(res=>{
+                setData(res.data.data);
+                setFilteredData(res.data.data);
+                setAddingNew(false);
+                setUploading(false);
+            })
+        }
+        setUploading(false);
     }
+
+    if (msgBox && !isLogin) return <Redirect to="/login" />
 
     return(
         <div className='request-page'>
+            {isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
+            {uploading && <UploadingAnim/>}
             <div className='request-page-main'>
                 <form>
                     <input type="search" class="request-search" value={searchedData} onChange={e=>setSearchedData(e.target.value)}  />
@@ -87,6 +112,7 @@ function RequestPage(){
                     <p>{d.Description}
                     </p>
                     <p>{d.ContactInfo}</p>
+
                     {msgBox && <MessageBox 
                         msgingTo={d.User.username}
                         onClose={()=>setMsgBox(false)}
@@ -109,7 +135,7 @@ function RequestPage(){
                     <form className='new-item-div'>
                         <input type='text' value={newTitle} onChange={e=>setNewTitle(e.target.value)} placeholder='Title' /><br/><br/>
                         <textarea rows='10' cols='40' type='text' value={newDescription} onChange={e=>setNewDescription(e.target.value)} placeholder='Description' ></textarea><br/><br/>
-                        <input type='text' value={newContactInfo} onChange={e=>setNewContactInfo(e.target.value)} placeholder='Contact info. mo. or email' /><br/><br/>
+                        <input type='text' value={newContactInfo} onChange={e=>setNewContactInfo(e.target.value)} placeholder='Contact info.(optional)' /><br/><br/>
                         <button onClick={handleNewItem}>Add</button>
                     </form>
 

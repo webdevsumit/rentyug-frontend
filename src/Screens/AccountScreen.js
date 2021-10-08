@@ -7,6 +7,7 @@ import UploadingAnim from '../Components/UploadingAnim';
 import { useSelector } from 'react-redux';
 import LoadingAnim from '../Components/LoadingAnim';
 import ServiceCategoryCard from '../Components/ServiceCategoryCard';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function AccountScreen(){
 
@@ -210,7 +211,8 @@ function AccountScreen(){
 		}
 	}
 	
-	const updateEmail=()=>{
+	const updateEmail=(e)=>{
+		e.preventDefault();
 		if (email===''){
 			setIsError(true);
 			setErrorMessage('Cannot asign empty value.');
@@ -555,7 +557,6 @@ function AccountScreen(){
 
 	 	if (noOfItems){
 	 		
-
 	 		setUploading(true);
 	 		axios.post(url+'setNoOfItems/',{
 	 				'username':localStorage.getItem('user223'),
@@ -619,7 +620,6 @@ function AccountScreen(){
 	 
 	const deleteImage=(id)=>{
 		
-
 		setUploading(true);
 	 	axios.post(url+'deleteImage/',{
  			'username':localStorage.getItem('user223'),
@@ -716,8 +716,6 @@ function AccountScreen(){
 		}
 	}
 
-
-
 	 const addNewService=()=>{
 	 	if(newShopName==='' || newMainImage===null || newItemOpenTime==='' || newItemCloseTime==='' || newItemPriceType==='' || newItemCataId===''){
 			setIsError(true);
@@ -768,6 +766,35 @@ function AccountScreen(){
 			setCanAddNewItem(true);
 		}
 	}
+
+	const sendVerifyEmail=()=>{
+		setUploading(true);
+		axios.get(url+'sendVerifyEmail/',{
+			headers: {
+			  'Authorization': `Token ${localStorage.getItem('token')}` 
+			}
+	  	}).then(res=>{
+			if (res.data.msg) setErrorMessage(res.data.msg);
+			else setErrorMessage(res.data.error);
+			setIsError(true);
+			setUploading(false);
+		})
+	}
+	
+
+	const sendGetProductEmail=()=>{
+		setUploading(true);
+		axios.get(url+'sendGetProductEmail/',{
+			headers: {
+			  'Authorization': `Token ${localStorage.getItem('token')}` 
+			}
+	  	}).then(res=>{
+			if (res.data.msg) setErrorMessage(res.data.msg);
+			else setErrorMessage(res.data.error);
+			setIsError(true);
+			setUploading(false);
+		})
+	}
 	
 	
 	return(
@@ -785,44 +812,72 @@ function AccountScreen(){
 				{profile?<button onClick={()=>{changeImage(data.Image.id)}}>Set</button>:<p>Choose image to update.</p>}
 				<h4 className='m-20 f-cursive'>@{data.User.username}</h4>
 
-				{settingFirstname?<h3>First Name : <input type='text' 
-					onChange={e=>{setFirstname(e.target.value)}}/><button
-									onClick={()=>{updateFirstname(); setSettingFirstname(false);}}
-								>Set</button>
-				</h3>:<h3>
+				{data.User.is_superuser &&  <div> 
+					<button onClick={sendVerifyEmail}>Send Verify Email</button>
+					<button onClick={sendGetProductEmail}>Send Promotion Email</button>
+				</div>}
+
+				{settingFirstname?
+				<form>First Name : 
+					<input type='text' 
+						onChange={e=>{setFirstname(e.target.value)}}/>
+					<button type="submit"
+						onClick={(e)=>{e.preventDefault();updateFirstname(); setSettingFirstname(false);}}
+					>Set</button>
+				</form>
+				:
+				<h3>
 					First Name : {data.User.first_name}<button
 					onClick={()=>{setSettingFirstname(true)}}
 				>Update</button></h3>}
 
 
-				{settingLastname?<h3>Last Name : <input type='text' 
-					onChange={e=>{setLastname(e.target.value)}}/><button
-						onClick={()=>{updateLastname(); setSettingLastname(false);}}
+				{settingLastname?
+				<form>Last Name : 
+					<input type='text' 
+						onChange={e=>{setLastname(e.target.value)}}/>
+					<button type="submit"
+						onClick={(e)=>{e.preventDefault();updateLastname(); setSettingLastname(false);}}
 				>Set</button>
-				</h3>:<h3>
+				</form>
+				:
+				<h3>
 				Last Name : {data.User.last_name}<button
 					onClick={()=>{setSettingLastname(true)}}
 				>Update</button></h3>}
 				
 
-				{settingEmail?<h3>Email : <input type='text' 
-					onChange={e=>{setEmail(e.target.value)}}/><button
+				{settingEmail?
+				<form>Email : 
+					<input type='text' 
+						onChange={e=>{setEmail(e.target.value)}}/>
+					<button type="submit"
 						onClick={updateEmail}
-				>Set</button>
-				</h3>:<h3>
-				Email : {data.User.email}<button
-					onClick={()=>{setSettingEmail(true)}}
-				>Update</button>
+					>Set</button>
+				</form>
+				:
+				<h3>
+					Email : {data.User.email}
+					<button
+						onClick={()=>{setSettingEmail(true)}}
+					>Update</button>
 					{data.emailConfirmed?<h6>Verified</h6>:<button onClick={configEmail}>Verify Now</button>}
 				</h3>}
 
-				{settingGetNotification?<div>
+				{settingGetNotification?
+							<form>
 								<p>Get Notifications (Typically on new <b>MESSAGES</b>) : </p>
 								<input type='checkbox'
-								onChange={e=>setGetNotification(e.target.checked)}
-								/><button onClick={()=>{changeGetNotification();
-												setSettingGetNotification(false);}}>Set</button>
-							</div>:<p>Get Notifications (Typically on new <b>MESSAGES</b>) : {data.emailNotification?<b>&#10003;</b>:<b>x</b>}<button
+									onChange={e=>setGetNotification(e.target.checked)}
+								/>
+								<button type="submit"
+									onClick={(e)=>{e.preventDefault();
+									changeGetNotification();
+									setSettingGetNotification(false);}}
+								>Set</button>
+							</form>
+							:
+							<p>Get Notifications (Typically on new <b>MESSAGES</b>) : {data.emailNotification?<b>&#10003;</b>:<b>x</b>}<button
 							onClick={()=>setSettingGetNotification(true)}
 							>Update</button></p>}
 
@@ -839,28 +894,40 @@ function AccountScreen(){
 
 					<button
 						onClick={()=>{updatePassword(); setSettingNewPassword(false);}}	
-				>Set</button></React.Fragment>:<button
+					>Set</button></React.Fragment>
+				:
+				<button
 					onClick={()=>{setSettingNewPassword(true)}}
 				>Change Password</button>}
 
 
 				{data.Service && <React.Fragment>
-					{settingMyNo?<h3>Mobile No. : <input type='tel' 
-						onChange={e=>{setMyNo(e.target.value)}}/><button
-						onClick={()=>{updateMyNo(); setSettingMyNo(false);}}
-					>Set</button>
-					</h3>:<h3>
+					{settingMyNo?
+					<form>Mobile No. : 
+						<input type='tel' 
+							hange={e=>{setMyNo(e.target.value)}}/>
+						<button type="submit"
+							onClick={(e)=>{e.preventDefault();updateMyNo(); setSettingMyNo(false);}}
+						>Set</button>
+					</form>
+					:
+					<h3>
 					Mobile No. : {data.MobileNo}<button
 						onClick={()=>{setSettingMyNo(true)}}
 					>Update</button></h3>}
 				</React.Fragment>
 				}
 
-				{settingMyAddr?<h3>Address : <input type='text' 
-					onChange={e=>{setMyAddr(e.target.value)}}/><button
-					onClick={()=>{updateMyAddr(); setSettingMyAddr(false);}}
-				>Set</button>
-				</h3>:<h3>
+				{settingMyAddr?
+				<form>Address : 
+					<input type='text' 
+						onChange={e=>{setMyAddr(e.target.value)}}/>
+					<button type="submit"
+						onClick={(e)=>{e.preventDefault();updateMyAddr(); setSettingMyAddr(false);}}
+					>Set</button>
+				</form>
+				:
+				<h3>
 					Address : {data.Address}<button
 					onClick={()=>{setSettingMyAddr(true)}}
 				>Update</button></h3>}
@@ -878,11 +945,19 @@ function AccountScreen(){
 							{d.VStatus && <p className='VStatus'>verified</p>}
 							<p>Rating : {d.Rating}</p>
 
-							{settingShopName?<h4><input type='text' 
-							onChange={e=>setShopName(e.target.value)}/><button 
-							onClick={()=>{updateShopName(d.id); setSettingShopName(false);}}
-							>Set</button></h4>:<h4>{d.ShopName}<button 
-							onClick={()=>{setSettingShopName(true)}}>Update</button></h4>}
+							{settingShopName?
+							
+							<form>
+								<input type='text' 
+									ange={e=>setShopName(e.target.value)}/>
+							
+								<button type="submit"
+									onClick={(e)=>{e.preventDefault();updateShopName(d.id); setSettingShopName(false);}}
+								>Set</button>
+							</form>
+							:
+							<h4>{d.ShopName}<button 
+								onClick={()=>{setSettingShopName(true)}}>Update</button></h4>}
 
 							<p>Category : {d.Type.Name}<button 
 							onClick={()=>{setChangeShopType(true)}}>Change</button></p>
@@ -947,74 +1022,75 @@ function AccountScreen(){
 												setSettingDesc(false)}}>Set</button>
 								</div>:<div className='descBox'>
 								<h3>Description</h3>
-								<p>{d.Description}</p>
+								<p className="para-whitespace">{d.Description}</p>
 								<button onClick={()=>{setSettingDesc(true)}}>update</button>
 								</div>}
 							
-							{settingOpenTime?<div>
+							{settingOpenTime?<form>
 								<input type='text'
 								onChange={e=>setOpenTime(e.target.value)}
-								/><button onClick={()=>{changeOpenTime(d.id); 
+								/><button onClick={(e)=>{e.preventDefault();changeOpenTime(d.id); 
 												setSettingOpenTime(false);}}>Set</button>
-							</div>:<p>Open Time to contact : {d.OpenTime}<button
+							</form>:<p>Open Time to contact : {d.OpenTime}<button
 							onClick={()=>setSettingOpenTime(true)}
 							>Update</button></p>}
 
 							
-							{settingCloseTime?<div>
+							{settingCloseTime?<form>
 								<input type='text'
 								onChange={e=>setCloseTime(e.target.value)}
-								/><button onClick={()=>{changeCloseTime(d.id); 
-												setSettingCloseTime(false);}}>Set</button>
-							</div>:<p>Close Time to contact : {d.closeTime}<button
+								/><button type="submit" onClick={(e)=>{e.preventDefault();
+									changeCloseTime(d.id); 
+									setSettingCloseTime(false);}}>Set</button>
+							</form>:<p>Close Time to contact : {d.closeTime}<button
 							onClick={()=>setSettingCloseTime(true)}
 							>Update</button></p>}
 
 							
 
 								
-							{settingRentalStatus?<div>
+							{settingRentalStatus?<form>
 								<p>Available : </p>
 								<input type='checkbox'
 								onChange={e=>setRentalStatus(e.target.checked)}
-								/><button onClick={()=>{changeRentalStatus(d.id);
+								/><button type="submit" onClick={(e)=>{e.preventDefault();changeRentalStatus(d.id);
 												setSettingRentalStatus(false);}}>Set</button>
-							</div>:<p>Rental status : {d.RentalStatus?<b>Available</b>:<b>Not avialable</b>}<button
+							</form>:<p>Rental status : {d.RentalStatus?<b>Available</b>:<b>Not avialable</b>}<button
 							onClick={()=>setSettingRentalStatus(true)}
 							>Update</button></p>}
 							
 
 								
-							{settingNoOfItems?<div>
+							{settingNoOfItems?<form>
 								<p>NO of items : </p>
 								<input type='number' min="0" max="100"
 								value={noOfItems}
 								onChange={e=>setNoOfItems(e.target.value)}
-								/><button onClick={()=>{changeNoOfItems(d.id);
+								/><button type="submit" onClick={(e)=>{e.preventDefault();changeNoOfItems(d.id);
 												setSettingNoOfItems(false);}}>Set</button>
-							</div>:<p>NO of items : {d.NoOfItems}<button
+							</form>:<p>NO of items : {d.NoOfItems}<button
 							onClick={()=>setSettingNoOfItems(true)}
 							>Update</button></p>}
 							
 							
-							{settingPriceType?<div>
+							{settingPriceType?<form>
 								<input type='text' placeholder='eg. Rs.10/month'
 								onChange={e=>setPriceType(e.target.value)}
-								/><button onClick={()=>{changePriceType(d.id); 
+								/><button type="submit" onClick={(e)=>{e.preventDefault();changePriceType(d.id); 
 												setSettingPriceType(false);}}>Set</button>
-							</div>:<p>Rent : {d.PriceType}<button
+							</form>:<p>Rent : {d.PriceType}<button
 							onClick={()=>setSettingPriceType(true)}
 							>Update</button></p>}
 
-							{settingAddr? <div>
+							{settingAddr? <form>
 								Address : <input type='text' 
 									onChange={e=>{setServiceAddr(e.target.value)}}/>
 									{serviceLatLng && <MMap latLng={serviceLatLng} setLatLng={d=>setServiceLatLng(d)}  />}
-									<button
-									onClick={()=>{updateServiceAddr(d.id); setSettingAddr(false);}}
+									<button type="submit"
+									onClick={(e)=>{e.preventDefault();updateServiceAddr(d.id); setSettingAddr(false);}}
 								>Set</button><br/>
 
-							</div>:<p>Address : {d.Address}<button
+							</form>:<p>Address : {d.Address}<button
 							onClick={()=>{setSettingAddr(true); setServiceLatLng({'lat':d.lat,'lng':d.lng})}}
 							>Update</button></p>}
 							
@@ -1022,17 +1098,17 @@ function AccountScreen(){
 							<h4>Search Tags</h4>
 							
 							{d.SearchNames.map(sn=><p key={sn.id}>{sn.Name}
-							<button className='cross cross-for-delete'
+							<DeleteIcon className='cross-for-delete-search-name'
 							onClick={()=>{deleteSearchName(sn.id)}}
-							>X</button>
+							/>
 							</p>)}
 
-							<div>
+							<form>
 								<input value={searchName} 
 								placeholder='Name/product/area/nick name/etc.'
 								onChange={e=>setSearchName(e.target.value)}/>
-								<button onClick={()=>addSearchName(d.id)}>Add new</button>
-							</div>
+								<button type="submit" onClick={e=>{e.preventDefault();addSearchName(d.id);}}>Add new</button>
+							</form>
 
 							
 							<div className='breakpoint'></div>
@@ -1088,17 +1164,23 @@ function AccountScreen(){
 						<p>Description is most important and describing way.<br/>
 							 Please add after save with relax mind.</p>
 						
-						<p>Open Time to contact : <input type='text' 
-						placeholder='eg. 10:00 am'
-						onChange={e=>setNewItemOpenTime(e.target.value)}/></p>
+						<p>Open Time to contact : 
+							<input type='text' 
+								placeholder='eg. 10:00 am'
+								onChange={e=>setNewItemOpenTime(e.target.value)}/>
+						</p>
 						
-						<p>Close Time to contact : <input type='text' 
-						placeholder='eg. 9:00 pm'
-						onChange={e=>setNewItemCloseTime(e.target.value)}/></p>
+						<p>Close Time to contact : 
+							<input type='text' 
+								placeholder='eg. 9:00 pm'
+								onChange={e=>setNewItemCloseTime(e.target.value)}/>
+						</p>
 						
-						<p>Rent : <input type='text' 
-						placeholder='eg. Rs.10/month'
-						onChange={e=>setNewItemPriceType(e.target.value)}/></p>
+						<p>Rent : 
+							<input type='text' 
+								placeholder='eg. Rs.10/month'
+								onChange={e=>setNewItemPriceType(e.target.value)}/>
+						</p>
 						
 						<p>Note: Add search tag(after saving) so CONSUMERS can find you more easily.</p>
 						<p></p>
@@ -1110,10 +1192,6 @@ function AccountScreen(){
 
 						{readTC?<div>
 
-
-
-
-						
 							<h4>Terms and Conditions to upload product.</h4>
 							<br/>
 
@@ -1151,12 +1229,9 @@ function AccountScreen(){
 								<li><a href='tel:+91 7999004229'>customer care</a></li>
 							</ul>
 
-
-
-
-							
-							
-						</div>:<button onClick={()=>setReadTC(!readTC)}>Read 8 points to keep in mind. </button>}
+						</div>
+						:
+						<button onClick={()=>setReadTC(!readTC)}>Read 8 points to keep in mind. </button>}
 						
 						<input type='checkbox' onChange={()=>setAgreeTC(!agreeTC)}/>
 						<label>I agree</label>

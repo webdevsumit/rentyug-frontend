@@ -1,0 +1,128 @@
+
+.liked{
+	color:red;
+}
+
+
+.PostScreen{
+	margin:10px;
+}
+
+.post{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:center;
+	box-shadow:1px 1px 5px rgb(131, 131, 131);
+	margin:20px 0px;
+    border-radius: 10px;
+}
+
+.post-tittle{
+	margin:10px;
+	opacity:0.6;
+	font-weight:normal;
+	letter-spacing:2px;
+	font-size:17px;
+}
+
+summary{
+	outline:none;
+	cursor:pointer;
+	opacity:0.7;
+	margin:10px auto;
+	color:rgb(0, 119, 255);
+	font-size:10px;
+    text-align: left;
+    margin: 10px 20px;
+    min-width: 250px;
+}
+
+.whatsapp-share button{
+	color:lightgreen;
+}
+
+.post-desc{
+	word-spacing:4px;
+	letter-spacing:1px;
+	padding:20px;
+}
+
+.post-media{
+	width:330px;
+	margin:20px;
+	border:1px solid #ddd;
+	outline:none;
+}
+
+.posts-main-section{
+	padding:20px;
+	flex:5;
+	margin:auto;
+}
+
+.post-comment-section{
+	border-left:1px solid rgb(61, 61, 61);
+	flex:2;
+}
+
+.post-comment-section-div{
+	height:300px;
+	overflow:scroll;
+}
+
+.post-user{
+	font-size:10px;
+}
+
+.post-comment{
+	height:fit-content;
+	margin:5px;
+}
+
+.post-comment-text{
+	border-radius:0 10px 10px 10px;
+	box-shadow:1px 1px 5px rgb(167, 164, 164);
+	padding:10px;
+	margin:5px auto 5px 5px;
+	font-size:14px;
+	width:fit-content;
+}
+
+.post-reply-text{
+	border-radius:10px 0 10px 10px;
+	box-shadow:1px 1px 5px rgb(134, 134, 134);
+	margin:5px auto 35px 45px;
+	padding:10px;
+	font-size:14px;
+	width:fit-content;
+}
+
+.new-post{
+	margin:20px;
+	padding:20px 10px;
+	box-shadow:1px 1px 5px rgb(141, 141, 141);
+}
+
+.post-image-lable{
+	font-size:10px;
+	opacity:0.8;
+}
+
+.post-checkbox{
+	margin:10px;
+}
+
+.post-tittle-input, .post-description-input{
+	outline:none;
+	border-radius:5px;
+	padding:5px;
+	margin:5px;
+}
+
+
+@media only screen and (min-width:5px){
+    .post-comment-section-div{
+        height:100%;
+        overflow:scroll;
+    }
+}

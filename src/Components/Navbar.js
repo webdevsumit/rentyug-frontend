@@ -23,7 +23,7 @@ import "./../css/navbar.css";
 function Navbar(){
 
 	const dispatch = useDispatch();
-	const { isLogin, isMenu } = useSelector(state=>state.isLogin);
+	const { isLogin, isMenu, unreadMsg } = useSelector(state=>state.isLogin);
 
 
 	const handleLogout=()=>{
@@ -40,7 +40,6 @@ function Navbar(){
 			console.log('logout');
 		})
 	}
-
 
 	return( 
 		<div className='Navbar-div'>
@@ -67,8 +66,10 @@ function Navbar(){
 				</Link>
 				
 				<Link to='/messages'>
-					<Tooltip title='Messages'>
+					<Tooltip title='Messages'><>
 						<ForumIcon onClick={()=>dispatch(setIsMenu(false))} className='nav-icon'/>
+						{unreadMsg>0 && <h6 className="unread-messages">{unreadMsg}</h6>}
+						</>
 					</Tooltip>
 				</Link>
 				
@@ -95,8 +96,8 @@ function Navbar(){
 								<SearchIcon className='nav-icon'/>
 							</Link>
 						</Tooltip>
-						<Link to='/login'><button>LOGIN</button></Link>
-						<Link to='/signup'><button>SIGNUP</button></Link>
+						<Link to='/login'><h6>LOGIN</h6></Link>
+						<Link to='/signup'><h6>SIGNUP</h6></Link>
 					</div>}
 			
 			{isMenu &&

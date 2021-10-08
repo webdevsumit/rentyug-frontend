@@ -6,15 +6,18 @@ import "./../css/login.css";
 import { setIsLogin} from '../redux/isLogin'
 import {useSelector, useDispatch } from 'react-redux'
 import UploadingAnim from '../Components/UploadingAnim';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 
 function LoginScreen(props){
 
 	const dispatch = useDispatch();
-	const { isLogin, url} = useSelector(state=>state.isLogin);
+	const { url} = useSelector(state=>state.isLogin);
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+
+	const [forgotEmail, setForgotEmail] = useState('');
 
 	const [hidePass, setHidePass] = useState(true);
 
@@ -34,7 +37,7 @@ function LoginScreen(props){
 		}else{
 
 			setUploading(true);
-			axios.post(url+'api-token-auth/',{
+			axios.post(url+'login/',{
 				'username':username,
 				'password':password
 			}).then(res=>{
@@ -43,7 +46,7 @@ function LoginScreen(props){
 					setErrorMessage(res.data.error);
 					setIsError(true);
 				}else{
-					localStorage.setItem('user223',username);
+					localStorage.setItem('user223',res.data.username);
 					localStorage.setItem('token',res.data.token);
 					setRedirect('redirect');
 					dispatch(setIsLogin(true));
@@ -66,7 +69,7 @@ function LoginScreen(props){
 
 			setUploading(true);
 			axios.post(url+'forgotpass/',{
-				'username':username
+				'email':forgotEmail
 			}).then(res=>{
 				setUploading(false);
 				if(res.data.error){
@@ -93,38 +96,51 @@ function LoginScreen(props){
 			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
 			{uploading && <UploadingAnim/>}
 			<form className="login-card">
+				{forgotpass? <>
 
 				<div className="login-input">
-				<input type='text' value={username} autoFocus={true}
-					onChange={e=>{setUsername(e.target.value.replace(/\s/g,''))}}
-					placeholder='Username*' required
-				/>
+					<input type='email' value={forgotEmail} autoFocus={true}
+						onChange={e=>{setForgotEmail(e.target.value.replace(/\s/g,''))}}
+						placeholder='email id' required
+					/>
 				</div>
 
-				{!forgotpass && <div className="login-input">
-					<input type={hidePass?'password':'text'} 
-						value={password} onChange={e=>{setPassword(e.target.value)}}
-						placeholder='Password*' required
-					/>
-					<button className="show-btn" type='button' onClick={()=>{setHidePass(!hidePass)}}>{hidePass?'show':'hide'}</button>
-				</div>}
-
-				{forgotpass? <div className="login-input">	
+				<div className="login-input">	
 					<button type="submit" className='login-btn' 
 						onClick={handleForgotPass}
-					>send mail</button>
-				</div>:<div className="login-input">	
+					>Get mail</button>
+				</div>
+				
+				<h6>Go to login page.<b className="forgot-pass" onClick={()=>setForgotpass(false)}>login</b></h6>
+				
+				</>:<>
+
+				<div className="login-input">
+					<input type='text' value={username} autoFocus={true}
+						onChange={e=>{setUsername(e.target.value.replace(/\s/g,''))}}
+						placeholder='username*' required
+					/>
+				</div>
+				
+				<div className="login-input">
+					<input type={hidePass?'password':'text'} 
+						value={password} onChange={e=>{setPassword(e.target.value)}}
+						placeholder='password*' required
+					/>
+					<button className="show-btn" type='button' onClick={()=>{setHidePass(!hidePass)}}>{hidePass?<Visibility/>:<VisibilityOff/>}</button>
+				</div>
+				
+				<div className="login-input">	
 					<button type="submit" className='login-btn' 
 						onClick={handleLogin}
 					>Login</button>
-				</div>}
-
-				{forgotpass?<h6>Go to login page.<b className="forgot-pass" onClick={()=>setForgotpass(false)}>login</b></h6>:
-				<div>
-				<h6>Do not have account yet?<Link to="/signup">signup</Link></h6>
-				<p className="forgot-pass" onClick={()=>setForgotpass(true)}>forgot password</p>
 				</div>
-				}
+				<div>
+					<h6>Do not have account yet?<Link to="/signup">signup</Link></h6>
+					<p className="forgot-pass" onClick={()=>setForgotpass(true)}>forgot password</p>
+				</div>
+				
+				</>}
 			</form>
 		</div>	
 	);

@@ -27,6 +27,7 @@
 
 .signup-input{
     width: 100%;
+    position: relative;
 }
 
 .signup-input>input{
@@ -36,6 +37,31 @@
 
 .show-btn{
     position: absolute;
+    right: 90px;
+    background: transparent;
+    color: black;
+    border: none;
+    box-shadow: none;
+    outline: none;
 }
+
+.show-btn:hover{
+    color: black;
+    outline: none;
+    box-shadow: none;
+
+}
+
+.show-btn>*{
+    transform:translateY(-5px);
+    opacity: .5;
+    width: 20px!important;
+}
+@media only screen and (max-width:420px) {
+    .show-btn{
+        right: 22%;
+    }
+}
+
 
 

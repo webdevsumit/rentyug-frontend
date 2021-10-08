@@ -5,6 +5,8 @@ import PostMedia from './../Components/PostMedia';
 import {useSelector} from "react-redux";
 import UploadingAnim from '../Components/UploadingAnim';
 import LoadingAnim from '../Components/LoadingAnim';
+import ShowError from '../Components/ShowError';
+import "./../css/post.css";
 
 
 
@@ -18,7 +20,7 @@ function MyPostScreen(){
 	const [addPost, setAddPost] = useState(false);
 
 	const [newImage, setNewImage] = useState(null);
-	const [hasImage, setHasImage] = useState(false);
+	const [hasImage, setHasImage] = useState(true);
 	const [newMedia, setNewMedia] = useState(null);
 	const [newTittle, setNewTittle] = useState('');
 	const [newText, setNewText] = useState('');
@@ -26,13 +28,12 @@ function MyPostScreen(){
 
 	const [preview, setPreview] = useState(false);
 	const [uploading, setUploading] = useState(false);
-		
-		
+	
+	const [errorMessage, setErrorMessage] = useState('');
+	const [isError, setIsError] = useState(false);
 	
 	useEffect(()=>{
-		axios.post(localStorage.getItem('url')+'myPosts/', {
-			'Username':localStorage.getItem('user223')
-		},{
+		axios.post(url+'myPosts/',{},{
 			headers :{
 				'Authorization': `Token ${localStorage.getItem('token')}` 
 			}
@@ -228,6 +229,7 @@ function MyPostScreen(){
 
 	return(
 		<div className='MyPostScreen'>
+			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
 			{uploading && <UploadingAnim/>}
 			<h3><em>Your posts</em></h3>
 			{data?<div>
@@ -250,7 +252,7 @@ function MyPostScreen(){
 
 		                        <details>
 		                           <summary>Description</summary>
-		                           <p className='post-desc'>{post.Text}</p>
+		                           <p className='post-desc para-whitespace'>{post.Text}</p>
 		                        </details>
 					
 		                        <div>
@@ -278,7 +280,7 @@ function MyPostScreen(){
 					                   <button onClick={()=>commentIt(post.id)}>comment</button>                                                         
 					                                                                                                                                                    
 					                   {post.Comments.map(comment=><div key={comment.id} className='post-comment'>                                        
-					                   <p className='post-comment-text'>
+					                   <p className='post-comment-text para-whitespace'>
 					                   <em className='post-user'>@{comment.Username}</em>                                                 
 					                   
 					                      {comment.Username===localStorage.getItem('user223') && <button                                                 
@@ -291,7 +293,7 @@ function MyPostScreen(){
 					                       <summary>replies {comment.Replies.length}</summary>                                                                                 
 					                       <div>                                                                                                      
 					                         {comment.Replies.map(reply=><div key={reply.id}>                                                       
-					                          <p className='post-reply-text'>
+					                          <p className='post-reply-text para-whitespace'>
 						                          <em className='post-user'>@{reply.Username}</em>                                                   
 					                          
 						                            {reply.Username===localStorage.getItem('user223') && <button                                     
@@ -313,9 +315,6 @@ function MyPostScreen(){
                             </details>                                                        
 					     </div>
 						<br/>
-						<h6><em>Your post is activated for  250 likes.</em></h6>
-						<h6><em>After that you have to contact us to reactivate that.</em></h6>
-						<h6><em>You can also do normal deactivation/reactivation.</em></h6>
 						
 						{post.Activated?<div>
 							<em>post status : active</em><br/>
@@ -338,18 +337,27 @@ function MyPostScreen(){
 
 				<img src={newImage?URL.createObjectURL(newImage):''} alt='' className='post-media'/><br/>
 
-				<lable className='post-image-lable'>Image or Thumbnail for video</lable><br/>
+				<lable className='post-image-lable'>Image or Thumbnail for video (less than 4 MB)</lable><br/>
 				<input type='file' accept='image/*'
-					onChange={e=>{setNewImage(e.target.files[0])}}/><br/>
+					onChange={e=>{
+						if ((e.target.files[0].size/1024).toFixed(2)>4*1024){
+							setErrorMessage('File size should be less than 4 MB.');
+							setIsError(true);
+						}else setNewImage(e.target.files[0])
+						}}/><br/>
 
-				<input type='checkbox' value={hasImage} className='post-checkbox'
+				<input type='checkbox' checked={hasImage} value={hasImage} className='post-checkbox'
 				onChange={()=>{setHasImage(!hasImage);setNewMedia(null);setPreview(false)}}/><em>image as post</em><br/>
 
-
+				<p style={{backgroundColor:'yellow'}}>To upload a video instead of image please uncheck above checkbox. Then your image will act as a Thumbnail of the video.</p>
 				{!hasImage && <div>
 					<lable className='post-image-lable'>or add video</lable><br/>
 					<input type='file' accept='video/*'
-						onChange={e=>{setNewMedia(e.target.files[0]);setPreview(true)}}/><br/>
+						onChange={e=>{if ((e.target.files[0].size/1024).toFixed(2)>20*1024){
+							setErrorMessage('File size should be less than 20 MB.');
+							setIsError(true);
+						}else setNewMedia(e.target.files[0]);
+						setPreview(true)}}/><br/>
 				</div>}
 						
 				{preview && <video width='80%' controls muted className='post-media'>

@@ -201,99 +201,100 @@ function Description(){
 
 	if(redirectToAccount) return <Redirect to={"/account/"+localStorage.getItem('user223')}/>
 	if(redirectToLogin) return <Redirect to="/login"/>
-	return(
-		<div className='Description'>
-			{Messaging && <MessageBox 
-				msgingTo={msgingTo}
-				onClose={()=>setMessaging(false)}
-			/>}
-			{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
-			{isGoodMessage && <ShowError message={errorMessage} goodMessage={true} onclose={()=>setIsGoodMessage(false)}/>}
-			{uploading && <UploadingAnim/>}
+	return(<div>
+			<div className='description'>
+				{Messaging && <MessageBox 
+					msgingTo={msgingTo}
+					onClose={()=>setMessaging(false)}
+				/>}
+				{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
+				{isGoodMessage && <ShowError message={errorMessage} goodMessage={true} onclose={()=>setIsGoodMessage(false)}/>}
+				{uploading && <UploadingAnim/>}
 
-			<h1>Details</h1>
-			{data?<div>
-				<h6>Rating : {data.Rating}</h6>
-
-
-				{canRate?<div>
-					<input type='range' min='0' max='50' value={rating}  
-						onChange={e=>setRating(e.target.value)}/><br/>
-					<button onClick={giveRating}>Rate</button>
-				</div>:<button onClick={setCanRate(true)}>Give rating</button>}
+				<h1>Details</h1>
+				{data?<div>
+					<h6>Rating : {data.Rating}</h6>
 
 
-				<h4>{data.ShopName}</h4>
-				<p>Category : {data.Type.Name}</p>
-				
-				<div className='imageSlider'>
-					<span>
-						<img src={data.MainImage} alt='product'/>
-					</span>
-					{data.ServiceImages.map(i=><span key={i.id}>
-						<img src={i.Image} alt=''/>
-					</span>
-					)}
-				</div>
-
-				<p>Open Time to contact: {data.OpenTime}</p>
-				<p>Close Time to contact : {data.closeTime}</p>
-				<p>Rent : {data.PriceType}</p>
-
-				<p>Rental Status : {data.RentalStatus? <b>Available</b> : <b>Not available</b>}</p>
-				<p>No of items : {data.NoOfItems}</p>
-
-				<div className='descBox'>
-					<h3>Description</h3>
-					<p>{data.Description}</p>
-				</div>
-
-				{profile?<div className='providerDetail'>
-					<h1>Provider details</h1>
-					<h5>Username : @{profile.User.username}</h5>
-					<h5>Address : {profile.Address}</h5>
-					<p><em>If you would get something wrong from provider please contact
-						customer care instantly to remove verified tag. 
-						This will help us to give better services to you.</em></p>
-						{showConfirmBox && <>
-							<div className="show-confirm-main-container">
-								<div className="confirm-card">
-									<h3>You will get a phone call in just 5 minutes.</h3>
-									<p>Please confirm your mobile number or change it.</p>
-									<form className="confirm-message">
-										<input type="text" value={consumerContact} onChange={e=>setConsumerContact(e.target.value)} />
-										<h5 className="confirm-button" onClick={()=>handleConfirRentNow(profile.id, data.id)}>Confirm</h5>
-									</form>
-								</div>
-							</div>
-						</>}
-					<button onClick={RentNow}>Rent Now</button>
-					<button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button>
-				</div>:''}
+					{canRate?<div>
+						<input type='range' min='0' max='50' value={rating}  
+							onChange={e=>setRating(e.target.value)}/><br/>
+						<button onClick={giveRating}>Rate</button>
+					</div>:<button onClick={setCanRate(true)}>Give rating</button>}
 
 
-				<div className='breakpoint'></div>
-					<h1>Feedbacks</h1>
-											
-					{data.ServiceFeedback.map(f=>{return(
-					<div key={f.id} className='feed'>
-						<p>{f.Username}</p>
-						<p>{f.Message}</p>
-						<p><em>{f.Date}</em></p>
+					<h4>{data.ShopName}</h4>
+					<p>Category : {data.Type.Name}</p>
+					
+					<div className='imageSlider'>
+						<span>
+							<img src={data.MainImage} alt='product'/>
+						</span>
+						{data.ServiceImages.map(i=><span key={i.id}>
+							<img src={i.Image} alt=''/>
+						</span>
+						)}
 					</div>
-				)})}
 
-				<div>
-					<textarea 
-					value={feed}
-					placeholder='how service provider can  improve.'
-					onChange={(e)=>addFeed(e.target.value)}
-					></textarea><br/>
-					<button
-					onClick={giveFeed}
-					>give feedback</button>
-				</div>
-			</div>:<LoadingAnim/>}
+					<p>Open Time to contact: {data.OpenTime}</p>
+					<p>Close Time to contact : {data.closeTime}</p>
+					<p>Rent : {data.PriceType}</p>
+
+					<p>Rental Status : {data.RentalStatus? <b>Available</b> : <b>Not available</b>}</p>
+					<p>No of items : {data.NoOfItems}</p>
+
+					<div className='descBox'>
+						<h3>Description</h3>
+						<p className='para-whitespace'>{data.Description}</p>
+					</div>
+
+					{profile?<div className='providerDetail'>
+						<h1>Provider details</h1>
+						<h5>Username : @{profile.User.username}</h5>
+						<h5>Address : {profile.Address}</h5>
+						<p><em>If you would get something wrong from provider please contact
+							customer care instantly to remove verified tag. 
+							This will help us to give better services to you.</em></p>
+							{showConfirmBox && <>
+								<div className="show-confirm-main-container">
+									<div className="confirm-card">
+										<h3>You will get a phone call in just 5 minutes.</h3>
+										<p>Please confirm your mobile number or change it.</p>
+										<form className="confirm-message">
+											<input type="text" value={consumerContact} onChange={e=>setConsumerContact(e.target.value)} />
+											<h5 className="confirm-button" onClick={()=>handleConfirRentNow(profile.id, data.id)}>Confirm</h5>
+										</form>
+									</div>
+								</div>
+							</>}
+						<button onClick={RentNow}>Rent Now</button>
+						<button onClick={()=>addNewSmsBox(profile.User.username)}>Message</button>
+					</div>:''}
+
+
+					<div className='breakpoint'></div>
+						<h1>Feedbacks</h1>
+												
+						{data.ServiceFeedback.map(f=>{return(
+						<div key={f.id} className='feed'>
+							<p>{f.Username}</p>
+							<p>{f.Message}</p>
+							<p><em>{f.Date}</em></p>
+						</div>
+					)})}
+
+					<div>
+						<textarea 
+						value={feed}
+						placeholder='how service provider can  improve.'
+						onChange={(e)=>addFeed(e.target.value)}
+						></textarea><br/>
+						<button
+						onClick={giveFeed}
+						>give feedback</button>
+					</div>
+				</div>:<LoadingAnim/>}
+			</div>
 		</div>
 	)
 }
