@@ -79,15 +79,15 @@ function SignupScreen(){
 				
 				<div className="signup-input" >
 					<input type='text' value={username} 
-						onChange={e=>setUsername(e.target.value.replace(/\s/g,''))}
+						onChange={e=>setUsername(e.target.value.replace('.','').replace('@','').replace(/\s/g,'').toLowerCase())}
 						value={username}
-						placeholder='Username* (in 1 word)' required
+						placeholder='Username (in 1 word)' required
 					/>
 				</div>
 
 				<div className="signup-input" >
 					<input type='email' value={email} 
-						onChange={e=>{setEmail(e.target.value)}}
+						onChange={e=>{setEmail(e.target.value.toLowerCase())}}
 						placeholder='email id*' required
 					/>
 				</div>
@@ -95,7 +95,7 @@ function SignupScreen(){
 				<div className="signup-input" >
 					<input type={hidePass1?'password':'text'} 
 						value={password1} onChange={e=>{setPassword1(e.target.value)}}
-						placeholder='create Password*' required
+						placeholder='create Password' required
 					/>
 					<button type="button" className="show-btn" onClick={()=>{setHidePass1(!hidePass1)}}>{hidePass1?<Visibility/>:<VisibilityOff/>}</button>
 				</div>
@@ -103,7 +103,7 @@ function SignupScreen(){
 				<div className="signup-input" >
 					<input type={hidePass2?'password':'text'} 
 						value={password2} onChange={e=>{setPassword2(e.target.value)}}
-						placeholder='confirm Password*' required
+						placeholder='confirm Password' required
 					/>
 					<button type="button" className="show-btn" onClick={()=>{setHidePass2(!hidePass2)}}>{hidePass2?<Visibility/>:<VisibilityOff/>}</button>
 				</div>

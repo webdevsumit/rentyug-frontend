@@ -100,7 +100,7 @@ function LoginScreen(props){
 
 				<div className="login-input">
 					<input type='email' value={forgotEmail} autoFocus={true}
-						onChange={e=>{setForgotEmail(e.target.value.replace(/\s/g,''))}}
+						onChange={e=>{setForgotEmail(e.target.value.toLowerCase().replace(/\s/g,''))}}
 						placeholder='email id' required
 					/>
 				</div>
@@ -117,15 +117,15 @@ function LoginScreen(props){
 
 				<div className="login-input">
 					<input type='text' value={username} autoFocus={true}
-						onChange={e=>{setUsername(e.target.value.replace(/\s/g,''))}}
-						placeholder='username*' required
+						onChange={e=>{setUsername(e.target.value.toLowerCase().replace(/\s/g,''))}}
+						placeholder='username or email' required
 					/>
 				</div>
 				
 				<div className="login-input">
 					<input type={hidePass?'password':'text'} 
 						value={password} onChange={e=>{setPassword(e.target.value)}}
-						placeholder='password*' required
+						placeholder='password' required
 					/>
 					<button className="show-btn" type='button' onClick={()=>{setHidePass(!hidePass)}}>{hidePass?<Visibility/>:<VisibilityOff/>}</button>
 				</div>
