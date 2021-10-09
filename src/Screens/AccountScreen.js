@@ -905,7 +905,7 @@ function AccountScreen(){
 					{settingMyNo?
 					<form>Mobile No. : 
 						<input type='tel' 
-							hange={e=>{setMyNo(e.target.value)}}/>
+							onChange={e=>{setMyNo(e.target.value)}}/>
 						<button type="submit"
 							onClick={(e)=>{e.preventDefault();updateMyNo(); setSettingMyNo(false);}}
 						>Set</button>
@@ -949,7 +949,7 @@ function AccountScreen(){
 							
 							<form>
 								<input type='text' 
-									ange={e=>setShopName(e.target.value)}/>
+									onChange={e=>setShopName(e.target.value)}/>
 							
 								<button type="submit"
 									onClick={(e)=>{e.preventDefault();updateShopName(d.id); setSettingShopName(false);}}
