@@ -778,6 +778,8 @@ function AccountScreen(){
 			else setErrorMessage(res.data.error);
 			setIsError(true);
 			setUploading(false);
+		}).catch(err=>{
+			setUploading(false);
 		})
 	}
 	
@@ -792,6 +794,8 @@ function AccountScreen(){
 			if (res.data.msg) setErrorMessage(res.data.msg);
 			else setErrorMessage(res.data.error);
 			setIsError(true);
+			setUploading(false);
+		}).catch(err=>{
 			setUploading(false);
 		})
 	}
