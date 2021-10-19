@@ -25,7 +25,6 @@ function Navbar(){
 	const dispatch = useDispatch();
 	const { isLogin, isMenu, unreadMsg } = useSelector(state=>state.isLogin);
 
-
 	const handleLogout=()=>{
 		const url = localStorage.getItem('url');
 		localStorage.removeItem('token');
@@ -109,27 +108,30 @@ function Navbar(){
 						<button onClick={()=>{dispatch(setIsMenu(false))}}>
 						<AccountBoxRoundedIcon style={{'font-size':'10px'}}/> Account</button>
 					</Link><br/>
-					<Link to='/posts'>
-						<button onClick={()=>{dispatch(setIsMenu(false))}}>
-							<PhotoSizeSelectActualRoundedIcon style={{'font-size':'10px'}}/> Posts</button>
+					<Link to='/add-service'>
+					<button>
+							<PhotoSizeSelectActualRoundedIcon style={{'font-size':'10px'}}/> Add Service
+						</button>
 					</Link><br/>
+
 					<Link to='/request-page'>
 						<button onClick={()=>{dispatch(setIsMenu(false))}}>
 							<PlaylistAddIcon style={{'font-size':'10px'}}/> Request Page</button>
 					</Link><br/>
-
-					
 					<Link to={'/categories'}>
 						<button onClick={()=>{dispatch(setIsMenu(false))}}><CategoryIcon style={{'font-size':'10px'}}/> Categories</button>
 					</Link>
-					
+					<Link to='/mysavedservices/'>
+						<button onClick={()=>{dispatch(setIsMenu(false))}}>
+						<SettingsApplicationsRoundedIcon style={{'font-size':'10px'}}/> My saved</button>
+					</Link><br/>
+					<Link to='/posts'>
+						<button onClick={()=>{dispatch(setIsMenu(false))}}>
+							<PhotoSizeSelectActualRoundedIcon style={{'font-size':'10px'}}/> Posts</button>
+					</Link><br/>
 					<Link to='/myposts'>
 						<button onClick={()=>{dispatch(setIsMenu(false))}}>
 						<PhotoSizeSelectActualRoundedIcon style={{'font-size':'10px'}}/> My posts</button>
-					</Link><br/>
-					<Link to='/mysavedservices/'>
-						<button onClick={()=>{dispatch(setIsMenu(false))}}>
-						<SettingsApplicationsRoundedIcon style={{'font-size':'10px'}}/> My saved services</button>
 					</Link><br/>
 					<h6>CONNECT WITH US THROUGH</h6>
 					<ul>

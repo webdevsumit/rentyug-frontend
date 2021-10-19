@@ -1241,9 +1241,9 @@ function AccountScreen(){
 						<label>I agree</label>
 
 						{agreeTC?<button onClick={addNewService}>Add</button>:<button onClick={()=>{
-			setIsError(true);
-			setErrorMessage('Please read carefully and agree that terms and conditions.');
-		}}>Add</button>}
+								setIsError(true);
+								setErrorMessage('Please read carefully and agree that terms and conditions.');
+							}}>Add</button>}
 						
 					</div>:<button onClick={handleAddNewBtn}>Add new service</button>}
 					

@@ -21,6 +21,7 @@ import RequestPage from './RequestPage';
 import { setIsLogin, setUrl} from '../redux/isLogin'
 import {useDispatch } from 'react-redux'
 import Category from './Category';
+import AddService from '../Components/AddService';
 
 
 
@@ -57,6 +58,7 @@ function MainScreen(){
 				<Route path='/privacy-policy' component={PPScreen}/>
 				<Route path='/faq' component={FAQScreen}/>
 				<Route path='/about' component={AboutUs}/>
+				<Route path='/add-service' component={AddService}/>
 			</Router>
 			
 		</>
