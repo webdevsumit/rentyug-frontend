@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import LoadingAnim from '../Components/LoadingAnim';
 import ServiceCategoryCard from '../Components/ServiceCategoryCard';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from "react-router-dom";
 
 function AccountScreen(){
 
@@ -1245,7 +1246,7 @@ function AccountScreen(){
 								setErrorMessage('Please read carefully and agree that terms and conditions.');
 							}}>Add</button>}
 						
-					</div>:<button onClick={handleAddNewBtn}>Add new service</button>}
+					</div>:<Link to='/add-service'><button>Add new service</button></Link>}
 					
 				</div>:''}
 					

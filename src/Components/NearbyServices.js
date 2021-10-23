@@ -27,7 +27,7 @@ function NearbyServices(props){
 		  // See style options here: https://docs.mapbox.com/api/maps/#styles
 		  style: 'mapbox://styles/mapbox/satellite-streets-v11',
 		  center: [77.4126, 23.2599],
-		  zoom: 11.5,
+		  zoom: 8,
 		});
 
         filteredData?.map(product=>{
