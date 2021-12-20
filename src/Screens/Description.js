@@ -258,11 +258,17 @@ function Description(){
 							{showConfirmBox && <>
 								<div className="show-confirm-main-container">
 									<div className="confirm-card">
-										<h3>You will get a phone call in just 5 minutes.</h3>
-										<p>Please confirm your mobile number or change it.</p>
+										{/* <h3>You will get a phone call in just 5 minutes.</h3>
+										<p>Please confirm your mobile number or change it.</p> */}
+										<h3>Thankyou for making order using RentYug.</h3>
+										<p>We are trying to give our best. In case of any problem please contact us. We are always there to help you.</p>
 										<form className="confirm-message">
-											<input type="text" value={consumerContact} onChange={e=>setConsumerContact(e.target.value)} />
-											<h5 className="confirm-button" onClick={()=>handleConfirRentNow(profile.id, data.id)}>Confirm</h5>
+											{/* <input type="text" value={consumerContact} onChange={e=>setConsumerContact(e.target.value)} /> */}
+											{/* <h5 className="confirm-button" onClick={()=>handleConfirRentNow(profile.id, data.id)}>Confirm</h5> */}
+											<div className='inlinediv'>
+												<a href={'tel:'+profile.MobileNo} className='call-now'><h5 className="confirm-button">Call</h5></a>
+												<h5 className="close-button" onClick={()=>setShowConfirmBox(false)}>Close</h5>
+											</div>
 										</form>
 									</div>
 								</div>

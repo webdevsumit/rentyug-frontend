@@ -3,6 +3,15 @@
     margin: auto;
 }
 
+.call-now{
+    text-decoration: none;
+}
+
+.inlinediv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .show-confirm-main-container{
     position: fixed;
@@ -38,11 +47,22 @@
 }
 
 .confirm-button{
-    background-color: rgb(109, 109, 109);
+    background-color: rgb(0, 177, 0);
     color: white;
     box-shadow: 0.1px 0.1px 4px grey;
-    padding: 15px;
+    padding: 10px;
     cursor: pointer;
     margin-top: 10px;
+    
+}
+
+.close-button{
+    background-color: rgba(255, 0, 0, 0.945);
+    color: white;
+    box-shadow: 0.1px 0.1px 4px grey;
+    padding: 10px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 15px!important;
     
 }
