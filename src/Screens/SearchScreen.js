@@ -2,9 +2,11 @@ import React,{useState, useEffect} from 'react';
 import ServiceCard from '../Components/ServiceCard';
 import axios from 'axios';
 import "./../css/searchscreen.css";
-import SearchIcon from '@material-ui/icons/Search';
+import { FaSearchengin } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import LoadingAnim from '../Components/LoadingAnim';
+
+import GoogleAds from '../Components/GoogleAds';
 
 function SearchScreen(props){
 
@@ -34,7 +36,7 @@ function SearchScreen(props){
 						autoFocus={true}
 						onChange={e=>setSearchedName(e.target.value)}
 						/><button className="search-btn" type="submit" onClick={onSearch}>
-							<SearchIcon className='search-icon'/>
+							<FaSearchengin className='search-icon'/>
 						</button>
 				</form>
 
@@ -43,6 +45,9 @@ function SearchScreen(props){
 				{data?
 					<div className='search-screen'>
 						<h6>Results for {searchedName}</h6>
+						<div style={{width:"100%"}}>
+							<GoogleAds slot="4606324849" />
+						</div>
 						<div className="search-container">
 							{data.map(d=>{return(
 								<div key={d.id}>

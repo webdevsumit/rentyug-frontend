@@ -27,7 +27,7 @@ function SiteIntro(props){
 				mainHeadDes.current.style.color = 'black';
 			};
 			
-			if (window.pageYOffset>=5) {
+			if (window.pageYOffset>=5 && head1?.current?.style) {
 				head1.current.style.opacity=1;
 			}else{
 				head1.current.style.opacity=0;

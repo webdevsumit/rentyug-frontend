@@ -1,8 +1,8 @@
 .search-form{
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.466);
+    background-color: rgba(0, 1, 73, 0.295);
     position: sticky;
-    top: 8px;
+    top: 48px;
     z-index: 2;
     transform: translateY(-10px);
 }
