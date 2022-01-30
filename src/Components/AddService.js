@@ -21,6 +21,7 @@ function AddService(props) {
     const [newShopName, setNewShopName] = useState('');
 	const [newMainImage, setNewMainImage] = useState(null);
 	const [newItemCataId, setNewItemCataId] = useState('');
+	const [desc, setDesc] = useState('');
 	const [newItemOpenTime, setNewItemOpenTime] = useState('');
 	const [newItemCloseTime, setNewItemCloseTime] = useState('');
 	const [newItemPriceType, setNewItemPriceType] = useState('');
@@ -70,6 +71,7 @@ function AddService(props) {
             formData.append('ShopName',newShopName);
             formData.append('MainImage',newMainImage);
             formData.append('catagoryId',newItemCataId);
+            formData.append('description',desc);
             formData.append('OpenTime',newItemOpenTime);
             formData.append('CloseTime',newItemCloseTime);
             formData.append('PriceType',newItemPriceType);
@@ -113,13 +115,13 @@ function AddService(props) {
       {canAddNewItem ? (
         <div className="addServiceCard">
           <p>
-            Product/Service Name :{" "}
-            <textarea
-              rows="4"
-              cols="auto"
+            Product/Service Name :<br/>
+            <input
+              type='text'
+              className='title-input'
               placeholder="Enter full name with address(if want to sell)"
               onChange={(e) => setNewShopName(e.target.value)}
-            ></textarea>
+            />
           </p>
 
           <p className="previewImage">
@@ -150,21 +152,15 @@ function AddService(props) {
                 return (
                   <div
                     key={Sc.id}
-                    className="accoount-page-category"
+                    className={newItemCataId === Sc.id?"accoount-page-category":"cursor-pointer"}
                     onClick={() => setNewItemCataId(Sc.id)}
                   >
                     <ServiceCategoryCard
                       id={Sc.id}
                       Name={Sc.Name}
                       Image={Sc.Image}
+                      disabled={true}
                     />
-                    <h4>CLICK HERE TO SELECT</h4>
-                    <p>{Sc.Description}</p>
-                    {newItemCataId === Sc.id && (
-                      <p>
-                        <em>selected</em>
-                      </p>
-                    )}
                   </div>
                 );
               })}
@@ -172,9 +168,11 @@ function AddService(props) {
           </div>
 
           <p>
-            Description is most important.
-            <br />
-            Please add Description with relaxed mind from account page after saving the minimum details.
+          <h3>Set Description</h3>
+          <textarea 
+            rows='20' cols='auto'
+            value={desc} onChange={e=>setDesc(e.target.value)}>
+          </textarea>
           </p>
 
           <p>

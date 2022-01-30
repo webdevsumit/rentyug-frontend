@@ -44,10 +44,6 @@ function SearchScreen(props){
 				<>
 				{data?
 					<div className='search-screen'>
-						<h6>Results for {searchedName}</h6>
-						<div style={{width:"100%"}}>
-							<GoogleAds slot="4606324849" />
-						</div>
 						<div className="search-container">
 							{data.map(d=>{return(
 								<div key={d.id}>
@@ -69,6 +65,10 @@ function SearchScreen(props){
 						</div>
 						<div className='breakpoint'></div>
 						<h4>{data.length===0 && 'No results!'}</h4>
+						<div style={{width:"100%"}}>
+							<GoogleAds slot="4606324849" />
+							<GoogleAds slot="3815987351" />
+						</div>
 					</div>
 				:
 					<LoadingAnim/>

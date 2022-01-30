@@ -7,7 +7,7 @@ function FamousServices(props){
 	return(
 		<div className="service-main-container">
 			<h3>Deal Of The Day</h3>
-			<em>get your best deal here.</em>
+			<em>TOP 10 FOR YOU.</em>
 			<div className="services-container">
 				{props.data?.map(d=>{return(
 					<div key={d.id}>

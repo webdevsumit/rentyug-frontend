@@ -6,7 +6,7 @@ import "./../css/you-may-like.css";
 function YouMayLike(props){
 	return(
 		<div className='you-may-like-main-container'>
-			<h3>You May Like</h3>
+			<h3>Recent Viewed</h3>
 			<div className='you-may-like-container'>
 			{props.data.map(d=>{return(
 				<div key={d.id}>

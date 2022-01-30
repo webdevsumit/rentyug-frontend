@@ -5,6 +5,7 @@ import axios from 'axios';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import PhotoSizeSelectActualRoundedIcon from '@material-ui/icons/PhotoSizeSelectActualRounded';
+import AddIcon from '@mui/icons-material/Add';
 import ForumIcon from '@material-ui/icons/Forum';
 import SearchIcon from '@material-ui/icons/Search';
 import CategoryIcon from '@material-ui/icons/Category';
@@ -42,7 +43,9 @@ function Navbar(){
 
 	return( 
 		<div className='Navbar-div'>
-			<img className='logo' src="/img/logo.png" alt='logo' loading='lazy'/>
+			<a href='/'>
+				<img className='logo' src="/img/logo.png" alt='logo' loading='lazy'/>
+			</a>
 			{isLogin?
 			<div className='msg-menu-div'>
 
@@ -58,12 +61,6 @@ function Navbar(){
 					</Link>
 				</Tooltip>
 				
-				<Link to='/posts'>
-					<Tooltip title='Posts'>
-						<PhotoSizeSelectActualRoundedIcon className='nav-icon'/>
-					</Tooltip>
-				</Link>
-				
 				<Link to='/messages'>
 					<Tooltip title='Messages'><>
 						<ForumIcon onClick={()=>dispatch(setIsMenu(false))} className='nav-icon'/>
@@ -72,7 +69,11 @@ function Navbar(){
 					</Tooltip>
 				</Link>
 				
-				
+				<Link to='/add-service'>
+					<Tooltip title='Add Product'>
+						<AddIcon className='nav-icon'/>
+					</Tooltip>
+				</Link>
 				
 				{isMenu?
 					<Link>
@@ -110,7 +111,7 @@ function Navbar(){
 					</Link><br/>
 					<Link to='/add-service'>
 					<button>
-							<PhotoSizeSelectActualRoundedIcon style={{'font-size':'10px'}}/> Add Service
+							<AddIcon style={{'font-size':'10px'}}/> Add Product
 						</button>
 					</Link><br/>
 

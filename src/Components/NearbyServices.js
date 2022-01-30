@@ -27,7 +27,7 @@ function NearbyServices(props){
 		  // See style options here: https://docs.mapbox.com/api/maps/#styles
 		  style: 'mapbox://styles/mapbox/satellite-streets-v11',
 		  center: [77.4126, 23.2599],
-		  zoom: 8,
+		  zoom: 11,
 		});
 
         filteredData?.map(product=>{
@@ -74,7 +74,7 @@ function NearbyServices(props){
         <div className="service-nearby-main-container">
             <h3>Services nearby you.</h3>
             <form>
-                <input className="search-nearby" type="search" placeholder="Search filter" value={filteredFor} onChange={e=>setFilteredFor(e.target.value.toUpperCase())}/>
+                <input className="search-nearby" type="search" placeholder="Filter by Name, Tag, Keyword" value={filteredFor} onChange={e=>setFilteredFor(e.target.value.toUpperCase())}/>
                 <button type="submit" onClick={handleMapFiltered}>filter</button>
             </form>
             <em>Adjust zoom and click on icon to know more.</em>

@@ -6,7 +6,7 @@ import Feedbacks from '../Components/Feedbacks';
 import Footer from '../Components/Footer';
 import SiteIntro from '../Components/SiteIntro';
 import AddFeedback from '../Components/AddFeedback';
-import GoogleAds from '../Components/GoogleAds';
+// import GoogleAds from '../Components/GoogleAds';
 import axios from 'axios';
 import "./../css/submainscreen.css";
 
@@ -53,6 +53,7 @@ function SubMainScreen(props){
 				<div>
 					
 					{!isLogin && <SiteIntro openAboutUs={props.openAboutUs}/>}
+					{data?.NearbyServices?.length>0 && <NearbyServices data={data.NearbyServices}/>}
 					<FamousServices data={data.Plans[0].PlanServices?data.Plans[0].PlanServices:[]} />
 					{data?.InterestedService?.Services && <YouMayLike
 						removeItem={removeItem}
@@ -61,8 +62,7 @@ function SubMainScreen(props){
 					<ServiceCategories
 						data={data?.ServiceCatagories}
 					/>
-					<GoogleAds slot="3815987351" />
-					{data?.NearbyServices?.length>0 && <NearbyServices data={data.NearbyServices}/>}
+					{/* <GoogleAds slot="3815987351" /> */}
 					<Feedbacks data={data?.FrontPageFeedback}/>
 					{isLogin?<AddFeedback/>:<em>You can give feedback after signup/login.</em>}
 					<hr/>
