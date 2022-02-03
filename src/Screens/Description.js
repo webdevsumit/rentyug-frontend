@@ -6,11 +6,12 @@ import MessageBox from './MessageBox';
 import "./../css/description.css";
 import {useSelector} from 'react-redux'
 import UploadingAnim from '../Components/UploadingAnim';
+import Login from "./LoginScreen";
 import LoadingAnim from '../Components/LoadingAnim';
 
 function Description(){
 
-	const { url } = useSelector(state=>state.isLogin);
+	const { url, isLogin } = useSelector(state=>state.isLogin);
 
 	const [data, setData] = useState(false);
 	const [profile, setProfile] = useState(false);
@@ -62,6 +63,12 @@ function Description(){
 		}).catch(()=>setRedirectToLogin(true))
 		}
 	},[]);
+
+	useEffect(()=>{
+		if(isLogin && redirectToLogin){
+			window.location.reload();
+		}
+	},[isLogin])
 
 
 	const addNewSmsBox=(provider)=>{
@@ -200,13 +207,14 @@ function Description(){
 	}
 
 	if(redirectToAccount) return <Redirect to={"/account/"+localStorage.getItem('user223')}/>
-	if(redirectToLogin) return <Redirect to="/login"/>
+	// if(redirectToLogin) return <Redirect to="/login"/>
 	return(<div>
 			<div className='description'>
 				{Messaging && <MessageBox 
 					msgingTo={msgingTo}
 					onClose={()=>setMessaging(false)}
 				/>}
+				{redirectToLogin && <><Login/></>}
 				{isError && <ShowError message={errorMessage} onclose={()=>setIsError(false)}/>}
 				{isGoodMessage && <ShowError message={errorMessage} goodMessage={true} onclose={()=>setIsGoodMessage(false)}/>}
 				{uploading && <UploadingAnim/>}

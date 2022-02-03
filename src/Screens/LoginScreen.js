@@ -48,7 +48,8 @@ function LoginScreen(props){
 				}else{
 					localStorage.setItem('user223',res.data.username);
 					localStorage.setItem('token',res.data.token);
-					setRedirect('redirect');
+					if (window.location.href.split('/')[3]==="login")
+						setRedirect('redirect');
 					dispatch(setIsLogin(true));
 				}
 			}).catch(err=>{
