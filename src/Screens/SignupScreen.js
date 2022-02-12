@@ -65,7 +65,7 @@ function SignupScreen(){
 		}
 	}
 
-	if (redirect) return <Redirect to={'/account/'+redirect}/>;
+	if (redirect) return <Redirect to={'/'}/>;
 	
 	return(
 		<div className='signup-main-container'>

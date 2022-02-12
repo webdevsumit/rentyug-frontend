@@ -110,7 +110,7 @@ function AccountScreen(){
 			setLatLng({lat:res.data.profile.lat,lng:res.data.profile.lng});
 			if(res.data.profile.User.first_name==='' || res.data.profile.User.last_name==='' || res.data.profile.Address==='' || res.data.profile.Address==='' || res.data.profile.MobileNo===''){
 				setIsError(true);
-				setErrorMessage("Please complete the profile. It will help us to provide the best for you.");
+				setErrorMessage("Please complete the profile. It will help us to provide the best for you. You can also do this later.");
 			}else if(res.data.profile.lat===23.25 && res.data.profile.lng===77.41){
 				setIsError(true);
 				setErrorMessage("Settnig your location on map help us to show nearby services.");

@@ -42,7 +42,7 @@ function AddService(props) {
 			setData(res.data.profile);
 			if(res.data.profile.User.first_name==='' || res.data.profile.User.last_name==='' || res.data.profile.Address==='' || res.data.profile.Address==='' || res.data.profile.MobileNo===''){
 				setIsError(true);
-				setErrorMessage("Please complete the profile account page. It will help us make this app more trustable. Then you can add service");
+				setErrorMessage("Please complete the profile account page. It will help us to make this platform more trustable. Then you can add service. Really sorry for the inconvenience.");
 			}else if(res.data.profile.lat===23.25 && res.data.profile.lng===77.41){
 				setIsError(true);
 				setErrorMessage("Settnig your location on map help us to show your service in nearby services. Please do this it will just few seconds.");
