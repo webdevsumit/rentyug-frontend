@@ -132,24 +132,25 @@ function Description(){
 	const RentNow=()=>{
 		const user = localStorage.getItem('user223');
 		 
-		axios.post(url+'rentnow/',{
-			'username':user,
-		},{
-				headers: {
-					'Authorization': `Token ${localStorage.getItem('token')}` 
-				}
-			}).then(res=>{
-			if (res.data.error){
-				setIsError(true);
-				setErrorMessage(res.data.error);
-				setTimeout(() => {
-					setRedirectToAccount(true);
-				}, 4000)
-			}else{
-				setShowConfirmBox(true);
-				setConsumerContact(res.data.ContactNo);
-			}
-		})
+		// axios.post(url+'rentnow/',{
+		// 	'username':user,
+		// },{
+		// 		headers: {
+		// 			'Authorization': `Token ${localStorage.getItem('token')}` 
+		// 		}
+		// 	}).then(res=>{
+		// 	if (res.data.error){
+		// 		setIsError(true);
+		// 		setErrorMessage(res.data.error);
+		// 		setTimeout(() => {
+		// 			setRedirectToAccount(true);
+		// 		}, 4000)
+		// 	}else{
+		// 		setShowConfirmBox(true);
+		// 		setConsumerContact(res.data.ContactNo);
+		// 	}
+		// })
+		setShowConfirmBox(true);
 	}
 
 	const handleConfirRentNow=(profileId, productId)=>{

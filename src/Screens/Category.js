@@ -23,7 +23,7 @@ function Category(){
  	return(<>
      {data?
 		<div className="service-main-container">
-			<h3>Get You Best Here.</h3>
+			<h3>Let's Grab The Deal.</h3>
 			<div className="services-container">
 				{data?.map(d=>{return(
 					<div key={d.id}>
@@ -41,6 +41,7 @@ function Category(){
 						/>
 					</div>
 				)})}
+				{!data.length && <h5>No Results Found, But you can add that in <a href='/add-service/'>request page</a> or in case of emergency <a href='tel:+917999004229'>contact us</a>.</h5>}
 			</div>
 		</div>
         :
