@@ -28,7 +28,7 @@ import AddService from '../Components/AddService';
 function MainScreen(){
 
 	const dispatch = useDispatch();
-	dispatch(setUrl('https://rentyug-backend.live/'));
+	dispatch(setUrl('http://rentyug-backend.live/'));
 	//dispatch(setUrl('http://127.0.0.1:8000/'));
 	//dispatch(setUrl('http://127.0.0.1/'));
 
